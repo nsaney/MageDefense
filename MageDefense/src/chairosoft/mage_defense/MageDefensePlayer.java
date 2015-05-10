@@ -28,7 +28,7 @@ public class MageDefensePlayer
     public static enum AbilityType
     {
         NONE(""),
-        FIRE_ATTACK("Fire_Attack_Sprite"), 
+        FIRE_ATTACK("Flame_Attack_Sprite"), 
         WHIRLWIND_ATTACK("Whirlwind_Attack_Sprite"), 
         BOLT_ATTACK("Bolt_Attack_Sprite"), 
         EARTHQUAKE_ATTACK("Earthquake_Attack_Sprite"),

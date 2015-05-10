@@ -77,7 +77,7 @@ public class MageDefense extends QApplication
     public static final String START_SCREEN_SPRITE_CODE = "Start_Screen_Sprite";
     public static final String BACKGROUND_SPRITE_CODE = "Background_Sprite";
     public static final String CROSSHAIR_SPRITE_CODE = "Crosshair_Sprite";
-    public static final String MAGE_SPRITE_CODE = "Mage_Sprite";
+    public static final String MAGE_SPRITE_CODE = "RedMage_Sprite";
     public static final String GHOST_SPRITE_CODE = "Ghost_Enemy_Sprite";
     public static final String TREX_SPRITE_CODE = "TRex_Enemy_Sprite";
     
