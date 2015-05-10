@@ -25,6 +25,9 @@ public class MageDefensePlayer
     // Inner Enums/Classes
     //
     
+    /**
+     *  A list of the possible attacks along with their String representations.
+    */
     public static enum AbilityType
     {
         NONE(""),
@@ -66,6 +69,10 @@ public class MageDefensePlayer
         }
     }
     
+    /**
+     *  The player state. BURNOUT is when the player has exhausted energy and needs to 
+     *	recharge. DEAD is when lifeforce is depleted and the game would end. 
+     */
     public static enum PlayerStatus
     {
         NORMAL(0x007f00, 0x7fff7f),

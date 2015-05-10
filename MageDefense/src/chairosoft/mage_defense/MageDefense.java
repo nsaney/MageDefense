@@ -229,6 +229,7 @@ public class MageDefense extends QApplication
                 switch (keyCode)
                 {
                     // normal gameplay
+                    //Changing attack types
                     case KeyEvent.VK_Q: player.chooseAbilityType(MageDefensePlayer.AbilityType.FIRE_ATTACK); break;
                     case KeyEvent.VK_W: player.chooseAbilityType(MageDefensePlayer.AbilityType.WHIRLWIND_ATTACK); break;
                     case KeyEvent.VK_E: player.chooseAbilityType(MageDefensePlayer.AbilityType.BOLT_ATTACK); break;
@@ -509,13 +510,16 @@ public class MageDefense extends QApplication
                     //mageSprite.resolveCollisionInQMapRoom(qmaproom, true, true);
                     
                     
-                    // get mageSprite info
+                    // get mageSprite and ghostSprite info
                     FloatPoint2D pp = mageSprite.getPosition();
+                    FloatPoint2D ghostPos = ghostSprite.getPosition();
+                    double distance = pp.distance(ghostPos);
+                    // update ghost sprite conditionally
                     
-                    // update ghost sprite
-                    ghostSprite.moveOneFrame();
-                    
-                    // update fire sprites
+                    if(distance >= 25){
+                    	ghostSprite.moveOneFrame();
+                    }
+                    // update attack sprites
                     ArrayList<AttackSprite> attackSpritesToRemove = new ArrayList<>();
                     for (AttackSprite qs : attackSprites)
                     {
@@ -529,12 +533,18 @@ public class MageDefense extends QApplication
                         }
                     }
                     
+                    //actually remove
                     for (AttackSprite qs : attackSpritesToRemove)
                     {
                         attackSprites.remove(qs);
                     }
-                    
                     attackSpritesToRemove.clear();
+                    
+                    for(AttackSprite qs : attackSprites){
+						if(ghostSprite.collidesWith(qs)){
+							ghostSprite.dispose();
+						}
+					}
                 }
                 
                 
