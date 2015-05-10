@@ -40,6 +40,7 @@ public class MageDefense extends QApplication
         JPanel panel = dbui.getPanel();
         panel.addMouseListener(app.mouseAdapter);
         panel.addMouseMotionListener(app.mouseAdapter);
+        panel.addKeyListener(app.keyAdapter);
 	}
     
     
