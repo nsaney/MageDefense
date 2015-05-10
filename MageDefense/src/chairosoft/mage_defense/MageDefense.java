@@ -540,9 +540,16 @@ public class MageDefense extends QApplication
                     }
                     attackSpritesToRemove.clear();
                     
-                    for(AttackSprite qs : attackSprites){
-						if(ghostSprite.collidesWith(qs)){
-							ghostSprite.dispose();
+                    for (AttackSprite qs : attackSprites)
+                    {
+						if (ghostSprite.collidesWith(qs))
+						{
+							ghostSprite.setPosition((float)(Math.random() * getPanelWidth()),
+													(float)(Math.random() * getPanelHeight()));
+							ghostPos = ghostSprite.getPosition();
+							FloatPoint2D difference = new FloatPoint2D(pp.x - ghostPos.x, pp.y - ghostPos.y);
+                   			FloatPoint2D differenceUnit = QPhysical2D.getUnitVector(difference);
+                    		ghostSprite.setVelocity(0.8f * differenceUnit.x, 0.8f * differenceUnit.y);
 						}
 					}
                 }
