@@ -61,8 +61,8 @@ public class MageDefense extends QApplication
     public static final String COORDINATE_FORMAT_STRING = "(%1$7.3f,%2$7.3f)";
     public static final int    TRANSPARENT              = Color.TRANSPARENT;
     
-    @Override public int getPanelWidth() { return 576; }
-    @Override public int getPanelHeight() { return 384; }
+    @Override public int getPanelWidth() { return 768; }
+    @Override public int getPanelHeight() { return 432; }
     
     public static final int X_SCALING = 1;
     public static final int Y_SCALING = 1;
