@@ -94,6 +94,7 @@ public class MageDefense extends QApplication
     // Instance Variables
     //
     int killScore = 0;
+    int wave = 1;
     
     protected final GameState GAME_NOT_LOADED = new GameNotLoaded(this);
     protected final GameState MAPROOM_LOADING = new MapRoomLoading(this);
@@ -130,12 +131,7 @@ public class MageDefense extends QApplication
     protected QSprite crosshair = new QSprite(CROSSHAIR_SPRITE_CODE);
     
     protected Set<AttackSprite> attackSprites = new HashSet<>();
-    
-    protected String positionString = "";
-    protected String velocityString = "";
-    protected String accelerationString = "";
-    protected String lastMoveString = "";
-    protected boolean show_position = false;
+    protected Set<QSprite> enemySprites = new HashSet<>();
     
     protected volatile ConcurrentLinkedQueue<MouseEvent> mouseEventQueue = new ConcurrentLinkedQueue<>();
     public final MouseAdapter mouseAdapter = new MouseAdapter()
@@ -151,16 +147,10 @@ public class MageDefense extends QApplication
         @Override public void keyReleased(KeyEvent ke) { MageDefense.this.keyEventQueue.offer(ke); }
     };
     
-    
-    protected QSprite ghostSprite = new QSprite(GHOST_SPRITE_CODE);
-    protected QSprite trexSprite1 = new QSprite(TREX_SPRITE_CODE);
-    protected QSprite trexSprite2 = new QSprite(TREX_SPRITE_CODE);
-    protected QSprite trexSprite3 = new QSprite(TREX_SPRITE_CODE);
-    
-    
     //
     // Instance Methods 
     //
+    
     
     public long getFramesElapsedTotal() { return this.framesElapsedTotal; }
     

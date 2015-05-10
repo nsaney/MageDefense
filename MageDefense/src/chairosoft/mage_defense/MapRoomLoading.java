@@ -28,14 +28,40 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
 
-public class MapRoomLoading extends GameState{
+public class MapRoomLoading extends GameState
+{
 
 	//constructor
-	public MapRoomLoading(MageDefense md){
+	public MapRoomLoading(MageDefense md)
+	{
 		super(md);
 	}
 	
 	//Overloaded methods
+	@Override
+	public void keyPressed(int keyCode)
+	{
+	
+	}
+	
+	@Override
+	public void keyReleased(int keyCode)
+	{
+	
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e)
+	{
+	
+	}
+	
+	@Override
+	public void mousePressed(MouseEvent e)
+	{
+	
+	}
+	
 	@Override
 	public void update()
 	{
@@ -50,27 +76,5 @@ public class MapRoomLoading extends GameState{
 		IntPoint2D cb = new IntPoint2D(7, 12);
 		ctx.drawRect(cb.x, cb.y, 102, 8); // outline
 		ctx.fillRect(cb.x + 1 + (int)(this.md.getFramesElapsedTotal() % 100), cb.y, 2, 8); // cycle
-	}
-	
-	@Override
-	public void keyPressed(int keyCode)
-	{
-	
-	}
-	
-	@Override
-	public void keyReleased(int keyCode)
-	{
-	
-	}
-
-	@Override
-	public void mouseMoved(MouseEvent e){
-	
-	}
-	
-	@Override
-	public void mousePressed(MouseEvent e){
-	
 	}
 }
