@@ -58,7 +58,7 @@ public class MageDefense extends QApplication
     //
     // Constants
     //
-    
+    public static final Font gameOverFont = new Font(Font.Family.MONOSPACED, Font.Style.BOLD, 48);
     public static final String COORDINATE_FORMAT_STRING = "(%1$7.3f,%2$7.3f)";
     public static final int    TRANSPARENT              = Color.TRANSPARENT;
     
@@ -93,6 +93,7 @@ public class MageDefense extends QApplication
     //
     // Instance Variables
     //
+    int killScore = 0;
     
     public enum GameState { GAME_NOT_LOADED, MAPROOM_LOADING, MAPROOM_LOADED, NORMAL_GAMEPLAY; }
     
@@ -261,6 +262,11 @@ public class MageDefense extends QApplication
                     case KeyEvent.VK_SPACE: 
                         mageSprite.setPositionByQTile(this.spawnCol, this.spawnRow); 
                         ghostSprite.setPositionByQTile(-2, -2);
+                        FloatPoint2D ghostPos = ghostSprite.getPosition();
+                        FloatPoint2D pp = mageSprite.getPosition();
+						FloatPoint2D difference = new FloatPoint2D(pp.x - ghostPos.x, pp.y - ghostPos.y);
+						FloatPoint2D differenceUnit = QPhysical2D.getUnitVector(difference);
+						ghostSprite.setVelocity(0.8f * differenceUnit.x, 0.8f * differenceUnit.y);
                         break;
                     default: break;
                 }
@@ -493,7 +499,7 @@ public class MageDefense extends QApplication
                 ////mageSprite.setDirection(keypad.getDirection()); //// TODO: this
                 
                 // collision
-                if (move_and_collide)
+                if (move_and_collide && player.getStatus() != MageDefensePlayer.PlayerStatus.DEAD)
                 {
                     // update life force
                     player.addToLifeForceCurrent(player.regenAmount / player.framesBetweenRegen);
@@ -516,8 +522,20 @@ public class MageDefense extends QApplication
                     double distance = pp.distance(ghostPos);
                     // update ghost sprite conditionally
                     
-                    if(distance >= 25){
+                    if (distance >= 25)
+                    {
                     	ghostSprite.moveOneFrame();
+                    }
+                    else if (this.framesElapsedTotal % 10 == 0)
+                    {
+                   		if (player.getStatus() == MageDefensePlayer.PlayerStatus.BURNOUT)
+                    	{
+                    		player.addToLifeForceMax(-1);             		
+                    	}
+                    	else
+                    	{
+                			player.addToLifeForceCurrent(-1);
+                    	}
                     }
                     // update attack sprites
                     ArrayList<AttackSprite> attackSpritesToRemove = new ArrayList<>();
@@ -550,6 +568,11 @@ public class MageDefense extends QApplication
 							FloatPoint2D difference = new FloatPoint2D(pp.x - ghostPos.x, pp.y - ghostPos.y);
                    			FloatPoint2D differenceUnit = QPhysical2D.getUnitVector(difference);
                     		ghostSprite.setVelocity(0.8f * differenceUnit.x, 0.8f * differenceUnit.y);
+                    		this.killScore++;
+                    		if (killScore % 5 == 0)
+                    		{
+                    			player.addToLifeForceMax(+4);
+                    		}
 						}
 					}
                 }
@@ -637,17 +660,28 @@ public class MageDefense extends QApplication
                     ctx.fillRect(lfb.x + 1, lfb.y + 1, lifeForceBarFillWidth, LIFE_FORCE_BAR_HEIGHT);
                     
                     ctx.setColor(Color.BLACK);
+                    String killScoreString = String.format("Kill Score: %04d", this.killScore);
                     String lifeForceString = String.format("%04d / %04d Life Force", (int)lifeForceCurrent, (int)lifeForceMax);
                     ctx.drawString(lifeForceString, lfb.x, lfb.y + LIFE_FORCE_BAR_HEIGHT + 22);
+                    
                     if (player.getStatus() == MageDefensePlayer.PlayerStatus.BURNOUT)
                     {
                         ctx.drawString("BURNOUT", lfb.x, lfb.y + LIFE_FORCE_BAR_HEIGHT + 42);
                     }
-                    
+                    ctx.drawString(killScoreString, lfb.x, lfb.y + LIFE_FORCE_BAR_HEIGHT + 42 * 2);
                     // // mouse position
                     // ctx.setColor(Color.BLACK);
                     // ctx.drawString(mousePositionString, cb.x, cb.y + 30);
                     // ctx.drawString(crosshairPositionString, cb.x, cb.y + 50);
+                    
+                    //Game Over
+                    if (player.getStatus() == MageDefensePlayer.PlayerStatus.DEAD)
+                    {
+                    	ctx.setFont(gameOverFont);
+                    	ctx.setColor(Color.RED);
+                    	ctx.drawString("DEATH TO MAGE. AND YOU.", (int)((1/8.0) * getPanelWidth()),
+                    											  (int)((1/2.0) * getPanelHeight()));
+                    }
                     break;
                 }
             }

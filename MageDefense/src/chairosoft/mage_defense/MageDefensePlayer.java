@@ -140,7 +140,8 @@ public class MageDefensePlayer
     {
         this.lifeForceMax += amt; 
         if (this.lifeForceMax < 0.0) { this.lifeForceMax = 0.0; }
-        this.addToLifeForceCurrent(0); 
+        this.addToLifeForceCurrent(0);
+        if (this.lifeForceMax == 0.0) { this.status = PlayerStatus.DEAD; }
     }
     public void addToLifeForceCurrent(double amt) 
     { 
