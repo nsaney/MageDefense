@@ -306,7 +306,7 @@ public class MageDefense extends QApplication
         double t = Math.atan2(-mp_unit.y, mp_unit.x);
         
         String next_state = "left_basic";
-        
+        /*
         double increment = Math.PI / 2;
         double t1 = - Math.PI + (increment / 2);
         double t2 = t1 + increment;
@@ -317,7 +317,9 @@ public class MageDefense extends QApplication
         else if (t2 <= t && t <= t3) { next_state = "right_basic"; }
         else if (t3 <= t && t <= t4) { next_state = "up_basic"; }
         else { next_state = "left_basic"; }
+        */
         
+        if(mp.x > 0){ next_state = "right_basic"; }
         mageSprite.setCurrentState(next_state);
         
         return mp_unit;

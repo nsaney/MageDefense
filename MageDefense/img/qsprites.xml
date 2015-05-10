@@ -71,6 +71,36 @@
 			<state code="down_basic" shape="shape_0" animation="down_basic"/>
 		</states>
 	</qsprite>
+	
+	<!-- Red Mage Sprite -->
+	<qsprite code="RedMage_Sprite" width="32" height="32">
+		<spritesheet image="RedMage.png" transparent="#ffffff" />
+		<shapes>
+			<rectangle code="shape_0" x0="0" y0="0" width="32" height="32"/>
+		</shapes>
+		<animations>
+			<animation code="left_basic">
+				<frame image="00" duration="100"/>
+			</animation>
+			<animation code="right_basic">
+				<frame image="01" duration="100"/>
+			</animation>
+<!-- 
+			<animation code="up_basic">
+				<frame image="02" duration="100"/>
+			</animation>
+			<animation code="down_basic">
+				<frame image="03" duration="100"/>
+			</animation>
+ -->
+		</animations>
+		<states default="left_basic">
+			<state code="left_basic" shape="shape_0" animation="left_basic"/>
+			<state code="right_basic" shape="shape_0" animation="right_basic"/>
+			<state code="up_basic" shape="shape_0" animation="up_basic"/>
+			<state code="down_basic" shape="shape_0" animation="down_basic"/>
+		</states>
+	</qsprite>
     
     <!-- Crosshair Sprite -->
     <qsprite code="Crosshair_Sprite" width="16" height="16">
@@ -100,6 +130,25 @@
 				<frame image="01" duration="10"/>
 				<frame image="00" duration="10"/>
 				<frame image="02" duration="10"/>
+			</animation>
+		</animations>
+		<states default="basic">
+			<state code="basic"  shape="shape_0" animation="basic"/>
+		</states>
+    </qsprite>
+    
+     <!-- Flame Attack Sprite -->
+    <qsprite code="Flame_Attack_Sprite" width="32" height="32">
+		<spritesheet image="FlameSprite.png" transparent="#ffffff" />
+		<shapes>
+			<rectangle code="shape_0" x0="8" y0="8" width="16" height="16"/>
+		</shapes>
+		<animations>
+			<animation code="basic">
+				<frame image="00" duration="10"/>
+				<frame image="01" duration="10"/>
+				<frame image="02" duration="10"/>
+				<frame image="01" duration="10"/>
 			</animation>
 		</animations>
 		<states default="basic">
