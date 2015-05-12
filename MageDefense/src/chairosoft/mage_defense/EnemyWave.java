@@ -47,14 +47,11 @@ public class EnemyWave
 				EnemyWave.addEnemies(md, 1, md.TREX_SPRITE_CODE);
 				break;
 			case 2:
-				EnemyWave.addEnemies(md, 1, md.GHOST_SPRITE_CODE);
-				EnemyWave.addEnemies(md, 1, md.GHOST_SPRITE_CODE);
+				EnemyWave.addEnemies(md, 2, md.GHOST_SPRITE_CODE);
 				EnemyWave.addEnemies(md, 1, md.TREX_SPRITE_CODE);
 				break;
 			case 3:
-				EnemyWave.addEnemies(md, 1, md.GHOST_SPRITE_CODE);
-				EnemyWave.addEnemies(md, 1, md.GHOST_SPRITE_CODE);
-				EnemyWave.addEnemies(md, 1, md.GHOST_SPRITE_CODE);
+				EnemyWave.addEnemies(md, 3, md.GHOST_SPRITE_CODE);
 				EnemyWave.addEnemies(md, 1, md.TREX_SPRITE_CODE);
 				break;
 			default:
