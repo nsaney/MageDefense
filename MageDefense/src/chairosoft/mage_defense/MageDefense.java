@@ -18,7 +18,7 @@ import java.io.*;
 import java.util.*;
 import java.util.concurrent.*;
 
-import chairosoft.desktop.*;
+import chairosoft.quadrado.desktop.DesktopDoubleBufferedUI;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
