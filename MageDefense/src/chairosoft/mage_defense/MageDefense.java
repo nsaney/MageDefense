@@ -240,7 +240,7 @@ public class MageDefense extends QApplication
         float mouseOffsetX = pp.x;//+ (pb.width / 2f);
         float mouseOffsetY = pp.y;// + (pb.height / 2f);
         FloatPoint2D mp = new FloatPoint2D(mouseX - mouseOffsetX, mouseY - mouseOffsetY);
-        FloatPoint2D mp_unit = QPhysical2D.getUnitVector(mp);
+        FloatPoint2D mp_unit = mp.getUnitVector();
         FloatPoint2D mp_ranged = new FloatPoint2D(mp_unit.x * CROSSHAIR_DISTANCE, mp_unit.y * CROSSHAIR_DISTANCE);
         //Rectangle cb = crosshair.getBounds();
         float dx = mouseOffsetX;// - (cb.width / 2f);

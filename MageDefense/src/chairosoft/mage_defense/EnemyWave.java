@@ -73,9 +73,9 @@ public class EnemyWave
 			FloatPoint2D gp = new FloatPoint2D((float)(Math.random() * md.getPanelWidth()),
 											   (float)(Math.random() * md.getPanelHeight()));
 			enemy.setPosition(gp.x, gp.y);
+            
 			FloatPoint2D difference = new FloatPoint2D(pp.x - gp.x, pp.y - gp.y);
-			FloatPoint2D differenceUnit = QPhysical2D.getUnitVector(difference);
-			enemy.setVelocity(0.8f * differenceUnit.x, 0.8f * differenceUnit.y);
+			enemy.setVelocity(difference.getUnitVector().multipliedBy(0.8f));
 			
 			md.enemySprites.add(enemy);
 		}
