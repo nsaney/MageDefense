@@ -12,6 +12,7 @@ import chairosoft.ui.audio.*;
 import chairosoft.ui.event.*;
 import chairosoft.ui.geom.*;
 import chairosoft.ui.graphics.*;
+import chairosoft.util.function.*;
 
 import java.io.*; 
 import java.util.*;
@@ -159,7 +160,7 @@ public class MageDefense extends QApplication
         this.gameState = this.MAPROOM_LOADING;
         QMapRoomLoader loader = new QMapRoomLoader(
             currentMapLink, 
-            new Functions.Consumer<QMapRoomLoader.Result>()
+            new Consumer<QMapRoomLoader.Result>()
             {
                 @Override public void accept(QMapRoomLoader.Result result)
                 {
