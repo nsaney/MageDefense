@@ -11,23 +11,20 @@
 
 package chairosoft.mage_defense;
 
-import static chairosoft.quadrado.QCompassDirection.*;
-import chairosoft.quadrado.*;
-import chairosoft.ui.audio.*;
-import chairosoft.ui.event.*;
-import chairosoft.ui.geom.*;
-import chairosoft.ui.graphics.*;
+import chairosoft.quadrado.QSprite;
+import chairosoft.quadrado.QTileset;
 
-import java.io.*; 
-import java.util.*;
-import java.util.concurrent.*;
+import chairosoft.ui.geom.Point2D;
+import chairosoft.ui.geom.FloatPoint2D;
+import chairosoft.ui.geom.IntPoint2D;
+import chairosoft.ui.graphics.Color;
+import chairosoft.ui.graphics.DrawingContext;
+import chairosoft.ui.graphics.Font;
 
-import chairosoft.desktop.*;
-import java.awt.event.KeyAdapter;
+import java.util.ArrayList;
+
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.JPanel;
 
 public class NormalGameState extends GameState
 {

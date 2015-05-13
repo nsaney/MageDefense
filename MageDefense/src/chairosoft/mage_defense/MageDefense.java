@@ -8,8 +8,9 @@ package chairosoft.mage_defense;
 
 import static chairosoft.quadrado.QCompassDirection.*;
 import chairosoft.quadrado.*;
+import chairosoft.quadrado.platform.event.*;
+
 import chairosoft.ui.audio.*;
-import chairosoft.ui.event.*;
 import chairosoft.ui.geom.*;
 import chairosoft.ui.graphics.*;
 import chairosoft.util.function.*;

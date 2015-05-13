@@ -10,23 +10,12 @@
 
 package chairosoft.mage_defense;
 
-import static chairosoft.quadrado.QCompassDirection.*;
-import chairosoft.quadrado.*;
-import chairosoft.ui.audio.*;
-import chairosoft.ui.event.*;
-import chairosoft.ui.geom.*;
-import chairosoft.ui.graphics.*;
+import chairosoft.ui.geom.IntPoint2D;
+import chairosoft.ui.graphics.Color;
+import chairosoft.ui.graphics.DrawingContext;
 
-import java.io.*; 
-import java.util.*;
-import java.util.concurrent.*;
-
-import chairosoft.desktop.*;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.JPanel;
 
 public class GameNotLoaded extends GameState
 {
