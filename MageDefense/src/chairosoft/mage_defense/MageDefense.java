@@ -17,7 +17,7 @@ package chairosoft.mage_defense;
 
 import static chairosoft.quadrado.QCompassDirection.*;
 import chairosoft.quadrado.*;
-import chairosoft.quadrado.platform.event.*;
+import chairosoft.quadrado.ui.event.*;
 
 import chairosoft.ui.audio.*;
 import chairosoft.ui.geom.*;
