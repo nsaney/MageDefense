@@ -1,10 +1,11 @@
 /* 
- * MageDefensePlayer.java
- * MageDefensePlayer class definition
+ * Nicholas Saney 
  * 
  * Created: August 03, 2014
  * 
- * @author Nicholas Saney
+ * MageDefensePlayer.java
+ * MageDefensePlayer class definition
+ * 
  */
 
 package chairosoft.mage_defense;

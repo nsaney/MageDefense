@@ -1,13 +1,11 @@
 /* 
+ * Nicholas Saney 
+ * 
+ * Created: August 03, 2014
+ * 
  * AttackSprite.java
  * AttackSprite class definition
  * 
- * Created: August 03, 2014
- *
- * Class to represent the spells and sword of the mage. Certain enemies will inevitably
- * use attacks as well.
- *
- * @author Nicholas Saney
  */
 
 package chairosoft.mage_defense;
@@ -19,6 +17,7 @@ import chairosoft.quadrado.*;
  * A class representing an attack sprite in Mage Defense.
  * 
  * @author Nicholas Saney
+ * @see QSprite
  */
 public class AttackSprite extends QSprite implements Comparable<AttackSprite>
 {
