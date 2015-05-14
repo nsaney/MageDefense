@@ -207,6 +207,7 @@ public class NormalGameState extends GameState
 				if (distance >= 25)
 				{
 					enemy.moveOneFrame();
+					//Calculate next point it needs to be along the movement path
 				}
 				else if (this.md.getFramesElapsedTotal() % 10 == 0)
 				{

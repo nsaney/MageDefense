@@ -2,6 +2,15 @@
  * MageDefense.java 
  * MageDefense main and auxiliary methods
  * 
+ * The MageDefense game is a simple reaction based game. The premise is that a mage, or
+ * wizard, is stationary in the center of a map while enemies converge on and attack the
+ * mage. The mage must therefore defend themself. The primary way the mage defends is by 
+ * using spells. The elements are fire, wind, earth, lighting, dark, and light. Spells
+ * may have different effects, including damaging, pushing, stunning, or burning enemies, 
+ * or also setting up barricades to impede enemy movement. 
+ *
+ * @author Nicholas Saney (Game Engine Programmer/Lead Programmer)
+ * @author Richard Saney  (Game Designer/Assistant Programmer)
  */
 
 package chairosoft.mage_defense;
@@ -60,10 +69,9 @@ public class MageDefense extends QApplication
     //
     // Constants
     //
-    public static final Font gameOverFont = new Font(Font.Family.MONOSPACED, Font.Style.BOLD, 48);
+    public static final Font   gameOverFont             = new Font(Font.Family.MONOSPACED, Font.Style.BOLD, 48);
     public static final String COORDINATE_FORMAT_STRING = "(%1$7.3f,%2$7.3f)";
     public static final int    TRANSPARENT              = Color.TRANSPARENT;
-    
     
     @Override public int getPanelWidth() { return 768; }
     @Override public int getPanelHeight() { return 432; }
@@ -152,7 +160,6 @@ public class MageDefense extends QApplication
     //
     // Instance Methods 
     //
-    
     
     public long getFramesElapsedTotal() { return this.framesElapsedTotal; }
     
