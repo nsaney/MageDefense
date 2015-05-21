@@ -139,7 +139,7 @@ public class NormalGameState extends GameState
 			else if (t7 <= t && t <= t8) { next_state = "up_left_basic"; }
 			else { next_state = "left_basic"; }
 			
-			nextAttackSprite.setCurrentState(next_state);
+			nextAttackSprite.setState(next_state);
 		}
 		else if (ability.type == MageDefensePlayer.AbilityType.SWORD_ATTACK)
 		{
@@ -158,7 +158,7 @@ public class NormalGameState extends GameState
 			else if (t3 <= t && t <= t4) { next_state = "up_basic"; }
 			else { next_state = "left_basic"; }
 			
-			nextAttackSprite.setCurrentState(next_state);
+			nextAttackSprite.setState(next_state);
 			
 			FloatPoint2D ap = nextAttackSprite.getPosition();
 			nextAttackSprite.setPosition(ap.x + mp_unit.x * QTileset.getTileWidth() / 2, ap.y + mp_unit.y * QTileset.getTileWidth() / 2);
