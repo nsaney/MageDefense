@@ -13,7 +13,7 @@
 	
     <!-- Start Screen Sprite -->
     <qsprite code="Start_Screen_Sprite" width="576" height="384">
-		<spritesheet image="MageDefenseStartScreen_blurs.png" width="1" height="1" transparent="#fffffe" />
+		<spritesheet image="MageDefenseStartScreen_blurs.png" transparent="#fffffe" />
 		<shapes>
 			<rectangle code="shape_0" x0="0" y0="0" width="576" height="384"/>
 		</shapes>
@@ -29,7 +29,7 @@
 	
     <!-- Background Sprite -->
     <qsprite code="Background_Sprite" width="384" height="384">
-		<spritesheet image="BackgroundMageDefense.png" width="1" height="1" transparent="#ffffff" />
+		<spritesheet image="BackgroundMageDefense.png" transparent="#ffffff" />
 		<shapes>
 			<rectangle code="shape_0" x0="0" y0="0" width="1" height="1"/>
 		</shapes>
@@ -46,7 +46,7 @@
     
 	<!-- Mage Sprite -->
 	<qsprite code="Mage_Sprite" width="32" height="32">
-		<spritesheet image="MageCharacter_LRUD.png" width="2" height="2" transparent="#ffffff" />
+		<spritesheet image="MageCharacter_LRUD.png" transparent="#ffffff" />
 		<shapes>
 			<rectangle code="shape_0" x0="0" y0="0" width="32" height="32"/>
 		</shapes>
@@ -104,7 +104,7 @@
     
     <!-- Crosshair Sprite -->
     <qsprite code="Crosshair_Sprite" width="16" height="16">
-		<spritesheet image="crosshair.png" width="1" height="1" transparent="#ffffff" />
+		<spritesheet image="crosshair.png" transparent="#ffffff" />
 		<shapes>
 			<rectangle code="shape_0" x0="0" y0="0" width="16" height="16"/>
 		</shapes>
@@ -120,7 +120,7 @@
     
     <!-- Fire Attack Sprite -->
     <qsprite code="Fire_Attack_Sprite" width="32" height="32">
-		<spritesheet image="FireImage2.png" width="1" height="3" transparent="#ffffff" />
+		<spritesheet image="FireImage2.png" transparent="#ffffff" />
 		<shapes>
 			<rectangle code="shape_0" x0="8" y0="8" width="16" height="16"/>
 		</shapes>
@@ -158,7 +158,7 @@
     
     <!-- Bolt Attack Sprite -->
     <qsprite code="Bolt_Attack_Sprite" width="32" height="32">
-		<spritesheet image="LightingSketch.png" width="3" height="3" transparent="#ffffff" />
+		<spritesheet image="LightingSketch.png" transparent="#ffffff" />
 		<shapes>
 			<rectangle code="shape_0" x0="8" y0="8" width="16" height="16"/>
 		</shapes>
@@ -202,7 +202,7 @@
     
     <!-- Whirlwind Attack Sprite -->
     <qsprite code="Whirlwind_Attack_Sprite" width="32" height="32">
-		<spritesheet image="WhirlwindSprite.png" width="1" height="3" transparent="#ffffff" />
+		<spritesheet image="WhirlwindSprite.png" transparent="#ffffff" />
 		<shapes>
 			<rectangle code="shape_0" x0="8" y0="8" width="16" height="16"/>
 		</shapes>
@@ -221,7 +221,7 @@
     
     <!-- Sword Attack Sprite -->
     <qsprite code="Sword_Attack_Sprite" width="64" height="64">
-		<spritesheet image="Swords64x64.png" width="4" height="3" transparent="#ffffff" />
+		<spritesheet image="Swords64x64.png" transparent="#ffffff" />
 		<shapes>
 			<rectangle code="shape_0" x0="0" y0="0" width="64" height="64"/>
 		</shapes>
@@ -257,7 +257,7 @@
     
     <!-- Ghost Enemy -->
     <qsprite code="Ghost_Enemy_Sprite" width="32" height="32">
-		<spritesheet image="GhostEnemy_transparent.png" width="4" height="3" transparent="#ffffff" />
+		<spritesheet image="GhostEnemy_transparent.png" transparent="#ffffff" />
 		<shapes>
 			<rectangle code="shape_0" x0="8" y0="8" width="16" height="16"/>
 		</shapes>
