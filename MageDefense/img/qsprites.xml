@@ -1,318 +1,316 @@
 <?xml version="1.0"?>
 <!-- 
-	Nicholas Saney 
-	
-	Created: August 02, 2014 
-	Modified: August 02, 2014
-	
-	qsprites.xml 
-	QSprite descriptions 
-	
+  Nicholas Saney 
+  
+  Created: August 02, 2014 
+  Modified: August 02, 2014
+  
+  qsprites.xml 
+  QSprite descriptions 
+  
 -->
 <qsprites folder="sprites">
-	
-    <!-- Start Screen Sprite -->
-    <qsprite code="Start_Screen_Sprite" width="576" height="384">
-		<spritesheet image="MageDefenseStartScreen_blurs.png" transparent="#fffffe" />
-		<shapes>
-			<rectangle code="shape_0" x0="0" y0="0" width="576" height="384"/>
-		</shapes>
-		<animations>
-			<animation code="basic">
-				<frame image="00" duration="100"/>
-			</animation>
-		</animations>
-		<states default="basic">
-			<state code="basic" shape="shape_0" animation="basic"/>
-		</states>
+  
+  <!-- Start Screen Sprite -->
+  <qsprite code="Start_Screen_Sprite" width="576" height="384">
+    <spritesheet image="MageDefenseStartScreen_blurs.png" transparent="#fffffe" />
+    <shapes>
+      <rectangle code="shape_0" x0="0" y0="0" width="576" height="384"/>
+    </shapes>
+    <animations>
+      <animation code="basic">
+        <frame image="00" duration="100"/>
+      </animation>
+    </animations>
+    <states default="basic">
+      <state code="basic" shape="shape_0" animation="basic"/>
+    </states>
     </qsprite>
-	
+  
     <!-- Background Sprite -->
     <qsprite code="Background_Sprite" width="384" height="384">
-		<spritesheet image="BackgroundMageDefense.png" transparent="#ffffff" />
-		<shapes>
-			<rectangle code="shape_0" x0="0" y0="0" width="1" height="1"/>
-		</shapes>
-		<animations>
-			<animation code="basic">
-				<frame image="00" duration="100"/>
-			</animation>
-		</animations>
-		<states default="basic">
-			<state code="basic" shape="shape_0" animation="basic"/>
-		</states>
-    </qsprite>
+    <spritesheet image="BackgroundMageDefense.png" transparent="#ffffff" />
+    <shapes>
+      <rectangle code="shape_0" x0="0" y0="0" width="1" height="1"/>
+    </shapes>
+    <animations>
+      <animation code="basic">
+        <frame image="00" duration="100"/>
+      </animation>
+    </animations>
+    <states default="basic">
+      <state code="basic" shape="shape_0" animation="basic"/>
+    </states>
+  </qsprite>
     
     
-	<!-- Mage Sprite -->
-	<qsprite code="Mage_Sprite" width="32" height="32">
-		<spritesheet image="MageCharacter_LRUD.png" transparent="#ffffff" />
-		<shapes>
-			<rectangle code="shape_0" x0="0" y0="0" width="32" height="32"/>
-		</shapes>
-		<animations>
-			<animation code="left_basic">
-				<frame image="00" duration="100"/>
-			</animation>
-			<animation code="right_basic">
-				<frame image="01" duration="100"/>
-			</animation>
-			<animation code="up_basic">
-				<frame image="02" duration="100"/>
-			</animation>
-			<animation code="down_basic">
-				<frame image="03" duration="100"/>
-			</animation>
-		</animations>
-		<states default="left_basic">
-			<state code="left_basic" shape="shape_0" animation="left_basic"/>
-			<state code="right_basic" shape="shape_0" animation="right_basic"/>
-			<state code="up_basic" shape="shape_0" animation="up_basic"/>
-			<state code="down_basic" shape="shape_0" animation="down_basic"/>
-		</states>
-	</qsprite>
-	
-	<!-- Red Mage Sprite -->
-	<qsprite code="RedMage_Sprite" width="32" height="32">
-		<spritesheet image="RedMage.png" transparent="#ffffff" />
-		<shapes>
-			<rectangle code="shape_0" x0="0" y0="0" width="32" height="32"/>
-		</shapes>
-		<animations>
-			<animation code="left_basic">
-				<frame image="00" duration="100"/>
-			</animation>
-			<animation code="right_basic">
-				<frame image="01" duration="100"/>
-			</animation>
+  <!-- Mage Sprite -->
+  <qsprite code="Mage_Sprite" width="32" height="32">
+    <spritesheet image="MageCharacter_LRUD.png" transparent="#ffffff" />
+    <shapes>
+      <rectangle code="shape_0" x0="0" y0="0" width="32" height="32"/>
+    </shapes>
+    <animations>
+      <animation code="left_basic">
+        <frame image="00" duration="100"/>
+      </animation>
+      <animation code="right_basic">
+        <frame image="01" duration="100"/>
+      </animation>
+      <animation code="up_basic">
+        <frame image="02" duration="100"/>
+      </animation>
+      <animation code="down_basic">
+        <frame image="03" duration="100"/>
+      </animation>
+    </animations>
+    <states default="left_basic">
+      <state code="left_basic" shape="shape_0" animation="left_basic"/>
+      <state code="right_basic" shape="shape_0" animation="right_basic"/>
+      <state code="up_basic" shape="shape_0" animation="up_basic"/>
+      <state code="down_basic" shape="shape_0" animation="down_basic"/>
+    </states>
+  </qsprite>
+  
+  <!-- Red Mage Sprite -->
+  <qsprite code="RedMage_Sprite" width="32" height="32">
+    <spritesheet image="RedMage.png" transparent="#ffffff" />
+    <shapes>
+      <rectangle code="shape_0" x0="0" y0="0" width="32" height="32"/>
+    </shapes>
+    <animations>
+      <animation code="left_basic">
+        <frame image="00" duration="100"/>
+      </animation>
+      <animation code="right_basic">
+        <frame image="01" duration="100"/>
+      </animation>
 <!-- 
-			<animation code="up_basic">
-				<frame image="02" duration="100"/>
-			</animation>
-			<animation code="down_basic">
-				<frame image="03" duration="100"/>
-			</animation>
+      <animation code="up_basic">
+        <frame image="02" duration="100"/>
+      </animation>
+      <animation code="down_basic">
+        <frame image="03" duration="100"/>
+      </animation>
  -->
-		</animations>
-		<states default="left_basic">
-			<state code="left_basic" shape="shape_0" animation="left_basic"/>
-			<state code="right_basic" shape="shape_0" animation="right_basic"/>
-			<state code="up_basic" shape="shape_0" animation="up_basic"/>
-			<state code="down_basic" shape="shape_0" animation="down_basic"/>
-		</states>
-	</qsprite>
+    </animations>
+    <states default="left_basic">
+      <state code="left_basic" shape="shape_0" animation="left_basic"/>
+      <state code="right_basic" shape="shape_0" animation="right_basic"/>
+      <state code="up_basic" shape="shape_0" animation="up_basic"/>
+      <state code="down_basic" shape="shape_0" animation="down_basic"/>
+    </states>
+  </qsprite>
     
-    <!-- Crosshair Sprite -->
-    <qsprite code="Crosshair_Sprite" width="16" height="16">
-		<spritesheet image="crosshair.png" transparent="#ffffff" />
-		<shapes>
-			<rectangle code="shape_0" x0="0" y0="0" width="16" height="16"/>
-		</shapes>
-		<animations>
-			<animation code="basic">
-				<frame image="00" duration="100"/>
-			</animation>
-		</animations>
-		<states default="basic">
-			<state code="basic" shape="shape_0" animation="basic"/>
-		</states>
-    </qsprite>
+  <!-- Crosshair Sprite -->
+  <qsprite code="Crosshair_Sprite" width="16" height="16">
+    <spritesheet image="crosshair.png" transparent="#ffffff" />
+    <shapes>
+      <rectangle code="shape_0" x0="0" y0="0" width="16" height="16"/>
+    </shapes>
+    <animations>
+      <animation code="basic">
+        <frame image="00" duration="100"/>
+      </animation>
+    </animations>
+    <states default="basic">
+      <state code="basic" shape="shape_0" animation="basic"/>
+    </states>
+  </qsprite>
     
-    <!-- Fire Attack Sprite -->
-    <qsprite code="Fire_Attack_Sprite" width="32" height="32">
-		<spritesheet image="FireImage2.png" transparent="#ffffff" />
-		<shapes>
-			<rectangle code="shape_0" x0="8" y0="8" width="16" height="16"/>
-		</shapes>
-		<animations>
-			<animation code="basic">
-				<frame image="00" duration="10"/>
-				<frame image="01" duration="10"/>
-				<frame image="00" duration="10"/>
-				<frame image="02" duration="10"/>
-			</animation>
-		</animations>
-		<states default="basic">
-			<state code="basic"  shape="shape_0" animation="basic"/>
-		</states>
-    </qsprite>
+  <!-- Fire Attack Sprite -->
+  <qsprite code="Fire_Attack_Sprite" width="32" height="32">
+    <spritesheet image="FireImage2.png" transparent="#ffffff" />
+    <shapes>
+      <rectangle code="shape_0" x0="8" y0="8" width="16" height="16"/>
+    </shapes>
+    <animations>
+      <animation code="basic">
+        <frame image="00" duration="10"/>
+        <frame image="01" duration="10"/>
+        <frame image="00" duration="10"/>
+        <frame image="02" duration="10"/>
+      </animation>
+    </animations>
+    <states default="basic">
+      <state code="basic"  shape="shape_0" animation="basic"/>
+    </states>
+  </qsprite>
     
-     <!-- Flame Attack Sprite -->
-    <qsprite code="Flame_Attack_Sprite" width="32" height="32">
-		<spritesheet image="FlameSprite.png" transparent="#ffffff" />
-		<shapes>
-			<rectangle code="shape_0" x0="8" y0="8" width="16" height="16"/>
-		</shapes>
-		<animations>
-			<animation code="basic">
-				<frame image="00" duration="10"/>
-				<frame image="01" duration="10"/>
-				<frame image="02" duration="10"/>
-				<frame image="01" duration="10"/>
-			</animation>
-		</animations>
-		<states default="basic">
-			<state code="basic"  shape="shape_0" animation="basic"/>
-		</states>
-    </qsprite>
+   <!-- Flame Attack Sprite -->
+  <qsprite code="Flame_Attack_Sprite" width="32" height="32">
+    <spritesheet image="FlameSprite.png" transparent="#ffffff" />
+    <shapes>
+      <rectangle code="shape_0" x0="8" y0="8" width="16" height="16"/>
+    </shapes>
+    <animations>
+      <animation code="basic">
+        <frame image="00" duration="10"/>
+        <frame image="01" duration="10"/>
+        <frame image="02" duration="10"/>
+        <frame image="01" duration="10"/>
+      </animation>
+    </animations>
+    <states default="basic">
+      <state code="basic"  shape="shape_0" animation="basic"/>
+    </states>
+  </qsprite>
     
-    <!-- Bolt Attack Sprite -->
-    <qsprite code="Bolt_Attack_Sprite" width="32" height="32">
-		<spritesheet image="LightingSketch.png" transparent="#ffffff" />
-		<shapes>
-			<rectangle code="shape_0" x0="8" y0="8" width="16" height="16"/>
-		</shapes>
-		<animations>
-			<animation code="up_basic">
-				<frame image="00" duration="15"/>
-			</animation>
-			<animation code="up_right_basic">
-				<frame image="01" duration="15"/>
-			</animation>
-			<animation code="right_basic">
-				<frame image="02" duration="15"/>
-			</animation>
-			<animation code="down_right_basic">
-				<frame image="03" duration="15"/>
-			</animation>
-			<animation code="down_basic">
-				<frame image="04" duration="15"/>
-			</animation>
-			<animation code="down_left_basic">
-				<frame image="05" duration="15"/>
-			</animation>
-			<animation code="left_basic">
-				<frame image="06" duration="15"/>
-			</animation>
-			<animation code="up_left_basic">
-				<frame image="07" duration="15"/>
-			</animation>
-		</animations>
-		<states default="up_basic">
-			<state code="up_basic"          shape="shape_0" animation="up_basic"/>
-			<state code="up_right_basic"    shape="shape_0" animation="up_right_basic"/>
-			<state code="right_basic"       shape="shape_0" animation="right_basic"/>
-			<state code="down_right_basic"  shape="shape_0" animation="down_right_basic"/>
-			<state code="down_basic"        shape="shape_0" animation="down_basic"/>
-			<state code="down_left_basic"   shape="shape_0" animation="down_left_basic"/>
-			<state code="left_basic"        shape="shape_0" animation="left_basic"/>
-			<state code="up_left_basic"     shape="shape_0" animation="up_left_basic"/>
-		</states>
-    </qsprite>
+  <!-- Bolt Attack Sprite -->
+  <qsprite code="Bolt_Attack_Sprite" width="32" height="32">
+    <spritesheet image="LightingSketch.png" transparent="#ffffff" />
+    <shapes>
+      <rectangle code="shape_0" x0="8" y0="8" width="16" height="16"/>
+    </shapes>
+    <animations>
+      <animation code="up_basic">
+        <frame image="00" duration="15"/>
+      </animation>
+      <animation code="up_right_basic">
+        <frame image="01" duration="15"/>
+      </animation>
+      <animation code="right_basic">
+        <frame image="02" duration="15"/>
+      </animation>
+      <animation code="down_right_basic">
+        <frame image="03" duration="15"/>
+      </animation>
+      <animation code="down_basic">
+        <frame image="04" duration="15"/>
+      </animation>
+      <animation code="down_left_basic">
+        <frame image="05" duration="15"/>
+      </animation>
+      <animation code="left_basic">
+        <frame image="06" duration="15"/>
+      </animation>
+      <animation code="up_left_basic">
+        <frame image="07" duration="15"/>
+      </animation>
+    </animations>
+    <states default="up_basic">
+      <state code="up_basic"          shape="shape_0" animation="up_basic"/>
+      <state code="up_right_basic"    shape="shape_0" animation="up_right_basic"/>
+      <state code="right_basic"       shape="shape_0" animation="right_basic"/>
+      <state code="down_right_basic"  shape="shape_0" animation="down_right_basic"/>
+      <state code="down_basic"        shape="shape_0" animation="down_basic"/>
+      <state code="down_left_basic"   shape="shape_0" animation="down_left_basic"/>
+      <state code="left_basic"        shape="shape_0" animation="left_basic"/>
+      <state code="up_left_basic"     shape="shape_0" animation="up_left_basic"/>
+    </states>
+  </qsprite>
     
-    <!-- Whirlwind Attack Sprite -->
-    <qsprite code="Whirlwind_Attack_Sprite" width="32" height="32">
-		<spritesheet image="WhirlwindSprite.png" transparent="#ffffff" />
-		<shapes>
-			<rectangle code="shape_0" x0="8" y0="8" width="16" height="16"/>
-		</shapes>
-		<animations>
-			<animation code="basic">
-				<frame image="00" duration="10"/>
-				<frame image="01" duration="10"/>
-				<frame image="00" duration="10"/>
-				<frame image="02" duration="10"/>
-			</animation>
-		</animations>
-		<states default="basic">
-			<state code="basic"  shape="shape_0" animation="basic"/>
-		</states>
-    </qsprite>
+  <!-- Whirlwind Attack Sprite -->
+  <qsprite code="Whirlwind_Attack_Sprite" width="32" height="32">
+    <spritesheet image="WhirlwindSprite.png" transparent="#ffffff" />
+    <shapes>
+      <rectangle code="shape_0" x0="8" y0="8" width="16" height="16"/>
+    </shapes>
+    <animations>
+      <animation code="basic">
+        <frame image="00" duration="10"/>
+        <frame image="01" duration="10"/>
+        <frame image="00" duration="10"/>
+        <frame image="02" duration="10"/>
+      </animation>
+    </animations>
+    <states default="basic">
+      <state code="basic"  shape="shape_0" animation="basic"/>
+    </states>
+  </qsprite>
     
-    <!-- Sword Attack Sprite -->
-    <qsprite code="Sword_Attack_Sprite" width="64" height="64">
-		<spritesheet image="Swords64x64.png" transparent="#ffffff" />
-		<shapes>
-			<rectangle code="shape_0" x0="0" y0="0" width="64" height="64"/>
-		</shapes>
-		<animations>
-			<animation code="up_basic">
-				<frame image="00" duration="10"/>
-				<frame image="04" duration="10"/>
-				<frame image="08" duration="25"/>
-			</animation>
-			<animation code="right_basic">
-				<frame image="01" duration="10"/>
-				<frame image="05" duration="10"/>
-				<frame image="09" duration="25"/>
-			</animation>
-			<animation code="down_basic">
-				<frame image="02" duration="10"/>
-				<frame image="06" duration="10"/>
-				<frame image="10" duration="25"/>
-			</animation>
-			<animation code="left_basic">
-				<frame image="03" duration="10"/>
-				<frame image="07" duration="10"/>
-				<frame image="11" duration="25"/>
-			</animation>
-		</animations>
-		<states default="up_basic">
-			<state code="up_basic"  shape="shape_0" animation="up_basic"/>
-			<state code="left_basic"  shape="shape_0" animation="left_basic"/>
-			<state code="down_basic"  shape="shape_0" animation="down_basic"/>
-			<state code="right_basic"  shape="shape_0" animation="right_basic"/>
-		</states>
-    </qsprite>
+  <!-- Sword Attack Sprite -->
+  <qsprite code="Sword_Attack_Sprite" width="64" height="64">
+    <spritesheet image="Swords64x64.png" transparent="#ffffff" />
+    <shapes>
+      <rectangle code="shape_0" x0="0" y0="0" width="64" height="64"/>
+    </shapes>
+    <animations>
+      <animation code="up_basic">
+        <frame image="00" duration="10"/>
+        <frame image="04" duration="10"/>
+        <frame image="08" duration="25"/>
+      </animation>
+      <animation code="right_basic">
+        <frame image="01" duration="10"/>
+        <frame image="05" duration="10"/>
+        <frame image="09" duration="25"/>
+      </animation>
+      <animation code="down_basic">
+        <frame image="02" duration="10"/>
+        <frame image="06" duration="10"/>
+        <frame image="10" duration="25"/>
+      </animation>
+      <animation code="left_basic">
+        <frame image="03" duration="10"/>
+        <frame image="07" duration="10"/>
+        <frame image="11" duration="25"/>
+      </animation>
+    </animations>
+    <states default="up_basic">
+      <state code="up_basic"  shape="shape_0" animation="up_basic"/>
+      <state code="left_basic"  shape="shape_0" animation="left_basic"/>
+      <state code="down_basic"  shape="shape_0" animation="down_basic"/>
+      <state code="right_basic"  shape="shape_0" animation="right_basic"/>
+    </states>
+  </qsprite>
     
-    <!-- Ghost Enemy -->
-    <qsprite code="Ghost_Enemy_Sprite" width="32" height="32">
-		<spritesheet image="GhostEnemy_transparent.png" transparent="#ffffff" />
-		<shapes>
-			<rectangle code="shape_0" x0="8" y0="8" width="16" height="16"/>
-		</shapes>
-		<animations>
-			<animation code="left_basic">
-				<frame image="00" duration="25"/>
-				<frame image="04" duration="25"/>
-				<frame image="00" duration="25"/>
-				<frame image="08" duration="25"/>
-			</animation>
-			<animation code="right_basic">
-				<frame image="01" duration="25"/>
-				<frame image="05" duration="25"/>
-				<frame image="01" duration="25"/>
-				<frame image="09" duration="25"/>
-			</animation>
-		</animations>
-		<states default="left_basic">
-			<state code="left_basic"  shape="shape_0" animation="left_basic"/>
-			<state code="right_basic"  shape="shape_0" animation="right_basic"/>
-		</states>
-    </qsprite>
+  <!-- Ghost Enemy -->
+  <qsprite code="Ghost_Enemy_Sprite" width="32" height="32">
+    <spritesheet image="GhostEnemy_transparent.png" transparent="#ffffff" />
+    <shapes>
+      <rectangle code="shape_0" x0="8" y0="8" width="16" height="16"/>
+    </shapes>
+    <animations>
+      <animation code="left_basic">
+        <frame image="00" duration="25"/>
+        <frame image="04" duration="25"/>
+        <frame image="00" duration="25"/>
+        <frame image="08" duration="25"/>
+      </animation>
+      <animation code="right_basic">
+        <frame image="01" duration="25"/>
+        <frame image="05" duration="25"/>
+        <frame image="01" duration="25"/>
+        <frame image="09" duration="25"/>
+      </animation>
+    </animations>
+    <states default="left_basic">
+      <state code="left_basic"  shape="shape_0" animation="left_basic"/>
+      <state code="right_basic"  shape="shape_0" animation="right_basic"/>
+    </states>
+  </qsprite>
     
-    <!-- T-Rex Enemy -->
-    <qsprite code="TRex_Enemy_Sprite" width="32" height="32">
-		<spritesheet image="TRex.png" width="4" height="3" transparent="#ffffff" />
-		<shapes>
-			<rectangle code="shape_0" x0="0" y0="0" width="32" height="32"/>
-		</shapes>
-		<animations>
-			<animation code="left_basic">
-				<frame image="04" duration="25"/>
-				<frame image="00" duration="25"/>
-				<frame image="04" duration="25"/>
-				<frame image="00" duration="25"/>
-				<frame image="04" duration="25"/>
-				<frame image="00" duration="25"/>
-				<frame image="08" duration="40"/>
-			</animation>
-			<animation code="right_basic">
-				<frame image="05" duration="25"/>
-				<frame image="01" duration="25"/>
-				<frame image="05" duration="25"/>
-				<frame image="01" duration="25"/>
-				<frame image="05" duration="25"/>
-				<frame image="01" duration="25"/>
-				<frame image="09" duration="40"/>
-			</animation>
-		</animations>
-		<states default="left_basic">
-			<state code="left_basic"  shape="shape_0" animation="left_basic"/>
-			<state code="right_basic"  shape="shape_0" animation="right_basic"/>
-		</states>
-    </qsprite>
-    
-    
-	
+  <!-- T-Rex Enemy -->
+  <qsprite code="TRex_Enemy_Sprite" width="32" height="32">
+    <spritesheet image="TRex.png" transparent="#ffffff" />
+    <shapes>
+      <rectangle code="shape_0" x0="0" y0="0" width="32" height="32"/>
+    </shapes>
+    <animations>
+      <animation code="left_basic">
+        <frame image="04" duration="25"/>
+        <frame image="00" duration="25"/>
+        <frame image="04" duration="25"/>
+        <frame image="00" duration="25"/>
+        <frame image="04" duration="25"/>
+        <frame image="00" duration="25"/>
+        <frame image="08" duration="40"/>
+      </animation>
+      <animation code="right_basic">
+        <frame image="05" duration="25"/>
+        <frame image="01" duration="25"/>
+        <frame image="05" duration="25"/>
+        <frame image="01" duration="25"/>
+        <frame image="05" duration="25"/>
+        <frame image="01" duration="25"/>
+        <frame image="09" duration="40"/>
+      </animation>
+    </animations>
+    <states default="left_basic">
+      <state code="left_basic"  shape="shape_0" animation="left_basic"/>
+      <state code="right_basic"  shape="shape_0" animation="right_basic"/>
+    </states>
+  </qsprite>
+  
 </qsprites>
