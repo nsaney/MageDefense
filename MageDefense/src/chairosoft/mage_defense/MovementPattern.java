@@ -33,7 +33,8 @@ public abstract class MovementPattern
 	protected int ticks;
 	
 	//constructor
-	MovementPattern(FloatPoint2D start, FloatPoint2D end, MageDefense md, QSprite qs){
+	public MovementPattern(FloatPoint2D start, FloatPoint2D end, MageDefense md, QSprite qs)
+    {
 		this.start = start;
 		this.end = end;
 		this.md = md;
@@ -48,9 +49,9 @@ public abstract class MovementPattern
 
 	/**
 	 * The transformation of one point at a given time
-	 *
+	 * @return the transformed point.
 	 */
-	public FloatPoint2D transform() {}
+	public FloatPoint2D transform() { return null; }
 }
 
 
