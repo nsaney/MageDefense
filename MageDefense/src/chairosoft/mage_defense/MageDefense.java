@@ -265,7 +265,7 @@ public class MageDefense extends QApplication
         */
         
         if(mp.x > 0){ next_state = "right_basic"; }
-        mageSprite.setState(next_state);
+        mageSprite.setCurrentStateCode(next_state);
         
         return mp_unit;
     }
