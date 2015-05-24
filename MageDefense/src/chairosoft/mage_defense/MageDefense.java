@@ -85,6 +85,7 @@ public class MageDefense extends QApplication
     public static final String GHOST_SPRITE_CODE = "Ghost_Enemy_Sprite";
     public static final String TREX_SPRITE_CODE = "TRex_Enemy_Sprite";
     
+    
     public static final int LIFE_BAR_OUTLINE_COLOR = Color.create(0x007f00);
     public static final int LIFE_BAR_FILL_COLOR = Color.create(0x7fff7f);
     public static final double LIFE_FORCE_COUNT_AT_MAX = 100;
