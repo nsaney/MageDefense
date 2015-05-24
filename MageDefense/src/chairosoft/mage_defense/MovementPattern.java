@@ -34,7 +34,8 @@ public class MovementPattern
 	protected long timeStart;
 	
 	//constructor
-	MovementPattern(FloatPoint2D end, MageDefense md, QSprite qs){
+	public MovementPattern(FloatPoint2D end, MageDefense md, QSprite qs)
+	{
 		this.start = qs.getPosition();
 		this.linearPathPosition = this.start;
 		this.end = end;
