@@ -39,6 +39,7 @@ public class MageDefense extends QApplication
 	{
 	    System.err.println("Starting game... ");
 		MageDefense app = new MageDefense();
+        app.setFrameRateInHz(100);
 	    app.gameStart();
         
         DesktopDoubleBufferedUI dbui = (DesktopDoubleBufferedUI)app.getDbui();
