@@ -115,9 +115,12 @@ public class MageDefense extends QApplication
         this.mageSprite.setPosition(x, y);
     }
     
-    
     protected float CROSSHAIR_DISTANCE = 7.0f * QTileset.getTileWidth();
     protected QSprite crosshair = new QSprite(CROSSHAIR_SPRITE_CODE);
+    {
+        this.crosshair.setPosition(-CROSSHAIR_DISTANCE, -CROSSHAIR_DISTANCE);
+    }
+    
     
     protected Set<AttackSprite> attackSprites = new HashSet<>();
     protected Set<QSprite> enemySprites = new HashSet<>();
@@ -240,12 +243,12 @@ public class MageDefense extends QApplication
     
     protected void qMouseMoved(MouseEvent e)
     {
-        gameState.mouseMoved(e);
+        this.gameState.mouseMoved(e);
     }
     
     protected void qMousePressed(MouseEvent e)
     {
-        gameState.mousePressed(e);
+        this.gameState.mousePressed(e);
     }
     
     @Override
@@ -279,8 +282,10 @@ public class MageDefense extends QApplication
                     case KeyEvent.KEY_RELEASED: this.qKeyReleased(e.getKeyCode()); break;
                 }
             }
-        }     
-        gameState.update();
+        }
+        
+        // do state-specific update
+        this.gameState.update();
     }
     
     @Override
