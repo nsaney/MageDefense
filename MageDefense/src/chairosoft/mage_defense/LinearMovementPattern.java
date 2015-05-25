@@ -10,12 +10,20 @@ public class LinearMovementPattern implements MovementPattern
 
 	double slope;
 	double intercept;
+	
+	public LinearMovementPattern(double slope, double intercept)
+	{
+		this.slope = slope;
+		this.intercept = intercept;
+	}
+
 	/**
 	 * The linear transformation that translates the sprite along the non transformed path 
 	 * before going on to translate the sprite to its transformed path location.
 	 *
-	 *@param slope slope m
-	 *@param intercept y-intercept
+	 * @param mpi information used in calculating untransformed path
+	 * 
+	 * @return the transformed point along graph
 	 */
 	 @Override
 	 public FloatPoint2D getNextTransformPoint(MovementPattern.Info mpi)

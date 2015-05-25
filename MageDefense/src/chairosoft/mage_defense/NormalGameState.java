@@ -228,7 +228,6 @@ public class NormalGameState extends GameState
 				// update enemy sprite only when at least 25 units away (not colliding effectively)
 				if (distance >= 25)
 				{
-//TODO RNS-->      //TODO: Incorporate MovementPattern of Enemy class in update
 					enemy.moveOneFrame();
 				}
 				else if (this.md.getFramesElapsedTotal() % 10 == 0)
@@ -248,7 +247,6 @@ public class NormalGameState extends GameState
 			ArrayList<AttackSprite> attackSpritesToRemove = new ArrayList<>();
 			for (AttackSprite qs : this.md.attackSprites)
 			{
-//TODO RNS-->  //TODO: Incorporate MovementPattern of Attack class in update
 				qs.moveOneFrame();
 				
 				Point2D qp = qs.getPosition();

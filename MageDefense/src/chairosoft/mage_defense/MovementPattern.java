@@ -27,23 +27,21 @@ public interface MovementPattern
 	{
 		//Instance Variables
 		protected FloatPoint2D start;
-		protected FloatPoint2D end;
-		//protected MageDefense md;
+		protected FloatPoint2D pathDirection;
 		protected FloatPoint2D pathVector;
 		protected FloatPoint2D unitNormalVector;
-		//protected FloatPoint2D linearPathPosition;
 		protected QPhysical2D pathPhysical = new QPhysical2D();
-		// protected QSprite sprite;
-	
-		public Info(QSprite sprite, FloatPoint2D end)
+		
+		//constructor	
+		public Info(QSprite sprite, FloatPoint2D pathDirection)
 		{
 			this.start = sprite.getPosition();
 			this.pathPhysical.setPosition(this.start);
 			this.pathPhysical.setVelocity(sprite.getVelocity());
 			this.pathPhysical.setAcceleration(sprite.getAcceleration());
-			this.end = end;
+			this.pathDirection = pathDirection;
 			
-			this.pathVector = new FloatPoint2D(this.end.x - this.start.x, this.end.y - this.start.x);
+			this.pathVector = new FloatPoint2D(this.pathDirection.x - this.start.x, this.pathDirection.y - this.start.x);
 			FloatPoint2D normalVec = new FloatPoint2D(-this.pathVector.y, this.pathVector.x);
 			this.unitNormalVector = normalVec.getUnitVector();
 		
@@ -57,13 +55,13 @@ public interface MovementPattern
 
 		//// Mutators
 
-		public void setStart(FloatPoint2D newStartPoint){ this.start = newStartPoint; }
-		//constructor
+		public void setStart(FloatPoint2D newStartPoint) { this.start = newStartPoint; }
+		public void setDirectionTowards(FloatPoint2D newDirectionPoint) { this.pathDirection = newDirectionPoint; }
 
- 		
+		//constructor
 	}
 		
-	public abstract FloatPoint2D getNextTransformPoint(MovementPattern.Info mpi);
+	public FloatPoint2D getNextTransformPoint(MovementPattern.Info mpi);
 }
 
 
