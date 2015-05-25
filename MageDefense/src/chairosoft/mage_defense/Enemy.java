@@ -16,37 +16,67 @@ import chairosoft.ui.geom.FloatPoint2D;
 public class Enemy extends QSprite
 {
 	//instance-variables
-	String name;
-	int health;
-	Element element;
-	int extraPower;
-	int extraRange;
-	int extraAttackSpeed;
-	MovementPattern movementPattern;
-	int spawnDistance;
-	double speed;
-	Element[] immunityArray;
-	Element[] weaknessArray;
+	protected int health;
+	protected Element element = Element.NEUTRAL;
+	protected Attack attack;
+	protected int spawnDistance;
+	protected int extraPower = 0;
+	protected int extraRange = 0;
+	protected int extraAttackSpeed = 0;
+	protected MovementPattern movementPattern;
+	protected Element[] immunityArray = Element.noElementsArray;
+	protected Element[] weaknessArray = Element.noElementsArray;
 	
-	//constructor
-	public Enemy(String code, String name, int health)
+	//constructors
+	public Enemy(String code, int health, int spawnDis, MovementPattern mP)
 	{
 		super(code);
-		this.name = name;
 		this.health = health;
+		this.spawnDistance = spawnDis;
+		mP.setSprite(this);
+		this.movementPattern = mP;
 	}
-// 	
-// 	public Enemy(String code, String name, int health, Element el, Element immunArr)
-// 	{
-// 		
+	
+	public Enemy(String code, int health, int spawnDis, MovementPattern mP,
+				 Element el, Element[] immunArr, Element[] weakArr)
+	{
+		this(code, health, spawnDis, mP);
+		this.element = el;
+		this.immunityArray = immunArr;
+		this.weaknessArray = weakArr;
+	}
+
+	public Enemy(String code, int health, int spawnDis, MovementPattern mP,
+				 Element el, Element[] immunArr, Element[] weakArr,
+				 int extraPow, int extraRng, int extraAtkSpd)
+	{
+		this(code, health, spawnDis, mP, el, immunArr, weakArr);
+		this.extraPower = extraPow;
+		this.extraRange = extraRange;
+		this.extraAttackSpeed = extraAtkSpd;
+	}
+	
+	/*
+	->setPosition() is final and cannot be overridden<-
+	@Override
+	protected void setPosition(FloatPoint2D pos)
+	{
+		super.setPosition(pos);
+		this.movementPatter.setStart(pos);
+	}
+	
+	@Override
+	protected void setPosition(float xPos, float yPos)
+	{
+		super.setPosition(xPos, yPos);
+		this.movementPattern.setStart(new FloatPoint2D(xPos, yPos));
+	}
+	*/
+	
+	//// Default Enemies
+	// public static Enemy getGhost(){
+// 		return new Enemy(String "Ghost_Enemy_Sprite", int 20, int 60, MovementPattern mP);
 // 	}
-// 	
-// 	public Enemy(String code, String name, int health, int extraPow, int extraRng, int extraAtkSpd,
-// 				 MovementPattern movPat, Element el, int spawnDis, double speed, 
-// 				 Element[] immunArr, Element[] weaknessArr)
-// 	{
-// 		this(code, name, health);
-// 		
-// 	
-// 	}
+	//public static Enemy getTRex(){}
+	//public static Enemy getViperRex(){}
 }

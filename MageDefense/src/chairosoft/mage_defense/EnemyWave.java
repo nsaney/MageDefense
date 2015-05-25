@@ -67,4 +67,5 @@ public class EnemyWave
 			md.enemySprites.add(enemy);
 		}
 	}
+	
 }

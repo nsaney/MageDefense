@@ -101,7 +101,36 @@
       <state code="down_basic" shape="shape_0" animation="down_basic"/>
     </states>
   </qsprite>
-    
+  
+<!-- ViperRex Sprite -->
+  <qsprite code="ViperRex_Sprite" width="64" height="64">
+    <spritesheet image="MageDefense_Piskel/ViperRex.png" transparent="#ffffff" />
+    <shapes>
+      <rectangle code="shape_0" x0="8" y0="8" width="48" height="48"/>
+    </shapes>
+    <animations>
+      <animation code="left_basic">
+        <frame image="00" duration="30"/>
+        <frame image="01" duration="30"/>
+        <frame image="02" duration="30"/>
+        <frame image="01" duration="30"/>
+        <frame image="02" duration="40"/>
+        <frame image="01" duration="30"/>
+      </animation>
+      <animation code="right_basic">
+        <frame image="03" duration="30"/>
+        <frame image="04" duration="30"/>
+        <frame image="05" duration="30"/>
+        <frame image="04" duration="30"/>
+        <frame image="05" duration="40"/>
+        <frame image="04" duration="30"/>
+    </animations>
+    <states default="left_basic">
+      <state code="left_basic"  shape="shape_0" animation="left_basic"/>
+      <state code="right_basic"  shape="shape_0" animation="right_basic"/>
+    </states>
+  </qsprite>
+  
   <!-- Crosshair Sprite -->
   <qsprite code="Crosshair_Sprite" width="16" height="16">
     <spritesheet image="crosshair.png" transparent="#ffffff" />
