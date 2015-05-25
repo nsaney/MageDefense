@@ -14,6 +14,11 @@ import chairosoft.ui.geom.FloatPoint2D;
 
 public class Enemy extends MovementPatternSprite
 {
+
+	public static final String GHOST_SPRITE_CODE = "Ghost_Enemy_Sprite";
+    public static final String TREX_SPRITE_CODE = "TRex_Enemy_Sprite";
+	public static final String VIPERREX_SPRITE_CODE = "ViperRex_Sprite";
+
 	//instance-variables
 	protected int health;
 	protected Element element = Element.NEUTRAL;
@@ -55,8 +60,12 @@ public class Enemy extends MovementPatternSprite
 	//// Default Enemies
 	public static Enemy getGhost()
 	{
-		return new Enemy("Ghost_Enemy_Sprite", 20, 60, new SineMovementPattern(32,1,0,0));
+		return new Enemy(Enemy.GHOST_SPRITE_CODE, 20, 32*12, new SineMovementPattern(3,.003,0,0));
 	}
-	//public static Enemy getTRex(){}
-	//public static Enemy getViperRex(){}
+	public static Enemy getTRex(){
+		return new Enemy(Enemy.TREX_SPRITE_CODE, 30, 32*12, new SineMovementPattern(1,.05,0,0));
+	}
+	public static Enemy getViperRex(){
+		return new Enemy(Enemy.VIPERREX_SPRITE_CODE, 45, 32*12, new SineMovementPattern(2,.01,0,0));
+	}
 }

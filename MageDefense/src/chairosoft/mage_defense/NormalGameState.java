@@ -220,7 +220,7 @@ public class NormalGameState extends GameState
 			// get mageSprite info
 			FloatPoint2D pp = this.md.mageSprite.getPosition();
 			
-			for (QSprite enemy : this.md.enemySprites)
+			for (Enemy enemy : this.md.enemySprites)
 			{
 				FloatPoint2D enemyPos = enemy.getPosition();
 				double distance = pp.distance(enemyPos);
@@ -264,10 +264,10 @@ public class NormalGameState extends GameState
 			}
 			attackSpritesToRemove.clear();
 			
-			ArrayList<QSprite> enemySpritesToRemove = new ArrayList<>();
+			ArrayList<Enemy> enemySpritesToRemove = new ArrayList<>();
 			for (AttackSprite qs : this.md.attackSprites)
 			{
-				for (QSprite enemy : this.md.enemySprites)
+				for (Enemy enemy : this.md.enemySprites)
 				{
 					if (enemy.collidesWith(qs))
 					{
@@ -281,7 +281,7 @@ public class NormalGameState extends GameState
 				}
 			}
 			//actually remove
-			for (QSprite enemy : enemySpritesToRemove)
+			for (Enemy enemy : enemySpritesToRemove)
 			{
 				this.md.enemySprites.remove(enemy);
 			}
@@ -304,10 +304,10 @@ public class NormalGameState extends GameState
         this.md.mageSprite.drawToContextAtOwnPosition(ctx);
         
         // enemy sprites
-        for (QSprite qs : this.md.enemySprites)
+        for (Enemy e : this.md.enemySprites)
         {
-            qs.advanceAnimationOneClick();
-            qs.drawToContextAtOwnPosition(ctx);
+            e.advanceAnimationOneClick();
+            e.drawToContextAtOwnPosition(ctx);
         }
 
         // attack sprites
@@ -328,7 +328,7 @@ public class NormalGameState extends GameState
             ctx.fillPolygon(this.md.mageSprite); 
             
             ctx.setColor(Color.RED);
-            for (QSprite qs : this.md.enemySprites) { ctx.fillPolygon(qs); }
+            for (Enemy e : this.md.enemySprites) { ctx.fillPolygon(e); }
             
             ctx.setColor(Color.CC.ORANGE); 
             for (QSprite qs : this.md.attackSprites) { ctx.fillPolygon(qs); }
