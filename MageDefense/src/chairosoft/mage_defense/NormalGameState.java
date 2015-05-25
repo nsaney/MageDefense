@@ -268,26 +268,13 @@ public class NormalGameState extends GameState
 		{
 			EnemyWave.initialize(this);
 		}
-		// TODO: set direction based on keypad compass direction
-		////mageSprite.setDirection(keypad.getDirection()); //// TODO: this
 		
 		// collision
 		if (this.move_and_collide && this.player.getStatus() != MageDefensePlayer.PlayerStatus.DEAD)
 		{
 			// update life force
 			this.player.addToLifeForceCurrent(this.player.regenAmount / this.player.framesBetweenRegen);
-			
-			
-			////mageSprite.moveOneFrameIn(qmaproom); //// TODO: this
-			/*currentMapLink = mageSprite.getMapLinkOrNullFrom(qmaproom);
-			if (currentMapLink != null)
-			{
-				//System.err.println(currentMapLink);
-				this.loadQMapRoomFromCurrentLink();
-				break; // break from the switch statement
-			}*/
-			//mageSprite.resolveCollisionInQMapRoom(qmaproom, true, true);
-			
+            
 			
 			// get mageSprite info
 			FloatPoint2D pp = this.mageSprite.getPosition();
@@ -436,7 +423,7 @@ public class NormalGameState extends GameState
 		}
 		ctx.drawString(killScoreString, lfb.x, lfb.y + NormalGameState.LIFE_FORCE_BAR_HEIGHT + 42 * 2);
         
-		//Game Over
+		// game over message
 		if (this.player.getStatus() == MageDefensePlayer.PlayerStatus.DEAD)
 		{
 			ctx.setFont(this.gameOverFont);
@@ -444,11 +431,6 @@ public class NormalGameState extends GameState
 			ctx.drawString("DEATH TO MAGE. AND YOU.", (int)((1/8.0) * this.md.getPanelWidth()),
 													  (int)((1/2.0) * this.md.getPanelHeight()));
 		}
-        
-        // // mouse position
-		// ctx.setColor(Color.BLACK);
-		// ctx.drawString(mousePositionString, cb.x, cb.y + 30);
-		// ctx.drawString(crosshairPositionString, cb.x, cb.y + 50);
 		
 		// // cycle bar
 		// ctx.setColor(Color.BLUE);

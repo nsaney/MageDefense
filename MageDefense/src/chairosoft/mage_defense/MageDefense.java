@@ -215,20 +215,7 @@ public class MageDefense extends QApplication
     @Override
     protected void qGameRender(DrawingContext ctx) 
     {
-        // save current graphics settings
-        int ctxColor = ctx.getColor();
-        Font ctxFont = ctx.getFont();
-        
-        try
-        {
-			this.gameState.render(ctx);
-        }
-        finally
-        {
-            // put back graphics settings
-            ctx.setFont(ctxFont);
-            ctx.setColor(ctxColor);
-        }
+        this.gameState.render(ctx);
     }
     
     @Override
