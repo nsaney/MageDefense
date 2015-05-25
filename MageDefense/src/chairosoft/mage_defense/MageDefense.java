@@ -7,17 +7,20 @@
 package chairosoft.mage_defense;
 
 import static chairosoft.quadrado.QCompassDirection.*;
-import chairosoft.quadrado.*;
-import chairosoft.quadrado.ui.event.*;
+import chairosoft.quadrado.QApplication;
+import chairosoft.quadrado.QCompassDirection;
+import chairosoft.quadrado.QCompassKeypad;
+import chairosoft.quadrado.ui.event.ButtonEvent;
 
-import chairosoft.ui.audio.*;
-import chairosoft.ui.geom.*;
-import chairosoft.ui.graphics.*;
-import chairosoft.util.function.*;
+// import chairosoft.ui.audio.*;
+// import chairosoft.ui.geom.*;
+import chairosoft.ui.graphics.DrawingContext;
+import chairosoft.ui.graphics.Font;
+// import chairosoft.util.function.*;
 
-import java.io.*; 
-import java.util.*;
-import java.util.concurrent.*;
+// import java.io.*; 
+// import java.util.*;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 import chairosoft.quadrado.desktop.DesktopDoubleBufferedUI;
 import java.awt.event.KeyAdapter;
@@ -60,30 +63,21 @@ public class MageDefense extends QApplication
     // Constants
     //
     
-    public static final Font gameOverFont = new Font(Font.Family.MONOSPACED, Font.Style.BOLD, 48);
-    public static final String COORDINATE_FORMAT_STRING = "(%1$7.3f,%2$7.3f)";
-    public static final int    TRANSPARENT              = Color.TRANSPARENT;
-    
-    
-    @Override public int getPanelWidth() { return 768; }
-    @Override public int getPanelHeight() { return 432; }
+    public static final int PANEL_WIDTH = 768;
+    public static final int PANEL_HEIGHT = 432;
+    @Override public int getPanelWidth() { return PANEL_WIDTH; }
+    @Override public int getPanelHeight() { return PANEL_HEIGHT; }
     
     public static final int X_SCALING = 1;
     public static final int Y_SCALING = 1;
     @Override public int getXScaling() { return X_SCALING; }
     @Override public int getYScaling() { return Y_SCALING; }
-    
-    public static final String CROSSHAIR_SPRITE_CODE = "Crosshair_Sprite";
-    public static final String MAGE_SPRITE_CODE = "RedMage_Sprite";
 
     
     
     //
     // Instance Variables
     //
-    
-    public int killScore = 0;
-    public int wave = 1;
     
     protected final GameState GAME_NOT_LOADED = new GameNotLoaded(this);
     protected final GameState MAPROOM_LOADING = new MapRoomLoading(this);
@@ -92,25 +86,7 @@ public class MageDefense extends QApplication
     
     protected volatile GameState gameState = this.GAME_NOT_LOADED;
     
-    protected QCompassKeypad keypad = new QCompassKeypad();
-    
-    protected MageDefensePlayer player = new MageDefensePlayer();
-    protected QSprite mageSprite = new QSprite(MAGE_SPRITE_CODE);
-    {
-        float x = (this.getPanelWidth() - this.mageSprite.getImage().getWidth()) / 2;
-        float y = (this.getPanelHeight() - this.mageSprite.getImage().getHeight()) / 2;
-        this.mageSprite.setPosition(x, y);
-    }
-    
-    protected float CROSSHAIR_DISTANCE = 7.0f * QTileset.getTileWidth();
-    protected QSprite crosshair = new QSprite(CROSSHAIR_SPRITE_CODE);
-    {
-        this.crosshair.setPosition(-CROSSHAIR_DISTANCE, -CROSSHAIR_DISTANCE);
-    }
-    
-    
-    protected Set<AttackSprite> attackSprites = new HashSet<>();
-    protected Set<Enemy> enemySprites = new HashSet<>();
+    protected final QCompassKeypad keypad = new QCompassKeypad();
     
     protected volatile ConcurrentLinkedQueue<MouseEvent> mouseEventQueue = new ConcurrentLinkedQueue<>();
     public final MouseAdapter mouseAdapter = new MouseAdapter()
@@ -146,7 +122,6 @@ public class MageDefense extends QApplication
     protected void qGameInitialize() 
     {
         System.err.println("GAME INITIALIZED");
-        player.chooseAbilityType(MageDefensePlayer.AbilityType.FIRE_ATTACK);
         //Loading.startVerbose();
     }
     
@@ -170,7 +145,7 @@ public class MageDefense extends QApplication
             case KeyEvent.VK_DOWN: keypad.activateValue(SOUTH); break; // down
         }
         
-        gameState.keyPressed(keyCode);
+        this.gameState.keyPressed(keyCode);
     }
     
     protected void qKeyReleased(int keyCode)
@@ -184,49 +159,10 @@ public class MageDefense extends QApplication
             case KeyEvent.VK_DOWN: keypad.deactivateValue(SOUTH); break; // down
             default: break;
         }
-        gameState.keyReleased(keyCode);
+        
+        this.gameState.keyReleased(keyCode);
     }
     
-    
-    protected FloatPoint2D updateCrosshair(MouseEvent e)
-    {
-        java.awt.Point ep = e.getPoint();
-        FloatPoint2D pp = this.mageSprite.getPosition();
-        //Rectangle pb = mageSprite.getBounds();
-        
-        int mouseX = ep.x;
-        int mouseY = ep.y;
-        float mouseOffsetX = pp.x;//+ (pb.width / 2f);
-        float mouseOffsetY = pp.y;// + (pb.height / 2f);
-        FloatPoint2D mp = new FloatPoint2D(mouseX - mouseOffsetX, mouseY - mouseOffsetY);
-        FloatPoint2D mp_unit = mp.getUnitVector();
-        FloatPoint2D mp_ranged = new FloatPoint2D(mp_unit.x * CROSSHAIR_DISTANCE, mp_unit.y * CROSSHAIR_DISTANCE);
-        //Rectangle cb = crosshair.getBounds();
-        float dx = mouseOffsetX;// - (cb.width / 2f);
-        float dy = mouseOffsetY;// - (cb.height / 2f);
-        crosshair.setPosition(mp_ranged.x + dx, mp_ranged.y + dy);
-        
-        double t = Math.atan2(-mp_unit.y, mp_unit.x);
-        
-        String next_state = "left_basic";
-        /*
-        double increment = Math.PI / 2;
-        double t1 = - Math.PI + (increment / 2);
-        double t2 = t1 + increment;
-        double t3 = t2 + increment;
-        double t4 = t3 + increment;
-        
-        if (t1 <= t && t <= t2) { next_state = "down_basic"; }
-        else if (t2 <= t && t <= t3) { next_state = "right_basic"; }
-        else if (t3 <= t && t <= t4) { next_state = "up_basic"; }
-        else { next_state = "left_basic"; }
-        */
-        
-        if(mp.x > 0){ next_state = "right_basic"; }
-        mageSprite.setCurrentStateCode(next_state);
-        
-        return mp_unit;
-    }
     
     protected void qMouseMoved(MouseEvent e)
     {
@@ -284,7 +220,7 @@ public class MageDefense extends QApplication
         
         try
         {
-			gameState.render(ctx);
+			this.gameState.render(ctx);
         }
         finally
         {
