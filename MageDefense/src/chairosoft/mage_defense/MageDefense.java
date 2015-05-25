@@ -78,8 +78,7 @@ public class MageDefense extends QApplication
     public final int getHalfClipWidth() { return this.getClipWidth() / 2; }
     public final int getHalfClipHeight() { return this.getClipHeight() / 2; }
     
-    public static final String START_SCREEN_SPRITE_CODE = "Start_Screen_Sprite";
-    public static final String BACKGROUND_SPRITE_CODE = "Background_Sprite";
+    //public static final String BACKGROUND_SPRITE_CODE = "Background_Sprite";
     public static final String CROSSHAIR_SPRITE_CODE = "Crosshair_Sprite";
     public static final String MAGE_SPRITE_CODE = "RedMage_Sprite";
     public static final String GHOST_SPRITE_CODE = "Ghost_Enemy_Sprite";
@@ -120,9 +119,6 @@ public class MageDefense extends QApplication
     protected boolean show_boundaries = false;
     protected boolean show_bounding_box = false;
     protected boolean move_and_collide = true;
-    
-    protected QSprite startScreenSprite = new QSprite(START_SCREEN_SPRITE_CODE);
-    protected QSprite backgroundSprite = new QSprite(BACKGROUND_SPRITE_CODE);
     
     protected QSprite mageSprite = new QSprite(MAGE_SPRITE_CODE);
     protected int spawnRow = 0;

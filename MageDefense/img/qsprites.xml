@@ -10,39 +10,6 @@
   
 -->
 <qsprites folder="sprites">
-  
-  <!-- Start Screen Sprite -->
-  <qsprite code="Start_Screen_Sprite" width="576" height="384">
-    <spritesheet image="MageDefenseStartScreen_blurs.png" transparent="#fffffe" />
-    <shapes>
-      <rectangle code="shape_0" x0="0" y0="0" width="576" height="384"/>
-    </shapes>
-    <animations>
-      <animation code="basic">
-        <frame image="00" duration="100"/>
-      </animation>
-    </animations>
-    <states default="basic">
-      <state code="basic" shape="shape_0" animation="basic"/>
-    </states>
-    </qsprite>
-  
-    <!-- Background Sprite -->
-    <qsprite code="Background_Sprite" width="384" height="384">
-    <spritesheet image="BackgroundMageDefense.png" transparent="#ffffff" />
-    <shapes>
-      <rectangle code="shape_0" x0="0" y0="0" width="1" height="1"/>
-    </shapes>
-    <animations>
-      <animation code="basic">
-        <frame image="00" duration="100"/>
-      </animation>
-    </animations>
-    <states default="basic">
-      <state code="basic" shape="shape_0" animation="basic"/>
-    </states>
-  </qsprite>
-    
     
   <!-- Mage Sprite -->
   <qsprite code="Mage_Sprite" width="32" height="32">

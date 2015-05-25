@@ -19,7 +19,10 @@ import chairosoft.ui.geom.FloatPoint2D;
 import chairosoft.ui.geom.IntPoint2D;
 import chairosoft.ui.graphics.Color;
 import chairosoft.ui.graphics.DrawingContext;
+import chairosoft.ui.graphics.DrawingImage;
 import chairosoft.ui.graphics.Font;
+
+import chairosoft.util.Loading;
 
 import java.util.ArrayList;
 
@@ -28,7 +31,8 @@ import java.awt.event.MouseEvent;
 
 public class NormalGameState extends GameState
 {
-	
+    public final DrawingImage backgroundImage = Loading.getImage("/img/bg/BackgroundMageDefense.png");
+    
 	//constructor
 	public NormalGameState(MageDefense md)
 	{
@@ -333,11 +337,11 @@ public class NormalGameState extends GameState
         
         try
         {
+            // TODO: remove qmaproom madness
         	// background and qmaproom
         	ctx.setColor(this.md.qmaproom.getBackgroundColor());
         	ctx.fillRect(0, 0, this.md.qmaproom.getWidthPixels(), this.md.qmaproom.getHeightPixels());
-			//qmaproom.drawToContext(ctx, 0, 0, null);
-			this.md.backgroundSprite.drawToContext(ctx, 0, 0);
+            ctx.drawImage(this.backgroundImage, 0, 0);
 			
 			// player sprite
 			//mageSprite.advanceAnimationOneClick();
