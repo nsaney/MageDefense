@@ -31,9 +31,15 @@ import java.awt.event.MouseEvent;
 
 public class NormalGameState extends GameState
 {
+    //fields
     public final DrawingImage backgroundImage = Loading.getImage("/img/bg/BackgroundMageDefense.png");
     public final int backgroundImageX = (this.md.getPanelWidth() - this.backgroundImage.getWidth()) / 2;
     public final int backgroundImageY = (this.md.getPanelHeight() - this.backgroundImage.getHeight()) / 2;
+    
+    protected volatile boolean isPaused = false;
+    protected boolean show_boundaries = false;
+    protected boolean show_bounding_box = false;
+    protected boolean move_and_collide = true;
     
 	//constructor
 	public NormalGameState(MageDefense md)
@@ -67,13 +73,12 @@ public class NormalGameState extends GameState
 			case KeyEvent.VK_NUMPAD6: this.md.player.addToLifeForceMax(+5); break;
 			
 			case KeyEvent.VK_ENTER:
-				this.md.isPaused = !this.md.isPaused;
+				this.isPaused = !this.isPaused;
 				break;
 			
 			// debug switches
-			case KeyEvent.VK_B: this.md.show_boundaries = !this.md.show_boundaries; break;
-			case KeyEvent.VK_X: this.md.show_bounding_box = !this.md.show_bounding_box; break;
-			case KeyEvent.VK_M: this.md.move_and_collide = !this.md.move_and_collide; break;
+			case KeyEvent.VK_B: this.show_bounding_box = !this.show_bounding_box; break;
+			case KeyEvent.VK_M: this.move_and_collide = !this.move_and_collide; break;
 			
 			default: break;
 		}
@@ -94,7 +99,7 @@ public class NormalGameState extends GameState
 	@Override
 	public void mousePressed(MouseEvent e)
 	{
-		if (this.md.move_and_collide && this.md.player.getStatus() != MageDefensePlayer.PlayerStatus.DEAD)
+		if (this.move_and_collide && this.md.player.getStatus() != MageDefensePlayer.PlayerStatus.DEAD)
 		{
             // get ability
             MageDefensePlayer.Ability ability = this.md.player.getChosenAbility();
@@ -187,7 +192,7 @@ public class NormalGameState extends GameState
 		////mageSprite.setDirection(keypad.getDirection()); //// TODO: this
 		
 		// collision
-		if (this.md.move_and_collide && this.md.player.getStatus() != MageDefensePlayer.PlayerStatus.DEAD)
+		if (this.move_and_collide && this.md.player.getStatus() != MageDefensePlayer.PlayerStatus.DEAD)
 		{
 			// update life force
 			this.md.player.addToLifeForceCurrent(this.md.player.regenAmount / this.md.player.framesBetweenRegen);
@@ -311,7 +316,7 @@ public class NormalGameState extends GameState
         this.md.crosshair.drawToContextAtOwnPosition(ctx);
         
         // boundaries
-        if (this.md.show_bounding_box) 
+        if (this.show_bounding_box) 
         {
             ctx.setColor(Color.BLUE); 
             ctx.fillPolygon(this.md.mageSprite); 

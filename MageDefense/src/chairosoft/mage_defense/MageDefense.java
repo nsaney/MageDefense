@@ -102,11 +102,6 @@ public class MageDefense extends QApplication
     
     protected QCompassKeypad keypad = new QCompassKeypad();
     
-    protected volatile boolean isPaused = false;
-    protected boolean show_boundaries = false;
-    protected boolean show_bounding_box = false;
-    protected boolean move_and_collide = true;
-    
     protected MageDefensePlayer player = new MageDefensePlayer();
     protected QSprite mageSprite = new QSprite(MAGE_SPRITE_CODE);
     {
@@ -139,10 +134,10 @@ public class MageDefense extends QApplication
         @Override public void keyReleased(KeyEvent ke) { MageDefense.this.keyEventQueue.offer(ke); }
     };
     
+    
     //
     // Instance Methods 
     //
-    
     
     public long getFramesElapsedTotal() { return this.framesElapsedTotal; }
     
