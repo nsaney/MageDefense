@@ -33,7 +33,6 @@ public class Enemy extends QSprite
 		super(code);
 		this.health = health;
 		this.spawnDistance = spawnDis;
-		mP.setSprite(this);
 		this.movementPattern = mP;
 	}
 	
