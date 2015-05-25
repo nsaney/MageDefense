@@ -31,7 +31,15 @@ import java.awt.event.MouseEvent;
 
 public class NormalGameState extends GameState
 {
-    //fields
+    // constants
+    public static final int LIFE_BAR_OUTLINE_COLOR = Color.create(0x007f00);
+    public static final int LIFE_BAR_FILL_COLOR = Color.create(0x7fff7f);
+    public static final double LIFE_FORCE_COUNT_AT_MAX = 100;
+    public static final double LIFE_FORCE_BAR_MAX_WIDTH = 200;
+    public static final double LIFE_FORCE_BAR_MAX_RATIO = LIFE_FORCE_BAR_MAX_WIDTH / LIFE_FORCE_COUNT_AT_MAX;
+    public static final int LIFE_FORCE_BAR_HEIGHT = 8;
+    
+    // variables
     public final DrawingImage backgroundImage = Loading.getImage("/img/bg/BackgroundMageDefense.png");
     public final int backgroundImageX = (this.md.getPanelWidth() - this.backgroundImage.getWidth()) / 2;
     public final int backgroundImageY = (this.md.getPanelHeight() - this.backgroundImage.getHeight()) / 2;
@@ -41,13 +49,13 @@ public class NormalGameState extends GameState
     protected boolean show_bounding_box = false;
     protected boolean move_and_collide = true;
     
-	//constructor
+	// constructor
 	public NormalGameState(MageDefense md)
 	{
 		super(md);
 	}
 
-	//Overloaded methods
+	// overridden methods
 	@Override
 	public void keyPressed(int keyCode)
 	{
@@ -338,25 +346,25 @@ public class NormalGameState extends GameState
 		double lifeForceMax = this.md.player.getLifeForceMax();
 		double lifeForceCurrent = this.md.player.getLifeForceCurrent();
 		double lifeForcePercent = this.md.player.getLifeForcePercent();
-		int lifeForceBarOutlineWidth = (int)(lifeForceMax * this.md.LIFE_FORCE_BAR_MAX_RATIO);
-		int lifeForceBarFillWidth = (int)(lifeForceCurrent * this.md.LIFE_FORCE_BAR_MAX_RATIO);
+		int lifeForceBarOutlineWidth = (int)(lifeForceMax * NormalGameState.LIFE_FORCE_BAR_MAX_RATIO);
+		int lifeForceBarFillWidth = (int)(lifeForceCurrent * NormalGameState.LIFE_FORCE_BAR_MAX_RATIO);
 		ctx.setColor(this.md.player.getStatus().barOutlineColorCode);
-		ctx.drawRect(lfb.x, lfb.y, lifeForceBarOutlineWidth + 1, this.md.LIFE_FORCE_BAR_HEIGHT + 1);
+		ctx.drawRect(lfb.x, lfb.y, lifeForceBarOutlineWidth + 1, NormalGameState.LIFE_FORCE_BAR_HEIGHT + 1);
 		ctx.setColor(this.md.player.getStatus().barFillColorCode);
-		ctx.fillRect(lfb.x + 1, lfb.y + 1, lifeForceBarFillWidth, this.md.LIFE_FORCE_BAR_HEIGHT);
+		ctx.fillRect(lfb.x + 1, lfb.y + 1, lifeForceBarFillWidth, NormalGameState.LIFE_FORCE_BAR_HEIGHT);
 		
         // kill score and life force number
 		ctx.setColor(Color.BLACK);
 		String killScoreString = String.format("Kill Score: %04d", this.md.killScore);
 		String lifeForceString = String.format("%04d / %04d Life Force", (int)lifeForceCurrent, (int)lifeForceMax);
-		ctx.drawString(lifeForceString, lfb.x, lfb.y + this.md.LIFE_FORCE_BAR_HEIGHT + 22);
+		ctx.drawString(lifeForceString, lfb.x, lfb.y + NormalGameState.LIFE_FORCE_BAR_HEIGHT + 22);
 		
         // burnout message
 		if (this.md.player.getStatus() == MageDefensePlayer.PlayerStatus.BURNOUT)
 		{
-			ctx.drawString("BURNOUT", lfb.x, lfb.y + this.md.LIFE_FORCE_BAR_HEIGHT + 42);
+			ctx.drawString("BURNOUT", lfb.x, lfb.y + NormalGameState.LIFE_FORCE_BAR_HEIGHT + 42);
 		}
-		ctx.drawString(killScoreString, lfb.x, lfb.y + this.md.LIFE_FORCE_BAR_HEIGHT + 42 * 2);
+		ctx.drawString(killScoreString, lfb.x, lfb.y + NormalGameState.LIFE_FORCE_BAR_HEIGHT + 42 * 2);
         
 		//Game Over
 		if (this.md.player.getStatus() == MageDefensePlayer.PlayerStatus.DEAD)
