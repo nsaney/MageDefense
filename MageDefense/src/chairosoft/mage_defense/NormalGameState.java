@@ -32,6 +32,8 @@ import java.awt.event.MouseEvent;
 public class NormalGameState extends GameState
 {
     public final DrawingImage backgroundImage = Loading.getImage("/img/bg/BackgroundMageDefense.png");
+    public final int backgroundImageX = (this.md.getPanelWidth() - this.backgroundImage.getWidth()) / 2;
+    public final int backgroundImageY = (this.md.getPanelHeight() - this.backgroundImage.getHeight()) / 2;
     
 	//constructor
 	public NormalGameState(MageDefense md)
@@ -276,22 +278,53 @@ public class NormalGameState extends GameState
 	@Override
 	public void render(DrawingContext ctx)
 	{
-		// background 
-		// this is taken care of in QPanel class (using Color.WHITE)
-		
-		// content graphics 
-		IntPoint2D p = this.md.mageSprite.getIntPosition();
-		this.md.clipX = this.md.getPanelHalfWidth() - (int)(p.x * this.md.X_SCALING);
-		this.md.clipY = this.md.getPanelHalfHeight() - (int)(p.y * this.md.Y_SCALING);
-		this.drawNormalGameplayContent(this.md.contentGraphics, p.x, p.y);
-		ctx.drawImage(this.md.content, this.md.clipX, this.md.clipY);
-		
-		// // cycle bar
-		// ctx.setColor(Color.BLUE);
-		// IntPoint2D cb = new IntPoint2D(7, 4);
-		// ctx.drawRect(cb.x, cb.y, 102, 8); // outline
-		// ctx.fillRect(cb.x + 1 + (int)(framesElapsedTotal % 100), cb.y, 2, 8); // cycle
-		
+		//////////////////////
+        // Gameplay Content //
+        //////////////////////
+        
+        // background image
+        ctx.drawImage(this.backgroundImage, this.backgroundImageX, this.backgroundImageY);
+        
+        // player sprite
+        //this.md.mageSprite.advanceAnimationOneClick();
+        this.md.mageSprite.drawToContextAtOwnPosition(ctx);
+        
+        // enemy sprites
+        for (QSprite qs : this.md.enemySprites)
+        {
+            qs.advanceAnimationOneClick();
+            qs.drawToContextAtOwnPosition(ctx);
+        }
+
+        // attack sprites
+        for (QSprite qs : this.md.attackSprites)
+        {
+            qs.advanceAnimationOneClick();
+            qs.drawToContextAtOwnPosition(ctx);
+        }
+        
+        // crosshair
+        //this.md.crosshair.advanceAnimationOneClick();
+        this.md.crosshair.drawToContextAtOwnPosition(ctx);
+        
+        // boundaries
+        if (this.md.show_bounding_box) 
+        {
+            ctx.setColor(Color.BLUE); 
+            ctx.fillPolygon(this.md.mageSprite); 
+            
+            ctx.setColor(Color.RED);
+            for (QSprite qs : this.md.enemySprites) { ctx.fillPolygon(qs); }
+            
+            ctx.setColor(Color.CC.ORANGE); 
+            for (QSprite qs : this.md.attackSprites) { ctx.fillPolygon(qs); }
+        }
+        
+        
+        //////////////////////
+        // Heads up display //
+        //////////////////////
+        
 		// life force bar
 		IntPoint2D lfb = new IntPoint2D(7, 7);
 		double lifeForceMax = this.md.player.getLifeForceMax();
@@ -304,21 +337,19 @@ public class NormalGameState extends GameState
 		ctx.setColor(this.md.player.getStatus().barFillColorCode);
 		ctx.fillRect(lfb.x + 1, lfb.y + 1, lifeForceBarFillWidth, this.md.LIFE_FORCE_BAR_HEIGHT);
 		
+        // kill score and life force number
 		ctx.setColor(Color.BLACK);
 		String killScoreString = String.format("Kill Score: %04d", this.md.killScore);
 		String lifeForceString = String.format("%04d / %04d Life Force", (int)lifeForceCurrent, (int)lifeForceMax);
 		ctx.drawString(lifeForceString, lfb.x, lfb.y + this.md.LIFE_FORCE_BAR_HEIGHT + 22);
 		
+        // burnout message
 		if (this.md.player.getStatus() == MageDefensePlayer.PlayerStatus.BURNOUT)
 		{
 			ctx.drawString("BURNOUT", lfb.x, lfb.y + this.md.LIFE_FORCE_BAR_HEIGHT + 42);
 		}
 		ctx.drawString(killScoreString, lfb.x, lfb.y + this.md.LIFE_FORCE_BAR_HEIGHT + 42 * 2);
-		// // mouse position
-		// ctx.setColor(Color.BLACK);
-		// ctx.drawString(mousePositionString, cb.x, cb.y + 30);
-		// ctx.drawString(crosshairPositionString, cb.x, cb.y + 50);
-		
+        
 		//Game Over
 		if (this.md.player.getStatus() == MageDefensePlayer.PlayerStatus.DEAD)
 		{
@@ -327,68 +358,16 @@ public class NormalGameState extends GameState
 			ctx.drawString("DEATH TO MAGE. AND YOU.", (int)((1/8.0) * this.md.getPanelWidth()),
 													  (int)((1/2.0) * this.md.getPanelHeight()));
 		}
-	}
-	
-	private void drawNormalGameplayContent(DrawingContext ctx, int playerX, int playerY)
-    {
-		// save current graphics settings
-        int ctxColor = ctx.getColor();
-        Font ctxFont = ctx.getFont();
         
-        try
-        {
-            // TODO: remove qmaproom madness
-        	// background and qmaproom
-        	ctx.setColor(this.md.qmaproom.getBackgroundColor());
-        	ctx.fillRect(0, 0, this.md.qmaproom.getWidthPixels(), this.md.qmaproom.getHeightPixels());
-            ctx.drawImage(this.backgroundImage, 0, 0);
-			
-			// player sprite
-			//mageSprite.advanceAnimationOneClick();
-			this.md.mageSprite.drawToContextAtOwnPosition(ctx);
-			
-			// enemy sprites
-			for (QSprite qs : this.md.enemySprites)
-			{
-				qs.advanceAnimationOneClick();
-            	qs.drawToContextAtOwnPosition(ctx);
-			}
-
-            // attack sprites
-            for (QSprite qs : this.md.attackSprites)
-            {
-                qs.advanceAnimationOneClick();
-                qs.drawToContextAtOwnPosition(ctx);
-            }
-            
-            // crosshair
-        	this.md.crosshair.advanceAnimationOneClick();
-            this.md.crosshair.drawToContextAtOwnPosition(ctx);
-			
-			// boundaries
-			if (this.md.show_bounding_box) 
-            {
-                ctx.setColor(Color.BLUE); 
-                ctx.fillPolygon(this.md.mageSprite); 
-                for (QSprite qs : this.md.attackSprites) { ctx.fillPolygon(qs); }
-            }
-            
-            //// TODO: collisions between attacks and enemies ???
-			// if (show_boundaries) 
-            // {
-                // mageSprite.drawCollidingBoundariesToGraphics(ctx, qmaproom, Color.RED); 
-                // for (QSprite qs : fireAttackSprites) { qs.drawCollidingBoundariesToGraphics(ctx, qmaproom, Color.RED); }
-            // }
-		}
-        catch (Exception ex)
-        {
-            System.err.println(ex);
-        }
-        finally
-        {
-			// put back graphics settings
-			ctx.setFont(ctxFont);
-			ctx.setColor(ctxColor);
-        }
-    }
+        // // mouse position
+		// ctx.setColor(Color.BLACK);
+		// ctx.drawString(mousePositionString, cb.x, cb.y + 30);
+		// ctx.drawString(crosshairPositionString, cb.x, cb.y + 50);
+		
+		// // cycle bar
+		// ctx.setColor(Color.BLUE);
+		// IntPoint2D cb = new IntPoint2D(7, 4);
+		// ctx.drawRect(cb.x, cb.y, 102, 8); // outline
+		// ctx.fillRect(cb.x + 1 + (int)(framesElapsedTotal % 100), cb.y, 2, 8); // cycle
+	}
 }	

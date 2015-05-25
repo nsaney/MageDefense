@@ -38,7 +38,7 @@ public class GameNotLoaded extends GameState
 	{
         if (keyCode == KeyEvent.VK_ENTER)
 		{
-            this.md.loadInitialQMapRoom();
+            this.md.loadNormalGameplay();
 		}
 	}
 	
@@ -51,7 +51,7 @@ public class GameNotLoaded extends GameState
 	@Override
 	public void mousePressed(MouseEvent e)
 	{
-		this.md.loadInitialQMapRoom();
+		this.md.loadNormalGameplay();
 	}
 	
 	@Override

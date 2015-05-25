@@ -56,10 +56,10 @@ public class MageDefense extends QApplication
     }
     
     
-    
     //
     // Constants
     //
+    
     public static final Font gameOverFont = new Font(Font.Family.MONOSPACED, Font.Style.BOLD, 48);
     public static final String COORDINATE_FORMAT_STRING = "(%1$7.3f,%2$7.3f)";
     public static final int    TRANSPARENT              = Color.TRANSPARENT;
@@ -73,17 +73,10 @@ public class MageDefense extends QApplication
     @Override public int getXScaling() { return X_SCALING; }
     @Override public int getYScaling() { return Y_SCALING; }
     
-    public final int getClipWidth() { return (int)(this.getPanelWidth() / X_SCALING); }
-    public final int getClipHeight() { return (int)(this.getPanelHeight() / Y_SCALING); }
-    public final int getHalfClipWidth() { return this.getClipWidth() / 2; }
-    public final int getHalfClipHeight() { return this.getClipHeight() / 2; }
-    
-    //public static final String BACKGROUND_SPRITE_CODE = "Background_Sprite";
     public static final String CROSSHAIR_SPRITE_CODE = "Crosshair_Sprite";
     public static final String MAGE_SPRITE_CODE = "RedMage_Sprite";
     public static final String GHOST_SPRITE_CODE = "Ghost_Enemy_Sprite";
     public static final String TREX_SPRITE_CODE = "TRex_Enemy_Sprite";
-    
     
     public static final int LIFE_BAR_OUTLINE_COLOR = Color.create(0x007f00);
     public static final int LIFE_BAR_FILL_COLOR = Color.create(0x7fff7f);
@@ -92,11 +85,13 @@ public class MageDefense extends QApplication
     public static final double LIFE_FORCE_BAR_MAX_RATIO = LIFE_FORCE_BAR_MAX_WIDTH / LIFE_FORCE_COUNT_AT_MAX;
     public static final int LIFE_FORCE_BAR_HEIGHT = 8;
     
+    
     //
     // Instance Variables
     //
-    int killScore = 0;
-    int wave = 1;
+    
+    public int killScore = 0;
+    public int wave = 1;
     
     protected final GameState GAME_NOT_LOADED = new GameNotLoaded(this);
     protected final GameState MAPROOM_LOADING = new MapRoomLoading(this);
@@ -107,24 +102,19 @@ public class MageDefense extends QApplication
     
     protected QCompassKeypad keypad = new QCompassKeypad();
     
-    protected volatile QMapRoom.MapLink currentMapLink = null;
-    protected volatile QMapRoom nextQMapRoom = null;
-    protected QMapRoom qmaproom = null;
-    protected DrawingImage content = null;
-    protected DrawingContext contentGraphics = null;
-    protected volatile int clipX = 0;
-    protected volatile int clipY = 0;
-    
     protected volatile boolean isPaused = false;
     protected boolean show_boundaries = false;
     protected boolean show_bounding_box = false;
     protected boolean move_and_collide = true;
     
-    protected QSprite mageSprite = new QSprite(MAGE_SPRITE_CODE);
-    protected int spawnRow = 0;
-    protected int spawnCol = 0;
-    
     protected MageDefensePlayer player = new MageDefensePlayer();
+    protected QSprite mageSprite = new QSprite(MAGE_SPRITE_CODE);
+    {
+        float x = (this.getPanelWidth() - this.mageSprite.getImage().getWidth()) / 2;
+        float y = (this.getPanelHeight() - this.mageSprite.getImage().getHeight()) / 2;
+        this.mageSprite.setPosition(x, y);
+    }
+    
     
     protected float CROSSHAIR_DISTANCE = 7.0f * QTileset.getTileWidth();
     protected QSprite crosshair = new QSprite(CROSSHAIR_SPRITE_CODE);
@@ -153,33 +143,14 @@ public class MageDefense extends QApplication
     
     public long getFramesElapsedTotal() { return this.framesElapsedTotal; }
     
-    public void loadQMapRoomFromCurrentLink()
+    public void loadNormalGameplay()
     {
-        this.gameState = this.MAPROOM_LOADING;
-        QMapRoomLoader loader = new QMapRoomLoader(
-            currentMapLink, 
-            new Consumer<QMapRoomLoader.Result>()
-            {
-                @Override public void accept(QMapRoomLoader.Result result)
-                {
-                    MageDefense thiz = MageDefense.this;
-                    thiz.nextQMapRoom = result.qMapRoom;
-                    thiz.spawnRow = result.spawnRow;
-                    thiz.spawnCol = result.spawnCol;
-                    thiz.content = result.contentImage;
-                    thiz.contentGraphics = result.contentImageContext;
-                    thiz.gameState = thiz.MAPROOM_LOADED;
-                }
-            }
-        );
-        loader.startLoading();
+        // If we need to do this asynchronously, we would make use of MAPROOM_LOADING.
+        // That would be for something like loading background music files.
+        // But otherwise, we can just go straight to MAPROOM_LOADED.
+        this.gameState = this.MAPROOM_LOADED;
     }
     
-    protected void loadInitialQMapRoom()
-    {
-        this.currentMapLink = new QMapRoom.MapLink(0, 0, "000", 11, 11);
-        this.loadQMapRoomFromCurrentLink();
-    }
     
     @Override
     protected void qGameInitialize() 
@@ -230,11 +201,11 @@ public class MageDefense extends QApplication
     protected FloatPoint2D updateCrosshair(MouseEvent e)
     {
         java.awt.Point ep = e.getPoint();
-        FloatPoint2D pp = mageSprite.getPosition();
+        FloatPoint2D pp = this.mageSprite.getPosition();
         //Rectangle pb = mageSprite.getBounds();
         
-        int mouseX = ep.x - clipX;
-        int mouseY = ep.y - clipY;
+        int mouseX = ep.x;
+        int mouseY = ep.y;
         float mouseOffsetX = pp.x;//+ (pb.width / 2f);
         float mouseOffsetY = pp.y;// + (pb.height / 2f);
         FloatPoint2D mp = new FloatPoint2D(mouseX - mouseOffsetX, mouseY - mouseOffsetY);
