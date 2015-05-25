@@ -124,6 +124,7 @@
         <frame image="04" duration="30"/>
         <frame image="05" duration="40"/>
         <frame image="04" duration="30"/>
+      </animation>
     </animations>
     <states default="left_basic">
       <state code="left_basic"  shape="shape_0" animation="left_basic"/>
