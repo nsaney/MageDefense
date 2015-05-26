@@ -281,6 +281,15 @@ public class NormalGameState extends GameState
 			
 			for (Enemy enemy : this.enemySprites)
 			{
+				if(enemy.getVelocity().x >= 0) 
+				{ 
+					enemy.setCurrentStateCode("right_basic"); 
+				}
+				else
+				{
+					enemy.setCurrentStateCode("left_basic");
+				}
+				
 				FloatPoint2D enemyPos = enemy.getPosition();
 				double distance = pp.distance(enemyPos);
 				
@@ -435,7 +444,7 @@ public class NormalGameState extends GameState
         //Debug Log
         ctx.setColor(Color.BLACK);
 		ArrayList<String> debugLog = new ArrayList<>();
-        for (Enemy e : this.md.enemySprites)
+        for (Enemy e : this.enemySprites)
         {   
 			float x = e.getPosition().x;
 			float y = e.getPosition().y;

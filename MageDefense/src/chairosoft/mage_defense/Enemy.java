@@ -72,6 +72,6 @@ public class Enemy extends MovementPatternSprite
 		return new Enemy(Enemy.TREX_SPRITE_CODE, 30, 32*12, new SineMovementPattern(10,.01,0,0));
 	}
 	public static Enemy getViperRex(){
-		return new Enemy(Enemy.VIPERREX_SPRITE_CODE, 45, 32*12, new SineMovementPattern(10,.1,0,0));
+		return new Enemy(Enemy.VIPERREX_SPRITE_CODE, 45, 32*12, new SineMovementPattern(15,.001,0,0));
 	}
 }
