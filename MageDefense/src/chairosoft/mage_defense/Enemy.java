@@ -18,8 +18,10 @@ public class Enemy extends MovementPatternSprite
 	public static final String GHOST_SPRITE_CODE = "Ghost_Enemy_Sprite";
     public static final String TREX_SPRITE_CODE = "TRex_Enemy_Sprite";
 	public static final String VIPERREX_SPRITE_CODE = "ViperRex_Sprite";
+	protected static int nextId = 0;
 
 	//instance-variables
+	public final int id = nextId++;
 	protected int health;
 	protected Element element = Element.NEUTRAL;
 	protected Attack attack;
@@ -57,15 +59,19 @@ public class Enemy extends MovementPatternSprite
 		this.extraAttackSpeed = extraAtkSpd;
 	}
 	
+	public int getID()
+	{	
+		return this.id;
+	}
 	//// Default Enemies
 	public static Enemy getGhost()
 	{
-		return new Enemy(Enemy.GHOST_SPRITE_CODE, 20, 32*12, new SineMovementPattern(3,.003,0,0));
+		return new Enemy(Enemy.GHOST_SPRITE_CODE, 20, 32*12, new SineMovementPattern(16,.01,0,0));
 	}
 	public static Enemy getTRex(){
-		return new Enemy(Enemy.TREX_SPRITE_CODE, 30, 32*12, new SineMovementPattern(1,.05,0,0));
+		return new Enemy(Enemy.TREX_SPRITE_CODE, 30, 32*12, new SineMovementPattern(10,.01,0,0));
 	}
 	public static Enemy getViperRex(){
-		return new Enemy(Enemy.VIPERREX_SPRITE_CODE, 45, 32*12, new SineMovementPattern(2,.01,0,0));
+		return new Enemy(Enemy.VIPERREX_SPRITE_CODE, 45, 32*12, new SineMovementPattern(10,.1,0,0));
 	}
 }

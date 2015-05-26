@@ -29,7 +29,9 @@ public class SineMovementPattern implements MovementPattern
 		//A * sin ( (2 * PI * f * t) + ph) + offset   Sine transform displacement
 		double displacement = this.amplitude * Math.sin((this.angularFrequency * distanceAlongPath) + this.phase) + this.offset;
 		
-		FloatPoint2D translationVector = mpi.unitNormalVector.multipliedBy((float)displacement);
+		//FloatPoint2D translationVector = mpi.unitNormalVector.multipliedBy((float)displacement);
+		FloatPoint2D translationVector = new FloatPoint2D(mpi.unitNormalVector.x * (float)displacement,
+	 													  mpi.unitNormalVector.y * (float)displacement);
 		FloatPoint2D transformedPosition = new FloatPoint2D(mpi.pathPhysical.getPosition().x + translationVector.x,
 															mpi.pathPhysical.getPosition().y + translationVector.y);
 	 	return transformedPosition;

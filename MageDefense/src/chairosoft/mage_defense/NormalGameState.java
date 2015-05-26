@@ -373,6 +373,18 @@ public class NormalGameState extends GameState
 													  (int)((1/2.0) * this.md.getPanelHeight()));
 		}
         
+        //Debug Log
+        ctx.setColor(Color.BLACK);
+		ArrayList<String> debugLog = new ArrayList<>();
+        for (Enemy e : this.md.enemySprites)
+        {   
+			float x = e.getPosition().x;
+			float y = e.getPosition().y;
+			debugLog.add(String.format("# %02d: %s,%s", e.getID(), x, y));
+        }
+        ctx.drawLinesOfText(debugLog, md.getPanelWidth()-190, lfb.y);
+        
+        
         // // mouse position
 		// ctx.setColor(Color.BLACK);
 		// ctx.drawString(mousePositionString, cb.x, cb.y + 30);

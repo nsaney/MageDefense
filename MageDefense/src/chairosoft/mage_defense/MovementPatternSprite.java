@@ -22,14 +22,14 @@ public class MovementPatternSprite extends QSprite
 		this.movementPattern = mp;
 	}
 	
-	public void initializePosition(float x, float y, float x2, float y2)
+	public void initializePosition(float x, float y)
 	{
-		this.initializePosition(new FloatPoint2D(x, y), new FloatPoint2D(x2, y2));
+		this.initializePosition(new FloatPoint2D(x, y));
 	}
-	public void initializePosition(FloatPoint2D p1, FloatPoint2D p2)
+	public void initializePosition(FloatPoint2D p1)
 	{
 		this.setPosition(p1.x , p1.y);
-		this.mpi = new MovementPattern.Info(this, p2);
+		this.mpi = new MovementPattern.Info(this);
 	}
 	
 	@Override
@@ -39,8 +39,8 @@ public class MovementPatternSprite extends QSprite
 		else
 		{
 			//update non position components
-			this.mpi.pathPhysical.setVelocity(this.velocity);
-			this.mpi.pathPhysical.setAcceleration(this.acceleration);
+			// this.mpi.pathPhysical.setVelocity(this.velocity);
+//  			this.mpi.pathPhysical.setAcceleration(this.acceleration);
 		
 			//move along linear path and record that position
 			this.mpi.pathPhysical.moveOneFrame();
