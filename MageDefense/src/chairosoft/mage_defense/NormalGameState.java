@@ -44,7 +44,7 @@ public class NormalGameState extends GameState
     public static final double LIFE_FORCE_BAR_MAX_RATIO = LIFE_FORCE_BAR_MAX_WIDTH / LIFE_FORCE_COUNT_AT_MAX;
     public static final int LIFE_FORCE_BAR_HEIGHT = 8;
     
-    public static final Font gameOverFont = new Font(Font.Family.MONOSPACED, Font.Style.BOLD, 48);
+    public static final Font GAME_OVER_FONT = Font.create(Font.Family.MONOSPACED, Font.Style.BOLD, 48);
     
     
     // fields
@@ -435,7 +435,7 @@ public class NormalGameState extends GameState
 		// game over message
 		if (this.player.getStatus() == MageDefensePlayer.PlayerStatus.DEAD)
 		{
-			ctx.setFont(this.gameOverFont);
+			ctx.setFont(NormalGameState.GAME_OVER_FONT);
 			ctx.setColor(Color.RED);
 			ctx.drawString("DEATH TO MAGE. AND YOU.", (int)((1/8.0) * this.md.getPanelWidth()),
 													  (int)((1/2.0) * this.md.getPanelHeight()));
