@@ -80,7 +80,33 @@ public class NormalGameState extends GameState
     protected Set<AttackSprite> attackSprites = new HashSet<>();
     protected Set<Enemy> enemySprites = new HashSet<>();
     
-    
+    //ElementIcons
+    protected final int ICON_WIDTH = 54;
+    protected final int ICON_HEIGHT = 54;
+	protected final QSprite[] swordIcons = {new QSprite("Sword_Icon"), new QSprite("Sword_Icon")};
+	protected final QSprite[] fireIcons = {new QSprite("Fire_Icon"), new QSprite("Fire_Icon")};
+	protected final QSprite[] windIcons = {new QSprite("Wind_Icon"), new QSprite("Wind_Icon")};
+	protected final QSprite[] lightningIcons = {new QSprite("Lightning_Icon"), new QSprite("Lightning_Icon"), new QSprite("Lightning_Icon")};
+    protected final QSprite[][] elementIcons = {swordIcons, fireIcons, windIcons, lightningIcons};
+    {
+		for(int row = 0; row < elementIcons.length; row++)
+		{
+			for(int col = 0; col < elementIcons[row].length; col++)
+			{
+				//System.err.println(row+", "+col+" "+elementIcons[row][col].code);
+				elementIcons[row][col].setPosition(((this.md.getPanelWidth() + this.backgroundImage.getWidth()) / 2) + (ICON_WIDTH * col) + 3,
+												   ((this.md.getPanelHeight() - this.backgroundImage.getHeight()) / 2) + (ICON_HEIGHT * row));
+				if(col == 1)
+				{
+					elementIcons[row][col].setCurrentStateCode("level2");
+				}
+				else if (col == 2)
+				{
+					elementIcons[row][col].setCurrentStateCode("level3");
+				}
+			}
+		}
+    }
 	// constructor
 	public NormalGameState(MageDefense md)
 	{
@@ -385,6 +411,14 @@ public class NormalGameState extends GameState
             qs.drawToContextAtOwnPosition(ctx);
         }
         
+        for (QSprite[] a : this.elementIcons)
+        {
+        	for(QSprite qs : a)
+        	{
+        		qs.drawToContextAtOwnPosition(ctx);
+        	}
+        }
+        
         // crosshair
         //this.crosshair.advanceAnimationOneClick();
         this.crosshair.drawToContextAtOwnPosition(ctx);
@@ -458,7 +492,7 @@ public class NormalGameState extends GameState
 			float y = e.getPosition().y;
 			debugLog.add(String.format("# %02d: %s,%s", e.getID(), x, y));
         }
-        ctx.drawLinesOfText(debugLog, md.getPanelWidth()-190, lfb.y);
+        ctx.drawLinesOfText(debugLog, md.getPanelWidth() - 150, md.getPanelHeight() - 50);
         
         
         // // mouse position
