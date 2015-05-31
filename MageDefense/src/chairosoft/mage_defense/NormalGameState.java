@@ -435,10 +435,18 @@ public class NormalGameState extends GameState
 		// game over message
 		if (this.player.getStatus() == MageDefensePlayer.PlayerStatus.DEAD)
 		{
-			ctx.setFont(NormalGameState.GAME_OVER_FONT);
-			ctx.setColor(Color.RED);
-			ctx.drawString("DEATH TO MAGE. AND YOU.", (int)((1/8.0) * this.md.getPanelWidth()),
-													  (int)((1/2.0) * this.md.getPanelHeight()));
+            Font originalFont = ctx.getFont();
+            try
+            {
+                ctx.setFont(NormalGameState.GAME_OVER_FONT);
+                ctx.setColor(Color.RED);
+                ctx.drawString("DEATH TO MAGE. AND YOU.", (int)((1/8.0) * this.md.getPanelWidth()),
+                                                          (int)((1/2.0) * this.md.getPanelHeight()));
+            }
+            finally
+            {
+                ctx.setFont(originalFont);
+            }
 		}
 		
         //Debug Log
