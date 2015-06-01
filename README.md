@@ -20,6 +20,7 @@
 
 ###Enemy Class:
  - [ ] Acceleration Based Movement
+ - [x] Movement-Pattern Movement
  - [ ] Attacking 
  - [ ] Enemy States
    - [ ] Push
