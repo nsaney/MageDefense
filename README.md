@@ -37,7 +37,7 @@
 
 
 ###Sprites:
- - Attack Sprites (Level 1)
+ - [ ] Attack Sprites (Level 1)
    - [ ] Water Level 1
    - [ ] Earth Level 1
    - [ ] Dark Level 1
