@@ -12,8 +12,6 @@ package chairosoft.mage_defense;
 
 import chairosoft.ui.graphics.DrawingContext;
 
-import java.awt.event.MouseEvent;
-
 
 /**
 * The segment of the game dependent on an overarching situation. Any portion of the 
@@ -62,16 +60,26 @@ public abstract class GameState
 	public void keyReleased(int keyCode) {}
 	
 	/**
-	 * A GameState specific handling of released keys, modifying the MageDefense object
+	 * A GameState specific handling of pressed pointers, modifying the MageDefense object
 	 *
-	 * @param e the event of a mouse moved action
+	 * @param x the x-location of the pressed pointer
+     * @param y the y-location of the pressed pointer
 	 */
-	public void mouseMoved(MouseEvent e) {}
+	public void pointerPressed(float x, float y) {}
 	
 	/**
-	 * A GameState specific handling of released keys, modifying the MageDefense object
+	 * A GameState specific handling of moved pointers, modifying the MageDefense object
 	 *
-	 * @param e the event of a mouse clicked action
+	 * @param x the updated x-location of the moved pointer
+     * @param y the updated y-location of the moved pointer
 	 */
-	public void mousePressed(MouseEvent e) {}
+	public void pointerMoved(float x, float y) {}
+	
+	/**
+	 * A GameState specific handling of released pointers, modifying the MageDefense object
+	 *
+	 * @param x the last x-location of the released pointer
+     * @param y the last y-location of the released pointer
+	 */
+	public void pointerReleased(float x, float y) {}
 }

@@ -10,10 +10,11 @@ import static chairosoft.quadrado.QCompassDirection.*;
 import chairosoft.quadrado.QApplication;
 import chairosoft.quadrado.QCompassDirection;
 import chairosoft.quadrado.QCompassKeypad;
-import chairosoft.quadrado.ui.event.ButtonEvent;
 
 // import chairosoft.ui.audio.*;
 // import chairosoft.ui.geom.*;
+import chairosoft.ui.event.ButtonEvent;
+import chairosoft.ui.event.PointerEvent;
 import chairosoft.ui.graphics.DrawingContext;
 import chairosoft.ui.graphics.Font;
 // import chairosoft.util.function.*;
@@ -22,11 +23,9 @@ import chairosoft.ui.graphics.Font;
 // import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-import chairosoft.quadrado.desktop.DesktopDoubleBufferedUI;
+import chairosoft.desktop.DesktopDoubleBufferedUI;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
 
 public class MageDefense extends QApplication
@@ -44,8 +43,6 @@ public class MageDefense extends QApplication
         
         DesktopDoubleBufferedUI dbui = (DesktopDoubleBufferedUI)app.getDbui();
         JPanel panel = dbui.getPanel();
-        panel.addMouseListener(app.mouseAdapter);
-        panel.addMouseMotionListener(app.mouseAdapter);
         panel.addKeyListener(app.keyAdapter);
 	}
     
@@ -88,13 +85,6 @@ public class MageDefense extends QApplication
     protected volatile GameState gameState = this.GAME_NOT_LOADED;
     
     protected final QCompassKeypad keypad = new QCompassKeypad();
-    
-    protected volatile ConcurrentLinkedQueue<MouseEvent> mouseEventQueue = new ConcurrentLinkedQueue<>();
-    public final MouseAdapter mouseAdapter = new MouseAdapter()
-    {
-        @Override public void mouseMoved(MouseEvent e) { MageDefense.this.mouseEventQueue.offer(e); }        
-        @Override public void mousePressed(MouseEvent e) { MageDefense.this.mouseEventQueue.offer(e); }
-    };
     
     protected volatile ConcurrentLinkedQueue<KeyEvent> keyEventQueue = new ConcurrentLinkedQueue<>();
     public final KeyAdapter keyAdapter = new KeyAdapter()
@@ -164,35 +154,27 @@ public class MageDefense extends QApplication
         this.gameState.keyReleased(keyCode);
     }
     
-    
-    protected void qMouseMoved(MouseEvent e)
+    @Override
+    protected void qPointerPressed(float x, float y)
     {
-        this.gameState.mouseMoved(e);
+        this.gameState.pointerPressed(x, y);
     }
     
-    protected void qMousePressed(MouseEvent e)
+    @Override
+    protected void qPointerMoved(float x, float y)
     {
-        this.gameState.mousePressed(e);
+        this.gameState.pointerMoved(x, y);
+    }
+    
+    @Override
+    protected void qPointerReleased(float x, float y)
+    {
+        this.gameState.pointerReleased(x, y);
     }
     
     @Override
     protected void qGameUpdate() 
     {
-        // hook for mouse event handling
-        int mouseEventCount = mouseEventQueue.size(); // only process mouse events in the queue as of this call
-        for (int i = 0; i < mouseEventCount; ++i)
-        {
-            MouseEvent e = mouseEventQueue.poll();
-            if (e != null) 
-            {
-                switch (e.getID())
-                {
-                    case MouseEvent.MOUSE_MOVED: this.qMouseMoved(e); break;
-                    case MouseEvent.MOUSE_PRESSED: this.qMousePressed(e); break;
-                }
-            }
-        }
-        
         // hook for key event handling
         int keyEventCount = keyEventQueue.size(); // only process key events in the queue as of this call
         for (int i = 0; i < keyEventCount; ++i)

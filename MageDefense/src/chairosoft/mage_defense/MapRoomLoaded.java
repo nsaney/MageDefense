@@ -12,8 +12,6 @@ package chairosoft.mage_defense;
 
 import chairosoft.ui.graphics.DrawingContext;
 
-import java.awt.event.MouseEvent;
-
 public class MapRoomLoaded extends GameState
 {
 	//constructor
@@ -22,7 +20,7 @@ public class MapRoomLoaded extends GameState
 		super(md);
 	}
 	
-	//Overloaded methods
+	//Overridden methods
 	@Override
 	public void keyPressed(int keyCode)	{ }
 	
@@ -30,10 +28,13 @@ public class MapRoomLoaded extends GameState
 	public void keyReleased(int keyCode) { }
 	
 	@Override
-	public void mouseMoved(MouseEvent e) { }
+	public void pointerPressed(float x, float y) { }
 	
 	@Override
-	public void mousePressed(MouseEvent e) { }
+	public void pointerMoved(float x, float y) { }
+	
+	@Override
+	public void pointerReleased(float x, float y) { }
 	
 	@Override
 	public void update()

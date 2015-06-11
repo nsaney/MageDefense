@@ -14,8 +14,6 @@ import chairosoft.ui.geom.IntPoint2D;
 import chairosoft.ui.graphics.Color;
 import chairosoft.ui.graphics.DrawingContext;
 
-import java.awt.event.MouseEvent;
-
 public class MapRoomLoading extends GameState
 {
 
@@ -25,36 +23,24 @@ public class MapRoomLoading extends GameState
 		super(md);
 	}
 	
-	//Overloaded methods
+	//Overridden methods
 	@Override
-	public void keyPressed(int keyCode)
-	{
-	
-	}
+	public void keyPressed(int keyCode) { }
 	
 	@Override
-	public void keyReleased(int keyCode)
-	{
-	
-	}
-
-	@Override
-	public void mouseMoved(MouseEvent e)
-	{
-	
-	}
+	public void keyReleased(int keyCode) { }
 	
 	@Override
-	public void mousePressed(MouseEvent e)
-	{
-	
-	}
+	public void pointerPressed(float x, float y) { }
 	
 	@Override
-	public void update()
-	{
+	public void pointerMoved(float x, float y) { }
 	
-	}
+	@Override
+	public void pointerReleased(float x, float y) { }
+	
+	@Override
+	public void update() { }
 	
 	@Override
 	public void render(DrawingContext ctx)

@@ -29,7 +29,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
 
 public class NormalGameState extends GameState
 {
@@ -153,23 +152,20 @@ public class NormalGameState extends GameState
 	@Override
 	public void keyReleased(int keyCode)
 	{
-	
+        // nothing here
 	}
 	
 	@Override
-	public void mouseMoved(MouseEvent e)
-	{
-		this.updateCrosshair(e);
-	}
-    
-    protected FloatPoint2D updateCrosshair(MouseEvent e)
+	public void pointerMoved(float x, float y) 
     {
-        java.awt.Point ep = e.getPoint();
+        this.updateCrosshair(x, y);
+    }
+    
+    protected FloatPoint2D updateCrosshair(float mouseX, float mouseY)
+    {
         FloatPoint2D pp = this.mageSprite.getPosition();
         //Rectangle pb = mageSprite.getBounds();
         
-        int mouseX = ep.x;
-        int mouseY = ep.y;
         float mouseOffsetX = pp.x;//+ (pb.width / 2f);
         float mouseOffsetY = pp.y;// + (pb.height / 2f);
         FloatPoint2D mp = new FloatPoint2D(mouseX - mouseOffsetX, mouseY - mouseOffsetY);
@@ -203,7 +199,7 @@ public class NormalGameState extends GameState
     }
 	
 	@Override
-	public void mousePressed(MouseEvent e)
+	public void pointerPressed(float x, float y)
 	{
 		if (this.move_and_collide && this.player.getStatus() != MageDefensePlayer.PlayerStatus.DEAD)
 		{
@@ -213,7 +209,7 @@ public class NormalGameState extends GameState
             if (ability == null) { return; }
             
             // update crosshair
-            FloatPoint2D mp_unit = this.updateCrosshair(e);
+            FloatPoint2D mp_unit = this.updateCrosshair(x, y);
             if (0.0 == mp_unit.distance(0, 0)) { return; }
             
             // update life force
@@ -286,6 +282,12 @@ public class NormalGameState extends GameState
             this.attackSprites.add(nextAttackSprite);
         }
 	}
+    
+    @Override
+    public void pointerReleased(float x, float y)
+    {
+        // nothing here
+    }
 	
 	@Override
 	public void update()

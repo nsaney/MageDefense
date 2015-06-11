@@ -18,7 +18,6 @@ import chairosoft.ui.graphics.DrawingImage;
 import chairosoft.util.Loading;
 
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
 
 public class GameNotLoaded extends GameState
 {
@@ -32,7 +31,7 @@ public class GameNotLoaded extends GameState
 		super(md);
 	}
 
-	//Overloaded methods
+	//Overridden methods
 	@Override
 	public void keyPressed(int keyCode)
 	{
@@ -43,19 +42,34 @@ public class GameNotLoaded extends GameState
 	}
 	
 	@Override
-	public void keyReleased(int keyCode) { }
+	public void keyReleased(int keyCode)
+    {
+        // nothing here
+    }
 	
 	@Override
-	public void mouseMoved(MouseEvent e) { }
-	
-	@Override
-	public void mousePressed(MouseEvent e)
+	public void pointerPressed(float x, float y)
 	{
 		this.md.loadNormalGameplay();
 	}
 	
 	@Override
-	public void update() { }
+	public void pointerMoved(float x, float y)
+    {
+        // nothing here
+    }
+	
+	@Override
+	public void pointerReleased(float x, float y)
+    {
+        // nothing here
+    }
+	
+	@Override
+	public void update()
+    {
+        // nothing here
+    }
 	
 	@Override
 	public void render(DrawingContext ctx)
