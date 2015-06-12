@@ -46,20 +46,6 @@ public abstract class GameState
 	public void render(DrawingContext ctx) {}
 	
 	/**
-	 * A GameState specific handling of pressed keys, modifying the MageDefense object
-	 *
-	 * @param keyCode the int code corresponding to the key pressed
-	 */
-	public void keyPressed(int keyCode) {}
-	
-	/**
-	 * A GameState specific handling of released keys, modifying the MageDefense object
-	 *
-	 * @param keyCode the int code corresponding to the key released
-	 */
-	public void keyReleased(int keyCode) {}
-	
-	/**
 	 * A GameState specific handling of pressed pointers, modifying the MageDefense object
 	 *
 	 * @param x the x-location of the pressed pointer

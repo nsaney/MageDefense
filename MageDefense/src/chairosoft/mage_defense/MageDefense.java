@@ -23,11 +23,6 @@ import chairosoft.ui.graphics.Font;
 // import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-import chairosoft.desktop.DesktopDoubleBufferedUI;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import javax.swing.JPanel;
-
 public class MageDefense extends QApplication
 {
 	//
@@ -39,11 +34,9 @@ public class MageDefense extends QApplication
 	    System.err.println("Starting game... ");
 		MageDefense app = new MageDefense();
         app.setFrameRateInHz(100);
+        //app.setUsePointerListener(true); // not going to use this for MageDefense
+        app.setUsePointerListener(true);
 	    app.gameStart();
-        
-        DesktopDoubleBufferedUI dbui = (DesktopDoubleBufferedUI)app.getDbui();
-        JPanel panel = dbui.getPanel();
-        panel.addKeyListener(app.keyAdapter);
 	}
     
     
@@ -84,15 +77,6 @@ public class MageDefense extends QApplication
     
     protected volatile GameState gameState = this.GAME_NOT_LOADED;
     
-    protected final QCompassKeypad keypad = new QCompassKeypad();
-    
-    protected volatile ConcurrentLinkedQueue<KeyEvent> keyEventQueue = new ConcurrentLinkedQueue<>();
-    public final KeyAdapter keyAdapter = new KeyAdapter()
-    {
-        @Override public void keyPressed(KeyEvent ke) { MageDefense.this.keyEventQueue.offer(ke); }
-        @Override public void keyReleased(KeyEvent ke) { MageDefense.this.keyEventQueue.offer(ke); }
-    };
-    
     
     //
     // Instance Methods 
@@ -125,35 +109,6 @@ public class MageDefense extends QApplication
     @Override protected void qButtonNotHeld(ButtonEvent.Code buttonCode) { }
     
     
-    protected void qKeyPressed(int keyCode)
-    {
-        // keypad needs to respond, even if loading
-        switch (keyCode)
-        {
-            case KeyEvent.VK_LEFT: keypad.activateValue(WEST); break; // left
-            case KeyEvent.VK_RIGHT: keypad.activateValue(EAST); break; // right
-            case KeyEvent.VK_UP: keypad.activateValue(NORTH); break; // up
-            case KeyEvent.VK_DOWN: keypad.activateValue(SOUTH); break; // down
-        }
-        
-        this.gameState.keyPressed(keyCode);
-    }
-    
-    protected void qKeyReleased(int keyCode)
-    {
-        // keypad needs to respond, even if loading
-        switch (keyCode)
-        {
-            case KeyEvent.VK_LEFT: keypad.deactivateValue(WEST); break; // left
-            case KeyEvent.VK_RIGHT: keypad.deactivateValue(EAST); break; // right
-            case KeyEvent.VK_UP: keypad.deactivateValue(NORTH); break; // up
-            case KeyEvent.VK_DOWN: keypad.deactivateValue(SOUTH); break; // down
-            default: break;
-        }
-        
-        this.gameState.keyReleased(keyCode);
-    }
-    
     @Override
     protected void qPointerPressed(float x, float y)
     {
@@ -175,21 +130,6 @@ public class MageDefense extends QApplication
     @Override
     protected void qGameUpdate() 
     {
-        // hook for key event handling
-        int keyEventCount = keyEventQueue.size(); // only process key events in the queue as of this call
-        for (int i = 0; i < keyEventCount; ++i)
-        {
-            KeyEvent e = keyEventQueue.poll();
-            if (e != null) 
-            {
-                switch (e.getID())
-                {
-                    case KeyEvent.KEY_PRESSED: this.qKeyPressed(e.getKeyCode()); break;
-                    case KeyEvent.KEY_RELEASED: this.qKeyReleased(e.getKeyCode()); break;
-                }
-            }
-        }
-        
         // do state-specific update
         this.gameState.update();
     }

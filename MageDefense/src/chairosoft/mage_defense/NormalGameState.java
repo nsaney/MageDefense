@@ -28,8 +28,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-import java.awt.event.KeyEvent;
-
 public class NormalGameState extends GameState
 {
     // constants
@@ -113,47 +111,48 @@ public class NormalGameState extends GameState
 	}
 
 	// overridden methods
-	@Override
-	public void keyPressed(int keyCode)
-	{
-		switch (keyCode)
-		{
-			// normal gameplay
-			//Changing attack types
-			case KeyEvent.VK_Q: this.player.chooseAbilityType(MageDefensePlayer.AbilityType.FIRE_ATTACK); break;
-			case KeyEvent.VK_W: this.player.chooseAbilityType(MageDefensePlayer.AbilityType.WHIRLWIND_ATTACK); break;
-			case KeyEvent.VK_E: this.player.chooseAbilityType(MageDefensePlayer.AbilityType.BOLT_ATTACK); break;
-			case KeyEvent.VK_S: this.player.chooseAbilityType(MageDefensePlayer.AbilityType.SWORD_ATTACK); break;
+    
+    
+    // TODO
+    // TODO: move this into pointerPressed code
+	// TODO
+    
+    
+    // // @Override
+	// // public void keyPressed(int keyCode)
+	// // {
+		// // switch (keyCode)
+		// // {
+			// // // normal gameplay
+			// // //Changing attack types
+			// // case KeyEvent.VK_Q: this.player.chooseAbilityType(MageDefensePlayer.AbilityType.FIRE_ATTACK); break;
+			// // case KeyEvent.VK_W: this.player.chooseAbilityType(MageDefensePlayer.AbilityType.WHIRLWIND_ATTACK); break;
+			// // case KeyEvent.VK_E: this.player.chooseAbilityType(MageDefensePlayer.AbilityType.BOLT_ATTACK); break;
+			// // case KeyEvent.VK_S: this.player.chooseAbilityType(MageDefensePlayer.AbilityType.SWORD_ATTACK); break;
 			
-			case KeyEvent.VK_2:
-			case KeyEvent.VK_NUMPAD2: this.player.addToLifeForceCurrent(-5); break;
+			// // case KeyEvent.VK_2:
+			// // case KeyEvent.VK_NUMPAD2: this.player.addToLifeForceCurrent(-5); break;
 			
-			case KeyEvent.VK_8:
-			case KeyEvent.VK_NUMPAD8: this.player.addToLifeForceCurrent(+5); break;
+			// // case KeyEvent.VK_8:
+			// // case KeyEvent.VK_NUMPAD8: this.player.addToLifeForceCurrent(+5); break;
 			
-			case KeyEvent.VK_4:
-			case KeyEvent.VK_NUMPAD4: this.player.addToLifeForceMax(-5); break;
+			// // case KeyEvent.VK_4:
+			// // case KeyEvent.VK_NUMPAD4: this.player.addToLifeForceMax(-5); break;
 			
-			case KeyEvent.VK_6:
-			case KeyEvent.VK_NUMPAD6: this.player.addToLifeForceMax(+5); break;
+			// // case KeyEvent.VK_6:
+			// // case KeyEvent.VK_NUMPAD6: this.player.addToLifeForceMax(+5); break;
 			
-			case KeyEvent.VK_ENTER:
-				this.isPaused = !this.isPaused;
-				break;
+			// // case KeyEvent.VK_ENTER:
+				// // this.isPaused = !this.isPaused;
+				// // break;
 			
-			// debug switches
-			case KeyEvent.VK_B: this.show_bounding_box = !this.show_bounding_box; break;
-			case KeyEvent.VK_M: this.move_and_collide = !this.move_and_collide; break;
+			// // // debug switches
+			// // case KeyEvent.VK_B: this.show_bounding_box = !this.show_bounding_box; break;
+			// // case KeyEvent.VK_M: this.move_and_collide = !this.move_and_collide; break;
 			
-			default: break;
-		}
-	}
-	
-	@Override
-	public void keyReleased(int keyCode)
-	{
-        // nothing here
-	}
+			// // default: break;
+		// // }
+	// // }
 	
 	@Override
 	public void pointerMoved(float x, float y) 

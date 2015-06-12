@@ -17,8 +17,6 @@ import chairosoft.ui.graphics.DrawingImage;
 
 import chairosoft.util.Loading;
 
-import java.awt.event.KeyEvent;
-
 public class GameNotLoaded extends GameState
 {
     public final DrawingImage startScreenImage = Loading.getImage("/img/bg/MageDefenseStartScreen_blurs.png");
@@ -32,21 +30,6 @@ public class GameNotLoaded extends GameState
 	}
 
 	//Overridden methods
-	@Override
-	public void keyPressed(int keyCode)
-	{
-        if (keyCode == KeyEvent.VK_ENTER)
-		{
-            this.md.loadNormalGameplay();
-		}
-	}
-	
-	@Override
-	public void keyReleased(int keyCode)
-    {
-        // nothing here
-    }
-	
 	@Override
 	public void pointerPressed(float x, float y)
 	{

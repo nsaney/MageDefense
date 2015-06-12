@@ -25,12 +25,6 @@ public class MapRoomLoading extends GameState
 	
 	//Overridden methods
 	@Override
-	public void keyPressed(int keyCode) { }
-	
-	@Override
-	public void keyReleased(int keyCode) { }
-	
-	@Override
 	public void pointerPressed(float x, float y) { }
 	
 	@Override
