@@ -34,7 +34,7 @@ public class MageDefense extends QApplication
 	    System.err.println("Starting game... ");
 		MageDefense app = new MageDefense();
         app.setFrameRateInHz(100);
-        //app.setUsePointerListener(true); // not going to use this for MageDefense
+        //app.setUseButtonListener(true); // not going to use this for MageDefense
         app.setUsePointerListener(true);
 	    app.gameStart();
 	}
