@@ -17,6 +17,8 @@ import chairosoft.quadrado.QTileset;
 import chairosoft.ui.geom.Point2D;
 import chairosoft.ui.geom.FloatPoint2D;
 import chairosoft.ui.geom.IntPoint2D;
+import chairosoft.ui.geom.Polygon;
+import chairosoft.ui.geom.Rectangle;
 import chairosoft.ui.graphics.Color;
 import chairosoft.ui.graphics.DrawingContext;
 import chairosoft.ui.graphics.DrawingImage;
@@ -56,6 +58,9 @@ public class NormalGameState extends GameState
     protected boolean show_boundaries = false;
     protected boolean show_bounding_box = false;
     protected boolean move_and_collide = true;
+    
+    protected Rectangle debugButton = new Rectangle();
+    protected Rectangle resetButton = new Rectangle();
     
     protected MageDefensePlayer player = new MageDefensePlayer();
     {
@@ -200,6 +205,57 @@ public class NormalGameState extends GameState
 	@Override
 	public void pointerPressed(float x, float y)
 	{
+        // buttons
+        if (this.debugButton.containsPoint(x, y))
+        {
+            this.show_bounding_box = !this.show_bounding_box;
+            return;
+        }
+        
+        if (this.player.getStatus() == MageDefensePlayer.PlayerStatus.DEAD)
+        {
+            if (this.resetButton.containsPoint(x, y))
+            {
+                this.md.gameState = new NormalGameState(this.md);
+                return;
+            }
+        }
+        else
+        {
+            for (QSprite qs : this.swordIcons)
+            {
+                if (qs.containsPoint(x, y)) 
+                {
+                    this.player.chooseAbilityType(MageDefensePlayer.AbilityType.SWORD_ATTACK); 
+                    return; 
+                } 
+            }
+            for (QSprite qs : this.fireIcons) 
+            {
+                if (qs.containsPoint(x, y)) 
+                {
+                    this.player.chooseAbilityType(MageDefensePlayer.AbilityType.FIRE_ATTACK); 
+                    return; 
+                } 
+            }
+            for (QSprite qs : this.windIcons) 
+            {
+                if (qs.containsPoint(x, y)) 
+                {
+                    this.player.chooseAbilityType(MageDefensePlayer.AbilityType.WHIRLWIND_ATTACK); 
+                    return; 
+                } 
+            }
+            for (QSprite qs : this.lightningIcons) 
+            {
+                if (qs.containsPoint(x, y)) 
+                {
+                    this.player.chooseAbilityType(MageDefensePlayer.AbilityType.BOLT_ATTACK); 
+                    return; 
+                } 
+            }
+        }
+        
 		if (this.move_and_collide && this.player.getStatus() != MageDefensePlayer.PlayerStatus.DEAD)
 		{
             // get ability
@@ -220,10 +276,9 @@ public class NormalGameState extends GameState
             AttackSprite nextAttackSprite = new AttackSprite(ability.type.spriteCode, ability.range, ability.clickLifeSpan);
             
             FloatPoint2D pp = this.mageSprite.getPosition();
-            // Rectangle pb = mageSprite.getBounds();
-            // Rectangle ab = nextAttackSprite.getBounds();
-            // nextAttackSprite.setPosition(pp.x + ((pb.width - ab.width) / 2f), pp.y + ((pb.height - ab.height) / 2f));
-            nextAttackSprite.setPosition(pp.x, pp.y);
+            Polygon.Bounds pb = this.mageSprite.getBounds();
+            Polygon.Bounds ab = nextAttackSprite.getBounds();
+            nextAttackSprite.setPosition(pp.x + ((pb.width - ab.width) / 2f), pp.y + ((pb.height - ab.height) / 2f));
             
             FloatPoint2D v = new FloatPoint2D(mp_unit.x * ability.velocity, mp_unit.y * ability.velocity);
             nextAttackSprite.setVelocity(v);
@@ -329,7 +384,7 @@ public class NormalGameState extends GameState
 				{
 					if (this.player.getStatus() == MageDefensePlayer.PlayerStatus.BURNOUT)
 					{
-						this.player.addToLifeForceMax(-1);             		
+						this.player.addToLifeForceMax(-1);
 					}
 					else
 					{
@@ -467,7 +522,17 @@ public class NormalGameState extends GameState
 		}
 		ctx.drawString(killScoreString, lfb.x, lfb.y + NormalGameState.LIFE_FORCE_BAR_HEIGHT + 42 * 2);
         
-		// game over message
+        // debug button
+        ctx.setColor(this.show_bounding_box ? Color.RED : Color.BLUE);
+        this.debugButton.x = lfb.x;
+        this.debugButton.y = lfb.y + NormalGameState.LIFE_FORCE_BAR_HEIGHT + 42 * 3;
+        this.debugButton.width = 80;
+        this.debugButton.height = 35;
+        ctx.fillRect(this.debugButton);
+        ctx.setColor(Color.BLACK);
+        ctx.drawString(this.show_bounding_box ? "DEBUG OFF" : "DEBUG ON", this.debugButton.x + 5, this.debugButton.y + this.debugButton.height - 5);
+        
+		// game over message and reset button
 		if (this.player.getStatus() == MageDefensePlayer.PlayerStatus.DEAD)
 		{
             Font originalFont = ctx.getFont();
@@ -482,6 +547,15 @@ public class NormalGameState extends GameState
             {
                 ctx.setFont(originalFont);
             }
+            
+            ctx.setColor(Color.CC.GREEN);
+            this.resetButton.x = lfb.x;
+            this.resetButton.y = lfb.y + NormalGameState.LIFE_FORCE_BAR_HEIGHT + 42 * 4;
+            this.resetButton.width = 80;
+            this.resetButton.height = 35;
+            ctx.fillRect(this.resetButton);
+            ctx.setColor(Color.BLACK);
+            ctx.drawString("RESET", this.resetButton.x + 5, this.resetButton.y + this.resetButton.height - 5);
 		}
 		
         //Debug Log
