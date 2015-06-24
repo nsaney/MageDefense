@@ -28,6 +28,7 @@
    - [ ] Blocked
    - [ ] Confused/Tricked
  - [ ] Overhead Lifebars
+	
  
 ###Mage Class:
  - [ ] Attacks:

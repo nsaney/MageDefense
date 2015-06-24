@@ -52,7 +52,7 @@ public class EnemyWave
 	
 	public static void addEnemies(NormalGameState ngs, int number, String spriteCode)
 	{
-		FloatPoint2D pp = ngs.mageSprite.getPosition();
+		FloatPoint2D magePos = ngs.mageSprite.getCenterPosition();
 		for (int i = 0; i < number; ++i)
 		{
 			Enemy enemy;
@@ -72,11 +72,27 @@ public class EnemyWave
 					return;
 			}		
 			// initialize pos and vel
-			FloatPoint2D gp = new FloatPoint2D((float)(Math.random() * MageDefense.PANEL_WIDTH),
-											   (float)(Math.random() * MageDefense.PANEL_HEIGHT));
-			FloatPoint2D difference = new FloatPoint2D(pp.x - gp.x, pp.y - gp.y);
+			
+			float enemPosX;
+			float enemPosY;
+			double posChance = Math.random();
+            
+			if(posChance > .5)
+			{
+			    enemPosX = (posChance > .75)? -1 : MageDefense.PANEL_WIDTH + 1;
+			    enemPosY = (float)(Math.random() * MageDefense.PANEL_HEIGHT);
+			}
+			else
+			{
+			    enemPosX = (float)(Math.random() * MageDefense.PANEL_WIDTH);
+			    enemPosY = (posChance > .25)? -1 : MageDefense.PANEL_HEIGHT + 1;
+			}
+
+			
+			FloatPoint2D enemPos = new FloatPoint2D(enemPosX, enemPosY);
+			FloatPoint2D difference = new FloatPoint2D(magePos.x - enemPos.x, magePos.y - enemPos.y);
 			enemy.setVelocity(difference.getUnitVector().multipliedBy(0.8f));
-			enemy.initializePosition(gp);
+			enemy.initializePosition(enemPos);
 			ngs.enemySprites.add(enemy);
 		}
 	}

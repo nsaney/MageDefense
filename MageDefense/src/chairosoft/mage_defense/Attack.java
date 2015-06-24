@@ -27,7 +27,7 @@ public class Attack extends MovementPatternSprite
 	{
 		this(code, mp, Element.NEUTRAL);
 	}
-	
+    
 	public Attack(String code, MovementPattern mp, Element el)
 	{
 		super(code, mp);
