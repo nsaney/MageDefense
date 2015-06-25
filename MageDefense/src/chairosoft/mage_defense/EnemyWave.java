@@ -87,8 +87,6 @@ public class EnemyWave
 			    enemPosX = (float)(Math.random() * MageDefense.PANEL_WIDTH);
 			    enemPosY = (posChance > .25)? -1 : MageDefense.PANEL_HEIGHT + 1;
 			}
-
-			
 			FloatPoint2D enemPos = new FloatPoint2D(enemPosX, enemPosY);
 			FloatPoint2D difference = new FloatPoint2D(magePos.x - enemPos.x, magePos.y - enemPos.y);
 			enemy.setVelocity(difference.getUnitVector().multipliedBy(0.8f));
