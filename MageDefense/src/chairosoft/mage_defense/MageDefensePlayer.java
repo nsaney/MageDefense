@@ -35,7 +35,7 @@ public class MageDefensePlayer
         WHIRLWIND_ATTACK("Whirlwind_Attack_Sprite"), 
         BOLT_ATTACK("Bolt_Attack_Sprite"), 
         EARTHQUAKE_ATTACK("Earthquake_Attack_Sprite"),
-        SWORD_ATTACK("Sword_Attack_Sprite"); 
+        SWORD_ATTACK("Invisible"); 
         
         public final String spriteCode;
         AbilityType(String s) { this.spriteCode = s; }

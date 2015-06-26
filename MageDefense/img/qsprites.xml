@@ -69,6 +69,91 @@
     </states>
   </qsprite>
   
+  <!--Green Mage Sprite-->
+  <qsprite code="GreenMage_Sprite" width="64" height="84">
+    <spritesheet image="MageDefense_Piskel/GreenMage/GreenMage.png" transparent="#ffffff" />
+    <shapes>
+      <rectangle code="shape_center" x0="16" y0="26" width="32" height="32"/>
+      <rectangle code="shape_left" x0="0" y0="26" width="32" height="32"/>
+      <rectangle code="shape_right" x0="32" y0="26" width="32" height="32"/>
+    </shapes>
+    <animations>
+      <animation code="Hand_right" repeat="false">
+        <frame image="00" duration="9"/>
+        <frame image="01" duration="9"/>
+        <frame image="02" duration="9"/>
+        <frame image="03" duration="9"/>
+        <frame image="04" duration="8"/>
+        <frame image="02" duration="10"/>
+        <frame image="01" duration="9"/>
+        <frame image="00" duration="9"/>
+      </animation>
+      <animation code="Hand_left" repeat="false">
+        <frame image="05" duration="9"/>
+        <frame image="06" duration="9"/>
+        <frame image="07" duration="9"/>
+        <frame image="08" duration="9"/>
+        <frame image="09" duration="8"/>
+        <frame image="07" duration="10"/>
+        <frame image="06" duration="9"/>
+        <frame image="05" duration="9"/>
+      </animation>
+      <animation code="Sword_right" repeat="false">
+        <frame image="19" duration="5"/>
+        <frame image="20" duration="5"/>
+        <frame image="21" duration="5"/>
+        <frame image="22" duration="5"/>
+        <frame image="23" duration="10"/>
+        <frame image="24" duration="10"/>
+        <frame image="20" duration="10"/>
+        <frame image="19" duration="10"/>
+      </animation>
+      <animation code="Sword_left" repeat="false">
+        <frame image="26" duration="5"/>
+        <frame image="27" duration="3"/>
+        <frame image="28" duration="3"/>
+        <frame image="29" duration="5"/>
+        <frame image="30" duration="5"/>
+        <frame image="31" duration="10"/>
+        <frame image="32" duration="10"/>
+        <frame image="27" duration="10"/>
+        <frame image="26" duration="10"/>
+      </animation> 
+      <animation code="Left_stances">
+        <frame image="05" duration="140"/>
+        <frame image="10" duration="30"/>
+        <frame image="11" duration="30"/>
+        <frame image="10" duration="30"/>
+        <frame image="11" duration="30"/>
+        <frame image="10" duration="30"/>
+      </animation>
+      <animation code="Right_stances">
+        <frame image="17" duration="140"/>
+        <frame image="16" duration="30"/>
+        <frame image="15" duration="30"/>
+        <frame image="16" duration="30"/>
+        <frame image="15" duration="30"/>
+        <frame image="16" duration="30"/>
+      </animation>
+      <animation code="Center_stances">
+        <frame image="13" duration="140"/>
+        <frame image="12" duration="30"/>
+        <frame image="13" duration="30"/>
+        <frame image="14" duration="30"/>
+      </animation>
+    </animations>
+    <states default="Idle_Left">
+      <state code="Hand_Right" shape="shape_center" animation="Hand_right"/>
+      <state code="Hand_Left" shape="shape_center" animation="Hand_left"/>
+      <state code="Sword_Right" shape="shape_center" animation="Sword_right"/>
+      <state code="Sword_Left" shape="shape_center" animation="Sword_left"/>
+      <state code="Idle_Left" shape="shape_center" animation="Left_stances"/>
+      <state code="Idle_Center" shape="shape_center" animation="Center_stances"/>
+      <state code="Idle_Right" shape="shape_center" animation="Right_stances"/>
+    </states>
+  </qsprite>
+  
+  
 <!-- ViperRex Sprite -->
   <qsprite code="ViperRex_Sprite" width="64" height="64">
     <spritesheet image="MageDefense_Piskel/ViperRex.png" transparent="#ffffff" />
@@ -115,6 +200,23 @@
     </states>
   </qsprite>
     
+  <!--Invisible Collider-->
+  <qsprite code="Invisible" width="64" height="84">
+    <spritesheet image="MageDefense_Piskel/InvisibleTile.png" transparent="#ffffff" />
+    <shapes> 
+      <rectangle code="left" x0="0" y0="14" width="60" height="50"/>
+      <rectangle code="right" x0="32" y0="14" width="60" height="50"/>
+    </shapes>
+    <animations>
+      <animation code="basic" repeat="false">
+        <frame image="00" duration="1"/>
+      </animation>
+    </animations>
+    <states default="left">
+      <state code="left" shape="left" animation="basic"/>
+      <state code="right" shape="right" animation="basic"/>
+    </states>
+  </qsprite>
   <!-- Fire Attack Sprite -->
   <qsprite code="Fire_Attack_Sprite" width="32" height="32">
     <spritesheet image="FireImage2.png" transparent="#ffffff" />
@@ -314,86 +416,86 @@
   
   <!--Sword Icon-->
   <qsprite code="Sword_Icon" width="54" height="54">
-  	<spritesheet image="MageDefense_Piskel/SwordIcon.png" transparent="#ffffff"/>
-  	<shapes>
-  		<rectangle code="shape_0" x0="0" y0="0" width="54" height="54"/>
-  	</shapes>
-  	<animations>
-  		<animation code="level1">
-  			<frame image="00" duration="100"/>
-  		</animation>
-  		<animation code="level2">
-  			<frame image="01" duration="100"/>
-  		</animation>
-  	</animations>
-  	<states default="level1">
-  		<state code="level1" shape="shape_0" animation="level1"/>
-  		<state code="level2" shape="shape_0" animation="level2"/>
-  	</states>
+    <spritesheet image="MageDefense_Piskel/SwordIcon.png" transparent="#ffffff"/>
+    <shapes>
+      <rectangle code="shape_0" x0="0" y0="0" width="54" height="54"/>
+    </shapes>
+    <animations>
+      <animation code="level1">
+        <frame image="00" duration="100"/>
+      </animation>
+      <animation code="level2">
+        <frame image="01" duration="100"/>
+      </animation>
+    </animations>
+    <states default="level1">
+      <state code="level1" shape="shape_0" animation="level1"/>
+      <state code="level2" shape="shape_0" animation="level2"/>
+    </states>
   </qsprite>
   
   <!--Fire Icon-->
   <qsprite code="Fire_Icon" width="54" height="54">
-  	<spritesheet image="MageDefense_Piskel/FireIcon.png" transparent="#ffffff"/>
-  	<shapes>
-  		<rectangle code="shape_0" x0="0" y0="0" width="54" height="54"/>
-  	</shapes>
-  	<animations>
-  		<animation code="level1">
-  			<frame image="00" duration="100"/>
-  		</animation>
-  		<animation code="level2">
-  			<frame image="01" duration="100"/>
-  		</animation>
-  	</animations>
-  	<states default="level1">
-  		<state code="level1" shape="shape_0" animation="level1"/>
-  		<state code="level2" shape="shape_0" animation="level2"/>
-  	</states>
+    <spritesheet image="MageDefense_Piskel/FireIcon.png" transparent="#ffffff"/>
+    <shapes>
+      <rectangle code="shape_0" x0="0" y0="0" width="54" height="54"/>
+    </shapes>
+    <animations>
+      <animation code="level1">
+        <frame image="00" duration="100"/>
+      </animation>
+      <animation code="level2">
+        <frame image="01" duration="100"/>
+      </animation>
+    </animations>
+    <states default="level1">
+      <state code="level1" shape="shape_0" animation="level1"/>
+      <state code="level2" shape="shape_0" animation="level2"/>
+    </states>
   </qsprite>
   
   <!--Lighting Icon-->
   <qsprite code="Lightning_Icon" width="54" height="54">
-  	<spritesheet image="MageDefense_Piskel/LightningIcon.png" transparent="#ffffff"/>
-  	<shapes>
-  		<rectangle code="shape_0" x0="0" y0="0" width="54" height="54"/>
-  	</shapes>
-  	<animations>
-  		<animation code="level1">
-  			<frame image="00" duration="100"/>
-  		</animation>
-  		<animation code="level2">
-  			<frame image="01" duration="100"/>
-  		</animation>
-  		<animation code="level3">
-  			<frame image="02" duration="100"/>
-  		</animation>
-  	</animations>
-  	<states default="level1">
-  		<state code="level1" shape="shape_0" animation="level1"/>
-  		<state code="level2" shape="shape_0" animation="level2"/>
-  		<state code="level3" shape="shape_0" animation="level3"/>
-  	</states>
+    <spritesheet image="MageDefense_Piskel/LightningIcon.png" transparent="#ffffff"/>
+    <shapes>
+      <rectangle code="shape_0" x0="0" y0="0" width="54" height="54"/>
+    </shapes>
+    <animations>
+      <animation code="level1">
+        <frame image="00" duration="100"/>
+      </animation>
+      <animation code="level2">
+        <frame image="01" duration="100"/>
+      </animation>
+      <animation code="level3">
+        <frame image="02" duration="100"/>
+      </animation>
+    </animations>
+    <states default="level1">
+      <state code="level1" shape="shape_0" animation="level1"/>
+      <state code="level2" shape="shape_0" animation="level2"/>
+      <state code="level3" shape="shape_0" animation="level3"/>
+    </states>
   </qsprite>
   
   <!--Wind Icon-->
   <qsprite code="Wind_Icon" width="54" height="54">
-  	<spritesheet image="MageDefense_Piskel/WindIcon.png" transparent="#ffffff"/>
-  	<shapes>
-  		<rectangle code="shape_0" x0="0" y0="0" width="54" height="54"/>
-  	</shapes>
-  	<animations>
-  		<animation code="level1">
-  			<frame image="00" duration="100"/>
-  		</animation>
-  		<animation code="level2">
-  			<frame image="01" duration="100"/>
-  		</animation>
-  	</animations>
-  	<states default="level1">
-  		<state code="level1" shape="shape_0" animation="level1"/>
-  		<state code="level2" shape="shape_0" animation="level2"/>
-  	</states>
+    <spritesheet image="MageDefense_Piskel/WindIcon.png" transparent="#ffffff"/>
+    <shapes>
+      <rectangle code="shape_0" x0="0" y0="0" width="54" height="54"/>
+    </shapes>
+    <animations>
+      <animation code="level1">
+        <frame image="00" duration="100"/>
+      </animation>
+      <animation code="level2">
+        <frame image="01" duration="100"/>
+      </animation>
+    </animations>
+    <states default="level1">
+      <state code="level1" shape="shape_0" animation="level1"/>
+      <state code="level2" shape="shape_0" animation="level2"/>
+    </states>
   </qsprite>
   
 </qsprites>

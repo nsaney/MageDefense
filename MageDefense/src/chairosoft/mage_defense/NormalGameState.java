@@ -34,7 +34,7 @@ public class NormalGameState extends GameState
 {
     // constants
     public static final String CROSSHAIR_SPRITE_CODE = "Crosshair_Sprite";
-    public static final String MAGE_SPRITE_CODE = "RedMage_Sprite";
+    public static final String MAGE_SPRITE_CODE = "GreenMage_Sprite";
     
     public static final int LIFE_BAR_OUTLINE_COLOR = Color.create(0x007f00);
     public static final int LIFE_BAR_FILL_COLOR = Color.create(0x7fff7f);
@@ -68,8 +68,8 @@ public class NormalGameState extends GameState
     }
     protected QSprite mageSprite = new QSprite(MAGE_SPRITE_CODE);
     {
-        float x = (this.md.getPanelWidth() - this.mageSprite.getImage().getWidth()) / 2;
-        float y = (this.md.getPanelHeight() - this.mageSprite.getImage().getHeight()) / 2;
+        float x = (this.md.getPanelWidth() - this.mageSprite.getImage().getWidth()/2) / 2;
+        float y = (this.md.getPanelHeight() - this.mageSprite.getImage().getHeight()/2) / 2;
         this.mageSprite.setPosition(x, y);
     }
     
@@ -182,7 +182,7 @@ public class NormalGameState extends GameState
         
         double t = Math.atan2(-mp_unit.y, mp_unit.x);
         
-        String next_state = "left_basic";
+        String next_state = "Idle_Left";
         /*
         double increment = Math.PI / 2;
         double t1 = - Math.PI + (increment / 2);
@@ -196,7 +196,7 @@ public class NormalGameState extends GameState
         else { next_state = "left_basic"; }
         */
         
-        if(mp.x > 0){ next_state = "right_basic"; }
+        if(mp.x > 0){ next_state = "Idle_Right"; }
         mageSprite.setCurrentStateCode(next_state);
         
         return mp_unit;
@@ -272,67 +272,73 @@ public class NormalGameState extends GameState
                 && ability.type != MageDefensePlayer.AbilityType.SWORD_ATTACK ) { return; }
             this.player.addToLifeForceCurrent(-1 * ability.cost);
             
+    
             // add attack sprite
             AttackSprite nextAttackSprite = new AttackSprite(ability.type.spriteCode, ability.range, ability.clickLifeSpan);
-            
+        
             FloatPoint2D pp = this.mageSprite.getPosition();
             Polygon.Bounds pb = this.mageSprite.getBounds();
             Polygon.Bounds ab = nextAttackSprite.getBounds();
             nextAttackSprite.setPosition(pp.x + ((pb.width - ab.width) / 2f), pp.y + ((pb.height - ab.height) / 2f));
-            
+        
             FloatPoint2D v = new FloatPoint2D(mp_unit.x * ability.velocity, mp_unit.y * ability.velocity);
             nextAttackSprite.setVelocity(v);
             
-            if (ability.type == MageDefensePlayer.AbilityType.BOLT_ATTACK)
-            {
-                double t = Math.atan2(-mp_unit.y, mp_unit.x);
-                
-                String next_state = "left_basic";
-                
-                double increment = Math.PI / 4;
-                double t1 = - Math.PI + (increment / 2);
-                double t2 = t1 + increment;
-                double t3 = t2 + increment;
-                double t4 = t3 + increment;
-                double t5 = t4 + increment;
-                double t6 = t5 + increment;
-                double t7 = t6 + increment;
-                double t8 = t7 + increment;
-                
-                if (t1 <= t && t <= t2) { next_state = "down_left_basic"; }
-                else if (t2 <= t && t <= t3) { next_state = "down_basic"; }
-                else if (t3 <= t && t <= t4) { next_state = "down_right_basic"; }
-                else if (t4 <= t && t <= t5) { next_state = "right_basic"; }
-                else if (t5 <= t && t <= t6) { next_state = "up_right_basic"; }
-                else if (t6 <= t && t <= t7) { next_state = "up_basic"; }
-                else if (t7 <= t && t <= t8) { next_state = "up_left_basic"; }
-                else { next_state = "left_basic"; }
-                
-                nextAttackSprite.setCurrentStateCode(next_state);
-            }
-            else if (ability.type == MageDefensePlayer.AbilityType.SWORD_ATTACK)
-            {
-                double t = Math.atan2(-mp_unit.y, mp_unit.x);
-                
-                String next_state = "left_basic";
-                
-                double increment = Math.PI / 2;
-                double t1 = - Math.PI + (increment / 2);
-                double t2 = t1 + increment;
-                double t3 = t2 + increment;
-                double t4 = t3 + increment;
-                
+            double increment = Math.PI / 2;
+            double t1 = - Math.PI /*+ (increment / 2)*/ ;
+            double t2 = t1 + increment;
+            double t3 = t2 + increment;
+            double t4 = t3 + increment;
+            double t = Math.atan2(-mp_unit.y, mp_unit.x);      
+            
+            String mage_state = "left_basic";
+            
+            if (ability.type == MageDefensePlayer.AbilityType.SWORD_ATTACK)
+            {           
+                mage_state = (t2 <= t && t <= t4)? "Sword_Right": "Sword_Left";
+            
+                /*
                 if (t1 <= t && t <= t2) { next_state = "down_basic"; }
                 else if (t2 <= t && t <= t3) { next_state = "right_basic"; }
                 else if (t3 <= t && t <= t4) { next_state = "up_basic"; }
                 else { next_state = "left_basic"; }
-                
-                nextAttackSprite.setCurrentStateCode(next_state);
-                
-                FloatPoint2D ap = nextAttackSprite.getPosition();
-                nextAttackSprite.setPosition(ap.x + mp_unit.x * QTileset.getTileWidth() / 2, ap.y + mp_unit.y * QTileset.getTileWidth() / 2);
-            }
+                */                
             
+                this.mageSprite.setCurrentStateCode(mage_state);
+            
+                FloatPoint2D ap = nextAttackSprite.getPosition();
+                nextAttackSprite.setPosition(ap.x + mp_unit.x * QTileset.getTileWidth(), ap.y + mp_unit.y * QTileset.getTileWidth());
+            }
+            else
+            {
+                mage_state = (t2 <= t && t <= t4)? "Hand_Right": "Hand_Left";
+                
+                //reuse t regions
+                increment = Math.PI / 4;
+                t1 = - Math.PI + (increment / 2);
+                t2 = t1 + increment;
+                t3 = t2 + increment;
+                t4 = t3 + increment;
+                double t5 = t4 + increment;
+                double t6 = t5 + increment;
+                double t7 = t6 + increment;
+                double t8 = t7 + increment;
+                if (ability.type == MageDefensePlayer.AbilityType.BOLT_ATTACK)
+                {              
+                    String next_state = "left_basic";                  
+                    if (t1 <= t && t <= t2) { next_state = "down_left_basic"; }
+                    else if (t2 <= t && t <= t3) { next_state = "down_basic"; }
+                    else if (t3 <= t && t <= t4) { next_state = "down_right_basic"; }
+                    else if (t4 <= t && t <= t5) { next_state = "right_basic"; }
+                    else if (t5 <= t && t <= t6) { next_state = "up_right_basic"; }
+                    else if (t6 <= t && t <= t7) { next_state = "up_basic"; }
+                    else if (t7 <= t && t <= t8) { next_state = "up_left_basic"; }
+                    else { next_state = "left_basic"; }
+                            
+                    nextAttackSprite.setCurrentStateCode(next_state);
+                }
+            this.mageSprite.setCurrentStateCode(mage_state);
+            }
             this.attackSprites.add(nextAttackSprite);
         }
 	}
@@ -450,7 +456,7 @@ public class NormalGameState extends GameState
         ctx.drawImage(this.backgroundImage, this.backgroundImageX, this.backgroundImageY);
         
         // player sprite
-        //this.mageSprite.advanceAnimationOneClick();
+        this.mageSprite.advanceAnimationOneClick();
         this.mageSprite.drawToContextAtOwnPosition(ctx);
         
         // enemy sprites
@@ -540,7 +546,7 @@ public class NormalGameState extends GameState
             {
                 ctx.setFont(NormalGameState.GAME_OVER_FONT);
                 ctx.setColor(Color.RED);
-                ctx.drawString("DEATH TO MAGE. AND YOU.", (int)((1/8.0) * this.md.getPanelWidth()),
+                ctx.drawString("GAME OVER!!!", (int)((1/8.0) * this.md.getPanelWidth()),
                                                           (int)((1/2.0) * this.md.getPanelHeight()));
             }
             finally
@@ -561,6 +567,8 @@ public class NormalGameState extends GameState
         //Debug Log
         ctx.setColor(Color.BLACK);
 		ArrayList<String> debugLog = new ArrayList<>();
+		FloatPoint2D magePos = mageSprite.getPosition();
+		debugLog.add(String.format("Mage: %s, %s", magePos.x, magePos.y));
         for (Enemy e : this.enemySprites)
         {   
 			float x = e.getPosition().x;
