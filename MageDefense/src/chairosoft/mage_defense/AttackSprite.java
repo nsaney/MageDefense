@@ -12,6 +12,8 @@ package chairosoft.mage_defense;
 
 import chairosoft.quadrado.*;
 
+import chairosoft.ui.geom.FloatPoint2D;
+
 
 /**
  * A class representing an attack sprite in Mage Defense.
@@ -24,8 +26,10 @@ public class AttackSprite extends QSprite implements Comparable<AttackSprite>
     protected static int nextId = 0;
     
     public final Integer id = nextId++;
-    public final double range;
     public final int clickLifeSpan;
+    
+    public double range;
+    public FloatPoint2D origin;
     
     protected int currentClick = 0;
     
@@ -66,6 +70,7 @@ public class AttackSprite extends QSprite implements Comparable<AttackSprite>
     public AttackSprite(String _code, double _range, int _clickLifeSpan)
     {
         super(_code);
+        this.origin = this.position;
         this.range = _range;
         this.clickLifeSpan = _clickLifeSpan;
     }
@@ -80,4 +85,9 @@ public class AttackSprite extends QSprite implements Comparable<AttackSprite>
     {
         return this.id.compareTo(qs.id);
     }
+    
+    public void setOrigin(FloatPoint2D newOrigin)
+    {
+        this.origin = newOrigin;
+    }    
 }

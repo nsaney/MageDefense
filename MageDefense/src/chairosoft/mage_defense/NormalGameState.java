@@ -307,7 +307,9 @@ public class NormalGameState extends GameState
                 this.mageSprite.setCurrentStateCode(mage_state);
             
                 FloatPoint2D ap = nextAttackSprite.getPosition();
+
                 nextAttackSprite.setPosition(ap.x + mp_unit.x * QTileset.getTileWidth(), ap.y + mp_unit.y * QTileset.getTileWidth());
+                
             }
             else
             {
@@ -336,9 +338,11 @@ public class NormalGameState extends GameState
                     else { next_state = "left_basic"; }
                             
                     nextAttackSprite.setCurrentStateCode(next_state);
+                    
                 }
             this.mageSprite.setCurrentStateCode(mage_state);
             }
+            nextAttackSprite.setOrigin(nextAttackSprite.getPosition());
             this.attackSprites.add(nextAttackSprite);
         }
 	}
@@ -406,7 +410,8 @@ public class NormalGameState extends GameState
 				qs.moveOneFrame();
 				
 				Point2D qp = qs.getPosition();
-				double qpDistance = pp.distance(qp);
+				//double qpDistance = pp.distance(qp);
+				double qpDistance = qs.origin.distance(qp);
 				if ((qpDistance > qs.range) || qs.lifeSpanExceeded())
 				{
 					attackSpritesToRemove.add(qs);
@@ -433,6 +438,37 @@ public class NormalGameState extends GameState
 						{
 							this.player.addToLifeForceMax(+4);
 						}
+						
+					    if(qs.code.equals("Bolt_Attack_Sprite")) //later generalize to all lighting type attacks
+					    {
+					        FloatPoint2D qp = qs.getPosition();
+					        qs.setOrigin(qp);
+					        Enemy enemyToBolt = null;
+					        for(Enemy e : this.enemySprites)
+					        {   
+					            if(e != enemy){
+                                    if(enemyToBolt == null)
+                                    {
+                                        if(e.getPosition().distance(qp) < qs.range)
+                                        { 
+                                            enemyToBolt = e; 
+                                        }
+                                    }
+                                    else if(qp.distance(e.getPosition()) < qp.distance(enemyToBolt.getPosition()))
+                                    {
+                                        enemyToBolt = e;
+                                    }
+					            }
+					        }   
+                            if(enemyToBolt != null && qp.distance(enemyToBolt.getPosition()) < qs.range)
+                            {
+                                FloatPoint2D unit_toEnemy = (new FloatPoint2D(enemyToBolt.getPosition().x - qp.x,
+                                                                            enemyToBolt.getPosition().y - qp.y)).getUnitVector();
+                                float vecLength = (float)(qs.getVelocity().getVectorLength());
+                                qs.setVelocity(unit_toEnemy.multipliedBy(vecLength));
+                                qs.range = qs.range / 2;
+                            }
+					    }   
 					}
 				}
 			}
