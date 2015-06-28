@@ -30,15 +30,16 @@ public class MageDefensePlayer
     */
     public static enum AbilityType
     {
-        NONE(""),
-        FIRE_ATTACK("Flame_Attack_Sprite"), 
-        WHIRLWIND_ATTACK("Whirlwind_Attack_Sprite"), 
-        BOLT_ATTACK("Bolt_Attack_Sprite"), 
-        EARTHQUAKE_ATTACK("Earthquake_Attack_Sprite"),
-        SWORD_ATTACK("Invisible"); 
+        NONE("", Element.NEUTRAL),
+        FIRE_ATTACK("Flame_Attack_Sprite", Element.FIRE), 
+        WHIRLWIND_ATTACK("Whirlwind_Attack_Sprite", Element.WIND), 
+        BOLT_ATTACK("Bolt_Attack_Sprite", Element.LIGHTNING), 
+        EARTHQUAKE_ATTACK("Earthquake_Attack_Sprite", Element.EARTH),
+        SWORD_ATTACK("Invisible", Element.NEUTRAL); 
         
         public final String spriteCode;
-        AbilityType(String s) { this.spriteCode = s; }
+        public final Element element;
+        AbilityType(String s, Element e) { this.spriteCode = s; this.element = e;}
     }
     
     public static enum AbilityLevel
@@ -56,16 +57,17 @@ public class MageDefensePlayer
         public final double range;
         public final float velocity;
         public final int clickLifeSpan;
+        public final int flinchFrames;
         
-        public Ability(AbilityType t, AbilityLevel l, int c, double r, float v, int s)
+        public Ability(AbilityType t, AbilityLevel l, int c, double r, float v, int s, int ff)
         {
-            this.type = t; this.level = l; this.cost = c; this.range = r; this.velocity = v; this.clickLifeSpan = s;
+            this.type = t; this.level = l; this.cost = c; this.range = r; this.velocity = v; this.clickLifeSpan = s; this.flinchFrames = ff;
         }
         
         @Override
         public String toString()
         {
-            return String.format("[type: %s, level: %s, cost: %s, range: %s, velocity: %s]", type, level, cost, range, velocity);
+            return String.format("[type: %s, level: %s, cost: %s, range: %s, velocity: %s, flinch: %s]", type, level, cost, range, velocity, flinchFrames);
         }
     }
     
@@ -96,12 +98,12 @@ public class MageDefensePlayer
     
     public static final Ability[] availableAbilities = 
     {
-        //          AbilityType,                  AbilityLevel,    cost,                       range, velocity, clickLifeSpan
-        new Ability(AbilityType.NONE,             AbilityLevel._1,   00, 0 * QTileset.getTileWidth(),        0,             0),
-        new Ability(AbilityType.FIRE_ATTACK,      AbilityLevel._1,   01, 4 * QTileset.getTileWidth(),        1,             0),
-        new Ability(AbilityType.WHIRLWIND_ATTACK, AbilityLevel._1,   02, 6 * QTileset.getTileWidth(),        1,             0),
-        new Ability(AbilityType.BOLT_ATTACK,      AbilityLevel._1,   03, 8 * QTileset.getTileWidth(),        3,             0),
-        new Ability(AbilityType.SWORD_ATTACK,     AbilityLevel._1,   00, 3 * QTileset.getTileWidth(),        0,            40)
+        //          AbilityType,                  AbilityLevel,    cost,                       range, velocity, clickLifeSpan   flinchFrames
+        new Ability(AbilityType.NONE,             AbilityLevel._1,   00, 0 * QTileset.getTileWidth(),        0,             0,             0),
+        new Ability(AbilityType.FIRE_ATTACK,      AbilityLevel._1,   01, 4 * QTileset.getTileWidth(),        2,             0,           200),
+        new Ability(AbilityType.WHIRLWIND_ATTACK, AbilityLevel._1,   02, 6 * QTileset.getTileWidth(),        1,             0,           300),
+        new Ability(AbilityType.BOLT_ATTACK,      AbilityLevel._1,   03, 8 * QTileset.getTileWidth(),        4,             0,           100),
+        new Ability(AbilityType.SWORD_ATTACK,     AbilityLevel._1,   00, 3 * QTileset.getTileWidth(),        0,            40,           150)
     };
     
     public static final Ability getAbilityIfAvailable(AbilityType t, AbilityLevel l)

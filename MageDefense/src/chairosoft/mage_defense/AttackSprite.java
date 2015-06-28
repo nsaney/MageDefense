@@ -27,7 +27,7 @@ public class AttackSprite extends QSprite implements Comparable<AttackSprite>
     
     public final Integer id = nextId++;
     public final int clickLifeSpan;
-    
+    public final int flinchFrames;
     public double range;
     public FloatPoint2D origin;
     
@@ -64,15 +64,17 @@ public class AttackSprite extends QSprite implements Comparable<AttackSprite>
      * @param _code identifier which corresponds to the sprite sheet 
      * @param _range the constant distance from original location in which the 
 	 * AttackSprite is permitted to exist.
-     * @param _clickLifeSpan the constant amount time (in clicks) the AttackSprite may
-     * exist during.
+     * @param _clickLifeSpan the constant amount time (in clicks) the AttackSprite may exist during.
+     * @param _flinchFrames the number of clicks that the enemy should halt after contact
+     * 
      */
-    public AttackSprite(String _code, double _range, int _clickLifeSpan)
+    public AttackSprite(String _code, double _range, int _clickLifeSpan, int _flinchFrames)
     {
         super(_code);
         this.origin = this.position;
         this.range = _range;
         this.clickLifeSpan = _clickLifeSpan;
+        this.flinchFrames = _flinchFrames;
     }
     
     /**

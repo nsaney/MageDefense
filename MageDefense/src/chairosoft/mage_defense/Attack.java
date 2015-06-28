@@ -18,7 +18,7 @@ public class Attack extends MovementPatternSprite
 	//Instance-Variables
 	public final Element element;
 	protected int strength;
-	public int cost;
+	//public int cost;
 	public double range;
 	public int clickLifeSpan;
 	
@@ -36,7 +36,14 @@ public class Attack extends MovementPatternSprite
 	
 	//Instance-Methods
 	
-	//// Mutators	
+	//// Mutators
+	
+	protected void strengthen(int amount){ this.strength += amount;}
+	
+	public int getStrength(){ return this.strength; }
+	
+	public void setRange(int range){ this.range = range; }
+	
 	//// Accessors	
 	//// Predefined Attacks
 	//public static getFlameAttack()

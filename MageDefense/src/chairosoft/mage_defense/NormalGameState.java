@@ -274,7 +274,7 @@ public class NormalGameState extends GameState
             
     
             // add attack sprite
-            AttackSprite nextAttackSprite = new AttackSprite(ability.type.spriteCode, ability.range, ability.clickLifeSpan);
+            AttackSprite nextAttackSprite = new AttackSprite(ability.type.spriteCode, ability.range, ability.clickLifeSpan, ability.flinchFrames);
         
             FloatPoint2D pp = this.mageSprite.getPosition();
             Polygon.Bounds pb = this.mageSprite.getBounds();
@@ -382,25 +382,44 @@ public class NormalGameState extends GameState
 					enemy.setCurrentStateCode("left_basic");
 				}
 				
+//BIG TODO		//SOMETHING HERE MAKES THEM SPIRAL
+				if(enemy.isOutOfRectangle(this.backgroundImageX - 32, 
+				                          this.backgroundImageX + this.backgroundImage.getWidth() + 32,
+				                          this.backgroundImageY - 32,
+				                          this.backgroundImageY + this.backgroundImage.getHeight() + 32))
+				{
+				    FloatPoint2D enemPos = enemy.getPosition();
+				    FloatPoint2D difference = new FloatPoint2D(pp.x - enemPos.x, pp.y - enemPos.y);
+			        enemy.setVelocity(difference.getUnitVector().multipliedBy(0.8f));
+			        enemy.initializePosition(enemPos);
+				}
+				
 				FloatPoint2D enemyPos = enemy.getPosition();
 				double distance = pp.distance(enemyPos);
-				
-				// update enemy sprite only when at least 25 units away (not colliding effectively)
-				if (distance >= 25)
-				{
-					enemy.moveOneFrame();
-				}
-				else if (this.md.getFramesElapsedTotal() % 10 == 0)
-				{
-					if (this.player.getStatus() == MageDefensePlayer.PlayerStatus.BURNOUT)
-					{
-						this.player.addToLifeForceMax(-1);
-					}
-					else
-					{
-						this.player.addToLifeForceCurrent(-1);
-					}
-				}			
+				//update if enemy not 
+                if(enemy.getFlinchCount() == 0)
+                {			
+                    // update enemy sprite only when at least 25 units away (not colliding effectively)
+                    if (distance >= 25)
+                    {
+                        enemy.moveOneFrame();
+                    }
+                    else if (this.md.getFramesElapsedTotal() % 10 == 0)
+                    {
+                        if (this.player.getStatus() == MageDefensePlayer.PlayerStatus.BURNOUT)
+                        {
+                            this.player.addToLifeForceMax(-1);
+                        }
+                        else
+                        {
+                            this.player.addToLifeForceCurrent(-1);
+                        }
+                    }	
+                }
+                else
+                {
+                    enemy.setFlinchCount(enemy.getFlinchCount() - 1);
+                }	
 			}
 			
 			// update attack sprites
@@ -425,6 +444,7 @@ public class NormalGameState extends GameState
 			}
 			attackSpritesToRemove.clear();
 			
+			//enemy sprites to remove
 			ArrayList<Enemy> enemySpritesToRemove = new ArrayList<>();
 			for (AttackSprite qs : this.attackSprites)
 			{
@@ -432,41 +452,49 @@ public class NormalGameState extends GameState
 				{
 					if (enemy.collidesWith(qs))
 					{
-						enemySpritesToRemove.add(enemy);
-						this.killScore++;
-						if (this.killScore % 5 == 0)
-						{
-							this.player.addToLifeForceMax(+4);
-						}
-						
-					    if(qs.code.equals("Bolt_Attack_Sprite")) //later generalize to all lighting type attacks
-					    {
-					        FloatPoint2D qp = qs.getPosition();
-					        qs.setOrigin(qp);
-					        Enemy enemyToBolt = null;
-					        for(Enemy e : this.enemySprites)
-					        {   
-					            if(e != enemy){
-                                    if(enemyToBolt == null)
-                                    {
-                                        if(e.getPosition().distance(qp) < qs.range)
-                                        { 
-                                            enemyToBolt = e; 
+					    enemy.setFlinchCount(qs.flinchFrames);
+					    if(this.md.getFramesElapsedTotal() % 15 == 0)
+					    { 
+					        enemy.damage(5); 
+                            if(enemy.condition == Condition.DEAD)
+                            {
+                                enemySpritesToRemove.add(enemy);
+                                this.killScore++;
+                                if (this.killScore % 5 == 0)
+                                {
+                                    this.player.addToLifeForceMax(+4);
+                                }
+                            }
+                        
+                            if(qs.code.equals("Bolt_Attack_Sprite")) //later generalize to all lighting type attacks
+                            {
+                                FloatPoint2D qp = qs.getPosition();
+                                qs.setOrigin(qp);
+                                Enemy enemyToBolt = null;
+                                for(Enemy e : this.enemySprites)
+                                {   
+                                    if(e != enemy){
+                                        if(enemyToBolt == null)
+                                        {
+                                            if(e.getPosition().distance(qp) < qs.range)
+                                            { 
+                                                enemyToBolt = e; 
+                                            }
+                                        }
+                                        else if(qp.distance(e.getPosition()) < qp.distance(enemyToBolt.getPosition()))
+                                        {
+                                            enemyToBolt = e;
                                         }
                                     }
-                                    else if(qp.distance(e.getPosition()) < qp.distance(enemyToBolt.getPosition()))
-                                    {
-                                        enemyToBolt = e;
-                                    }
-					            }
-					        }   
-                            if(enemyToBolt != null && qp.distance(enemyToBolt.getPosition()) < qs.range)
-                            {
-                                FloatPoint2D unit_toEnemy = (new FloatPoint2D(enemyToBolt.getPosition().x - qp.x,
-                                                                            enemyToBolt.getPosition().y - qp.y)).getUnitVector();
-                                float vecLength = (float)(qs.getVelocity().getVectorLength());
-                                qs.setVelocity(unit_toEnemy.multipliedBy(vecLength));
-                                qs.range = qs.range / 2;
+                                }   
+                                if(enemyToBolt != null && qp.distance(enemyToBolt.getPosition()) < qs.range)
+                                {
+                                    FloatPoint2D unit_toEnemy = (new FloatPoint2D(enemyToBolt.getPosition().x - qp.x,
+                                                                                enemyToBolt.getPosition().y - qp.y)).getUnitVector();
+                                    float vecLength = (float)(qs.getVelocity().getVectorLength());
+                                    qs.setVelocity(unit_toEnemy.multipliedBy(vecLength));
+                                    qs.range = qs.range * (.9);
+                                }
                             }
 					    }   
 					}
@@ -603,16 +631,21 @@ public class NormalGameState extends GameState
         //Debug Log
         ctx.setColor(Color.BLACK);
 		ArrayList<String> debugLog = new ArrayList<>();
-		FloatPoint2D magePos = mageSprite.getPosition();
-		debugLog.add(String.format("Mage: %s, %s", magePos.x, magePos.y));
         for (Enemy e : this.enemySprites)
         {   
-			float x = e.getPosition().x;
-			float y = e.getPosition().y;
-			debugLog.add(String.format("# %02d: %s,%s", e.getID(), x, y));
+			//float x = e.getPosition().x;
+			//float y = e.getPosition().y;
+			int h = e.getHealth();
+			int flinch = e.getFlinchCount();
+			boolean b = e.isOutOfRectangle(this.backgroundImageX, this.backgroundImage.getWidth(),
+				                          this.backgroundImageY, this.backgroundImage.getHeight());
+			debugLog.add(String.format("# %02d: %d / %d  flinch: %d  box: %s", e.getID(), h, e.maxHealth, flinch, b));
         }
-        ctx.drawLinesOfText(debugLog, md.getPanelWidth() - 150, md.getPanelHeight() - 50);
+        //ctx.drawLinesOfText(debugLog, md.getPanelWidth() - 150, md.getPanelHeight() - 50);
+        ctx.drawLinesOfText(debugLog, 0, 250);
         
+        //Enemy Life
+        // life force bar
         
         // // mouse position
 		// ctx.setColor(Color.BLACK);

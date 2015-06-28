@@ -34,10 +34,10 @@ public class LinearMovementPattern implements MovementPattern
 	 	//y = mx + b Linear Transform Displacement
 	 	double displacement = this.slope * distanceAlongPath + this.intercept;
 	 	//System.out.println("Displacement: "+displacement);
-		FloatPoint2D translationVector = new FloatPoint2D(mpi.unitNormalVector.x * (float)displacement,
- 	 													  mpi.unitNormalVector.y * (float)displacement);
-	 	//FloatPoint2D translationVector = mpi.unitNormalVector.multipliedBy((float)displacement);
-	 	System.out.println("Translation Vector"+translationVector.x+", "+translationVector.y);
+		//FloatPoint2D translationVector = new FloatPoint2D(mpi.unitNormalVector.x * (float)displacement,
+ 	 													  //mpi.unitNormalVector.y * (float)displacement);
+	 	FloatPoint2D translationVector = mpi.unitNormalVector.multipliedBy((float)displacement);
+	 	//System.out.println("Translation Vector"+translationVector.x+", "+translationVector.y);
 		FloatPoint2D transformedPosition = new FloatPoint2D(mpi.pathPhysical.getPosition().x + translationVector.x,
 															mpi.pathPhysical.getPosition().y + translationVector.y);
 	 	return transformedPosition;
