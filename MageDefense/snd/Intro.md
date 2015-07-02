@@ -5,7 +5,7 @@
 ammellemφa ne uclixi han зec  
 nanuxeз maqeφac  
 nanuxeз sqovaφac  
-yenqan eclixi ganqamφac vonìllast зes  
+yeŋqan eclixi gaŋqamφac vonìllast зes  
 
 ####English####
 Prepare yourself for the never-ending stream  
