@@ -11,13 +11,27 @@ package chairosoft.mage_defense;
 
 import chairosoft.quadrado.QSprite;
 import chairosoft.ui.geom.FloatPoint2D;
+import chairosoft.ui.graphics.Color;
+import chairosoft.ui.graphics.DrawingContext;
+
 
 public class Enemy extends MovementPatternSprite
 {
 
+    //LifeBar Info
+    public static final int LIFE_BAR_OUTLINE_COLOR = Color.create(0x007f00);
+    public static final int LIFE_BAR_FILL_COLOR = Color.create(0x7fff7f);
+    public static final double LIFE_FORCE_COUNT_AT_MAX = 64;
+    public static final double LIFE_FORCE_BAR_MAX_WIDTH = 32;
+    public static final double LIFE_FORCE_BAR_MAX_RATIO = LIFE_FORCE_BAR_MAX_WIDTH / LIFE_FORCE_COUNT_AT_MAX;
+    public static final int LIFE_FORCE_BAR_HEIGHT = 4;
+
+    //Sprite Info
     public static final String GHOST_SPRITE_CODE = "Ghost_Enemy_Sprite";
     public static final String TREX_SPRITE_CODE = "TRex_Enemy_Sprite";
     public static final String VIPERREX_SPRITE_CODE = "ViperRex_Sprite";
+    
+    //ID
     protected static int nextId = 0;
 
     //instance-variables
@@ -33,8 +47,7 @@ public class Enemy extends MovementPatternSprite
     protected Element[] immunityArray = Element.noElementsArray;
     protected Element[] weaknessArray = Element.noElementsArray;
     protected int flinchCount = 0;
-    
-    
+        
     //constructors
     public Enemy(String code, int health, MovementPattern mp)
     {
@@ -118,6 +131,27 @@ public class Enemy extends MovementPatternSprite
         }
         return isOutOfRectangle(widthMin, widthMax, heightMin, heightMax);
     }
+    
+    public void drawAuxContent(DrawingContext ctx)
+    {
+        int x = (int)this.getPosition().x - 4;
+        int y = (int)this.getPosition().y - 4;
+        
+        int lifeForceBarOutlineWidth = (int)(this.maxHealth * Enemy.LIFE_FORCE_BAR_MAX_RATIO);
+		int lifeForceBarFillWidth = (int)(this.health * Enemy.LIFE_FORCE_BAR_MAX_RATIO);
+		//ctx.setColor(Enemy.LIFE_BAR_OUTLINE_CODE);
+		ctx.setColor(Color.BLACK);
+		ctx.drawRect(x, y, lifeForceBarOutlineWidth + 1, Enemy.LIFE_FORCE_BAR_HEIGHT + 1);
+		float healthPercent = this.health / (float)this.maxHealth;
+        if (healthPercent > .75) 
+        { 
+            ctx.setColor(Color.GREEN); 
+        }
+        else if (healthPercent > .4) {ctx.setColor(Color.YELLOW); }
+        else {ctx.setColor(Color.RED); }		
+        ctx.fillRect(x + 1, y + 1, lifeForceBarFillWidth, Enemy.LIFE_FORCE_BAR_HEIGHT);
+    }
+    
     
     //// Default Enemies
     public static Enemy getGhost()

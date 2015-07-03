@@ -528,6 +528,7 @@ public class NormalGameState extends GameState
         {
             e.advanceAnimationOneClick();
             e.drawToContextAtOwnPosition(ctx);
+            e.drawAuxContent(ctx);
         }
 
         // attack sprites
