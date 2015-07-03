@@ -53,6 +53,7 @@ public class NormalGameState extends GameState
     
     public int killScore = 0;
     public int wave = 1;
+    public int round = 2;
     
     protected volatile boolean isPaused = false;
     protected boolean show_boundaries = false;
@@ -612,6 +613,32 @@ public class NormalGameState extends GameState
                 ctx.setFont(NormalGameState.GAME_OVER_FONT);
                 ctx.setColor(Color.RED);
                 ctx.drawString("GAME OVER!!!", (int)((1/8.0) * this.md.getPanelWidth()),
+                                                          (int)((1/2.0) * this.md.getPanelHeight()));
+            }
+            finally
+            {
+                ctx.setFont(originalFont);
+            }
+            
+            ctx.setColor(Color.CC.GREEN);
+            this.resetButton.x = lfb.x;
+            this.resetButton.y = lfb.y + NormalGameState.LIFE_FORCE_BAR_HEIGHT + 42 * 4;
+            this.resetButton.width = 80;
+            this.resetButton.height = 35;
+            ctx.fillRect(this.resetButton);
+            ctx.setColor(Color.BLACK);
+            ctx.drawString("RESET", this.resetButton.x + 5, this.resetButton.y + this.resetButton.height - 5);
+		}
+		
+		// game won message and reset button
+		if (this.player.roundsCompleted)
+		{
+            Font originalFont = ctx.getFont();
+            try
+            {
+                ctx.setFont(NormalGameState.GAME_OVER_FONT);
+                ctx.setColor(Color.GREEN);
+                ctx.drawString("YOU HAVE WON!!!", (int)((1/8.0) * this.md.getPanelWidth()),
                                                           (int)((1/2.0) * this.md.getPanelHeight()));
             }
             finally

@@ -81,6 +81,7 @@ public class MageDefensePlayer
         BURNOUT(0x7f0000, 0xff7f7f), 
         DEAD(0x000000, 0x7f7f7f);
         
+        
         public final int barOutlineColorCode;
         public final int barFillColorCode;
         
@@ -129,6 +130,8 @@ public class MageDefensePlayer
     
     protected PlayerStatus status = PlayerStatus.NORMAL;
     public PlayerStatus getStatus() { return this.status; }
+    
+    public boolean roundsCompleted = false;
     
     public double regenAmount = 5.0;
     public int framesBetweenRegen = 100;
