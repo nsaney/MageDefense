@@ -213,7 +213,7 @@ public class NormalGameState extends GameState
             return;
         }
         
-        if (this.player.getStatus() == MageDefensePlayer.PlayerStatus.DEAD)
+        if (this.player.getStatus() == MageDefensePlayer.PlayerStatus.DEAD || this.player.roundsCompleted)
         {
             if (this.resetButton.containsPoint(x, y))
             {
