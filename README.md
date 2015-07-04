@@ -10,8 +10,8 @@
 
 ###Game Structure:
  - [ ] App Hierarchy
-  	-  Levels: All share one Background and general set of Enemies. A level may have some (3 to 5) stages, and a Boss at the end. The Boss may be at the end of the of the final round 
-  	-  Stage: Selected in the main Stage Selection menu screen. Many stages constitute a level.
+  	-  World: All share one Background and general set of Enemies. A world may have some (3 to 5) stages, and a Boss at the end. The Boss may be at the end of the of the final round 
+  	-  Stage: Selected in the main Stage Selection menu screen. Many stages constitute a world.
   	-  Rounds: A collection of enemy waves that have similar difficulty level. Player is notified of Round Change.
   	-  Waves: The spawning of a collection of enemies, each wave begins when one enemy remains of the previous wave. Player is not notified of enemy wave changes. 
  - [ ] Level 1 Design
