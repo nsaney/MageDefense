@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+      package="chairosoft.mage_defense"
+      android:versionCode="1"
+      android:versionName="1.0">
+    <application android:label="@string/app_name" android:icon="@drawable/icon_mage">
+        <activity android:name="MageDefenseLauncherActivity"
+                  android:label="@string/app_name"
+                  android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|screenSize|smallestScreenSize|layoutDirection"
+                  android:screenOrientation="landscape"
+                  android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <service android:enabled="true" 
+                 android:name="QuadradoLauncherService" 
+        />
+    </application>
+    <supports-screens android:requiresSmallestWidthDp="432" />
+</manifest>

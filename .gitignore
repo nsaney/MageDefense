@@ -3,6 +3,11 @@ MageDefense/Deploy_*
 MageDefense/doc
 MageDefense/lib/*.jar
 MageDefense/lib/*/*
+MageDefenseApp/bin
+MageDefenseApp/gen
+MageDefenseApp/libs/*.jar
+MageDefenseApp/libs/*/*
+MageDefenseApp/local.properties
 
 
 # Windows image file caches
