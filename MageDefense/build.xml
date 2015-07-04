@@ -22,9 +22,10 @@
   
   <!-- Quadrado properties -->
   <property name="image"         value="img"/>
+  <property name="font"          value="font"/>
   <property name="maps"          value="map"/>
   <property name="sound"         value="snd"/>
-  <property name="q_includes"    value="${image}/, ${maps}/, ${sound}/"/>
+  <property name="q_includes"    value="${image}/, ${font}/, ${maps}/, ${sound}/"/>
   
   <!-- Library properties -->
   <property name="library"       value="lib"/>

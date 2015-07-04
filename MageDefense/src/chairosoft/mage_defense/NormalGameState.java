@@ -45,6 +45,8 @@ public class NormalGameState extends GameState
     
     public static final Font GAME_OVER_FONT = Font.create(Font.Family.MONOSPACED, Font.Style.BOLD, 48);
     
+    public static final Font FF_FONT = Font.createFromEmbeddedFont("finalf.ttf");
+    public static final Font FF_FONT_BOLD = FF_FONT.derive(Font.Style.PLAIN, 48);
     
     // fields
     public final DrawingImage backgroundImage = Loading.getImage("/img/bg/BackgroundMageDefense.png");
@@ -54,6 +56,7 @@ public class NormalGameState extends GameState
     public int killScore = 0;
     public int wave = 1;
     public int round = 2;
+    public int showNextRound = 0;
     
     protected volatile boolean isPaused = false;
     protected boolean show_boundaries = false;
@@ -654,6 +657,25 @@ public class NormalGameState extends GameState
             ctx.fillRect(this.resetButton);
             ctx.setColor(Color.BLACK);
             ctx.drawString("RESET", this.resetButton.x + 5, this.resetButton.y + this.resetButton.height - 5);
+		}
+		
+		//Next Round
+		if(showNextRound > 0)
+		{
+		    showNextRound--;
+		    Font originalFont = ctx.getFont();
+            try
+            {
+                ctx.setFont(NormalGameState.FF_FONT_BOLD);
+                ctx.setColor(Color.BLUE);
+                ctx.drawString("ROUND "+this.round, (int)((1/2.0) * this.md.getPanelWidth()),
+                                                          (int)((2/5.0) * this.md.getPanelHeight()));
+            }
+            finally
+            {
+                ctx.setFont(originalFont);
+            }
+		    
 		}
 		
         //Debug Log

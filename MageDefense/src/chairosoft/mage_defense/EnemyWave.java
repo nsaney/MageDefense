@@ -47,6 +47,7 @@ public class EnemyWave
                         break;
                     default:
                         ngs.round++; //for repeating 
+                        ngs.showNextRound = 200;
                         ngs.wave = 0;
                 }
                 ngs.wave++;
@@ -69,7 +70,8 @@ public class EnemyWave
                     case 4: EnemyWave.addEnemies(ngs, 1, Enemy.VIPERREX_SPRITE_CODE);
                         break;
                     default:
-                        ngs.round++; 
+                        ngs.round++;
+                        ngs.showNextRound = 200;
                         ngs.wave = 0;
                 }
                 ngs.wave++;
@@ -93,6 +95,7 @@ public class EnemyWave
                         break;
                     default:
                         ngs.round++; 
+                        ngs.showNextRound = 200;
                         ngs.wave = 0;
                 }
                 ngs.wave++;
