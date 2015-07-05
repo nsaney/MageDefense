@@ -68,6 +68,7 @@ public class NormalGameState extends GameState
     protected Rectangle debugButton = new Rectangle();
     protected Rectangle resetButton = new Rectangle();
     
+    
     protected MageDefensePlayer player = new MageDefensePlayer();
     {
         this.player.chooseAbilityType(MageDefensePlayer.AbilityType.FIRE_ATTACK);
@@ -91,6 +92,7 @@ public class NormalGameState extends GameState
     //ElementIcons
     protected final int ICON_WIDTH = 54;
     protected final int ICON_HEIGHT = 54;
+    public Rectangle attackChoice = new Rectangle(ICON_WIDTH + 2, ICON_HEIGHT + 2);
 	protected final QSprite[] swordIcons = {new QSprite("Sword_Icon"), new QSprite("Sword_Icon")};
 	protected final QSprite[] fireIcons = {new QSprite("Fire_Icon"), new QSprite("Fire_Icon")};
 	protected final QSprite[] windIcons = {new QSprite("Wind_Icon"), new QSprite("Wind_Icon")};
@@ -388,7 +390,7 @@ public class NormalGameState extends GameState
 					enemy.setCurrentStateCode("left_basic");
 				}
 				
-//BIG TODO		//SOMETHING HERE MAKES THEM SPIRAL
+				//Spiral here
 				if(enemy.isOutOfRectangle(this.backgroundImageX - 32, 
 				                          this.backgroundImageX + this.backgroundImage.getWidth() + 32,
 				                          this.backgroundImageY - 32,
@@ -410,7 +412,7 @@ public class NormalGameState extends GameState
                     {
                         enemy.moveOneFrame();
                     }
-                    else if (this.md.getFramesElapsedTotal() % 10 == 0)
+                    else if (this.md.getFramesElapsedTotal() % 15 == 0)
                     {
                         if (this.player.getStatus() == MageDefensePlayer.PlayerStatus.BURNOUT)
                         {
@@ -552,6 +554,35 @@ public class NormalGameState extends GameState
         	}
         }
         
+        //attackChoice
+        MageDefensePlayer.Ability ability = this.player.getChosenAbility();
+        FloatPoint2D atkIconPt = null;
+        switch(ability.type)
+        {
+            case  NONE:
+            break;
+            case  FIRE_ATTACK:
+                atkIconPt = this.fireIcons[0].getPosition();
+            break;
+            case  WHIRLWIND_ATTACK:
+                atkIconPt = this.windIcons[0].getPosition();
+            break;
+            case  BOLT_ATTACK:
+                atkIconPt = this.lightningIcons[0].getPosition();
+            break;
+            case  EARTHQUAKE_ATTACK:
+            break;
+            case  SWORD_ATTACK:
+                atkIconPt = this.swordIcons[0].getPosition();
+            break;
+            default:
+            break;
+        }
+        if(atkIconPt != null)
+        {
+            ctx.setColor(Color.MAGENTA);
+            ctx.drawRect((int)atkIconPt.x - 1, (int)atkIconPt.y - 1, this.ICON_WIDTH + 2, this.ICON_HEIGHT + 2);
+        }
         // crosshair
         //this.crosshair.advanceAnimationOneClick();
         this.crosshair.drawToContextAtOwnPosition(ctx);

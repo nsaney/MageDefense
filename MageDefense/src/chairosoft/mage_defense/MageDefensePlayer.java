@@ -135,6 +135,7 @@ public class MageDefensePlayer
     
     public double regenAmount = 5.0;
     public int framesBetweenRegen = 100;
+    //public int damageDelay = 0;
     
     protected double lifeForceMax = 10.0;
     protected double lifeForceCurrent = 10.0;
