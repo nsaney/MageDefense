@@ -21,15 +21,22 @@ import chairosoft.ui.geom.FloatPoint2D;
  */
 public class EnemyWave
 {
+    public static final int ROUND_DISPLAY_FRAMES = 250;
 	// no instantiations
-	private EnemyWave() {}
+	private EnemyWave() { }
 		
 	// methods
 	public static void initialize(NormalGameState ngs)
 	{
 	    switch (ngs.round)
 	    {
+	        case 0:
+            ngs.round++;
+	        ngs.showNextRound = ROUND_DISPLAY_FRAMES;
+	        
+	        break;
 	        case 1:
+	       
                 switch (ngs.wave)
                 {
                     case 1:
@@ -37,17 +44,18 @@ public class EnemyWave
                         break;
                     case 2:
                         EnemyWave.addEnemies(ngs, 1, Enemy.GHOST_SPRITE_CODE);
-                        EnemyWave.addEnemies(ngs, 1, Enemy.TREX_SPRITE_CODE);
+                        //EnemyWave.addEnemies(ngs, 1, Enemy.TREX_SPRITE_CODE);
                         break;
                     case 3:
                         EnemyWave.addEnemies(ngs, 2, Enemy.GHOST_SPRITE_CODE);
-                        EnemyWave.addEnemies(ngs, 1, Enemy.TREX_SPRITE_CODE);
+                        //EnemyWave.addEnemies(ngs, 1, Enemy.TREX_SPRITE_CODE);
                         break;
-                    case 4: EnemyWave.addEnemies(ngs, 1, Enemy.VIPERREX_SPRITE_CODE);
+                    case 4: 
+                        EnemyWave.addEnemies(ngs, 1, Enemy.VIPERREX_SPRITE_CODE);
                         break;
                     default:
                         ngs.round++; //for repeating 
-                        ngs.showNextRound = 200;
+                        ngs.showNextRound = ROUND_DISPLAY_FRAMES;
                         ngs.wave = 0;
                 }
                 ngs.wave++;
@@ -57,21 +65,22 @@ public class EnemyWave
                 {
                     case 1:
                         EnemyWave.addEnemies(ngs, 1, Enemy.GHOST_SPRITE_CODE);
-                        EnemyWave.addEnemies(ngs, 1, Enemy.TREX_SPRITE_CODE);
+                        //EnemyWave.addEnemies(ngs, 1, Enemy.TREX_SPRITE_CODE);
                         break;
                     case 2:
                         EnemyWave.addEnemies(ngs, 2, Enemy.GHOST_SPRITE_CODE);
-                        EnemyWave.addEnemies(ngs, 1, Enemy.TREX_SPRITE_CODE);
+                        //EnemyWave.addEnemies(ngs, 1, Enemy.TREX_SPRITE_CODE);
                         break;
                     case 3:
                         EnemyWave.addEnemies(ngs, 3, Enemy.GHOST_SPRITE_CODE);
-                        EnemyWave.addEnemies(ngs, 1, Enemy.TREX_SPRITE_CODE);
+                        //EnemyWave.addEnemies(ngs, 1, Enemy.TREX_SPRITE_CODE);
                         break;
-                    case 4: EnemyWave.addEnemies(ngs, 1, Enemy.VIPERREX_SPRITE_CODE);
+                    case 4: 
+                        EnemyWave.addEnemies(ngs, 1, Enemy.VIPERREX_SPRITE_CODE);
                         break;
                     default:
                         ngs.round++;
-                        ngs.showNextRound = 200;
+                        ngs.showNextRound = ROUND_DISPLAY_FRAMES;
                         ngs.wave = 0;
                 }
                 ngs.wave++;
@@ -81,21 +90,22 @@ public class EnemyWave
                 {
                     case 1:
                         EnemyWave.addEnemies(ngs, 2, Enemy.GHOST_SPRITE_CODE);
-                        EnemyWave.addEnemies(ngs, 2, Enemy.TREX_SPRITE_CODE);
+                        //EnemyWave.addEnemies(ngs, 2, Enemy.TREX_SPRITE_CODE);
                         break;
                     case 2:
                         EnemyWave.addEnemies(ngs, 2, Enemy.GHOST_SPRITE_CODE);
-                        EnemyWave.addEnemies(ngs, 2, Enemy.TREX_SPRITE_CODE);
+                        //EnemyWave.addEnemies(ngs, 2, Enemy.TREX_SPRITE_CODE);
                         break;
                     case 3:
                         EnemyWave.addEnemies(ngs, 3, Enemy.GHOST_SPRITE_CODE);
-                        EnemyWave.addEnemies(ngs, 3, Enemy.TREX_SPRITE_CODE);
+                        //EnemyWave.addEnemies(ngs, 3, Enemy.TREX_SPRITE_CODE);
                         break;
-                    case 4: EnemyWave.addEnemies(ngs, 10, Enemy.VIPERREX_SPRITE_CODE);
+                    case 4: 
+                        EnemyWave.addEnemies(ngs, 10, Enemy.VIPERREX_SPRITE_CODE);
                         break;
                     default:
                         ngs.round++; 
-                        ngs.showNextRound = 200;
+                        ngs.showNextRound = ROUND_DISPLAY_FRAMES;
                         ngs.wave = 0;
                 }
                 ngs.wave++;

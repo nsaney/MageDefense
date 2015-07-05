@@ -45,8 +45,10 @@ public class NormalGameState extends GameState
     
     public static final Font GAME_OVER_FONT = Font.create(Font.Family.MONOSPACED, Font.Style.BOLD, 48);
     
-    public static final Font FF_FONT = Font.createFromEmbeddedFont("finalf.ttf");
-    public static final Font FF_FONT_BOLD = FF_FONT.derive(Font.Style.PLAIN, 48);
+    //public static final Font FF_FONT = Font.createFromEmbeddedFont("finalf.ttf");
+    public static final Font FF_FONT = Font.createFromEmbeddedFont("uq_0.ttf");
+
+    public static final Font FF_FONT_BOLD = FF_FONT.derive(Font.Style.BOLD | Font.Style.ITALIC, 48);
     
     // fields
     public final DrawingImage backgroundImage = Loading.getImage("/img/bg/BackgroundMageDefense.png");
@@ -55,7 +57,7 @@ public class NormalGameState extends GameState
     
     public int killScore = 0;
     public int wave = 1;
-    public int round = 2;
+    public int round = 0;
     public int showNextRound = 0;
     
     protected volatile boolean isPaused = false;
@@ -634,7 +636,7 @@ public class NormalGameState extends GameState
 		}
 		
 		// game won message and reset button
-		if (this.player.roundsCompleted)
+		if (this.player.roundsCompleted && this.enemySprites.size() == 0)
 		{
             Font originalFont = ctx.getFont();
             try
@@ -668,8 +670,8 @@ public class NormalGameState extends GameState
             {
                 ctx.setFont(NormalGameState.FF_FONT_BOLD);
                 ctx.setColor(Color.BLUE);
-                ctx.drawString("ROUND "+this.round, (int)((1/2.0) * this.md.getPanelWidth()),
-                                                          (int)((2/5.0) * this.md.getPanelHeight()));
+                String roundString = "ROUND "+this.round;
+                ctx.drawString(roundString, -50 + 3 * showNextRound, (int)((2/5.0) * this.md.getPanelHeight()));
             }
             finally
             {
