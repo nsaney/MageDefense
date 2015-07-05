@@ -14,6 +14,7 @@ import chairosoft.ui.geom.IntPoint2D;
 import chairosoft.ui.graphics.Color;
 import chairosoft.ui.graphics.DrawingContext;
 import chairosoft.ui.graphics.DrawingImage;
+import chairosoft.ui.audio.MultitrackBackgroundAudio;
 
 import chairosoft.util.Loading;
 
@@ -22,17 +23,23 @@ public class GameNotLoaded extends GameState
     public final DrawingImage startScreenImage = Loading.getImage("/img/bg/MageDefenseStartScreen_blurs.png");
     public final int startScreenImageX = (this.md.getPanelWidth() - this.startScreenImage.getWidth()) / 2;
     public final int startScreenImageY = (this.md.getPanelHeight() - this.startScreenImage.getHeight()) / 2;
+    public final MultitrackBackgroundAudio introAudio = MultitrackBackgroundAudio.create();
+    
     
 	//constructor
 	public GameNotLoaded(MageDefense md)
 	{
 		super(md);
+		String [] tracks = { "/snd/jetheLishruxej.mp3" }; 
+		introAudio.loadLoopingTracks(0, 43670, tracks);
+		introAudio.playAll();
 	}
 
 	//Overridden methods
 	@Override
 	public void pointerPressed(float x, float y)
 	{
+		introAudio.stopAll();
 		this.md.loadNormalGameplay();
 	}
 	
