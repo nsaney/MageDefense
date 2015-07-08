@@ -515,6 +515,36 @@ public class NormalGameState extends GameState
 			}
 			enemySpritesToRemove.clear();
 		}
+        
+        
+        ////////////////////////
+        // Advance Animations //
+        ////////////////////////
+        // (advance in update, draw in render)
+        
+        // player sprite
+        this.mageSprite.advanceAnimationOneClick();
+        
+        // enemy sprites
+        for (Enemy e : this.enemySprites)
+        {
+            e.advanceAnimationOneClick();
+        }
+
+        // attack sprites
+        for (QSprite qs : this.attackSprites)
+        {
+            qs.advanceAnimationOneClick();
+        }
+        
+        // crosshair
+        //this.crosshair.advanceAnimationOneClick();
+        
+		//Next Round
+		if (showNextRound > 0)
+		{
+		    showNextRound--;
+        }
 	}
 	
 	@Override
@@ -528,13 +558,11 @@ public class NormalGameState extends GameState
         ctx.drawImage(this.backgroundImage, this.backgroundImageX, this.backgroundImageY);
         
         // player sprite
-        this.mageSprite.advanceAnimationOneClick();
         this.mageSprite.drawToContextAtOwnPosition(ctx);
         
         // enemy sprites
         for (Enemy e : this.enemySprites)
         {
-            e.advanceAnimationOneClick();
             e.drawToContextAtOwnPosition(ctx);
             e.drawAuxContent(ctx);
         }
@@ -583,8 +611,8 @@ public class NormalGameState extends GameState
             ctx.setColor(Color.MAGENTA);
             ctx.drawRect((int)atkIconPt.x - 1, (int)atkIconPt.y - 1, this.ICON_WIDTH + 2, this.ICON_HEIGHT + 2);
         }
+        
         // crosshair
-        //this.crosshair.advanceAnimationOneClick();
         this.crosshair.drawToContextAtOwnPosition(ctx);
         
         // boundaries
@@ -695,7 +723,6 @@ public class NormalGameState extends GameState
 		//Next Round
 		if(showNextRound > 0)
 		{
-		    showNextRound--;
 		    Font originalFont = ctx.getFont();
             try
             {
@@ -708,7 +735,6 @@ public class NormalGameState extends GameState
             {
                 ctx.setFont(originalFont);
             }
-		    
 		}
 		
         //Debug Log
