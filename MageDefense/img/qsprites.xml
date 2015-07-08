@@ -78,7 +78,7 @@
       <rectangle code="shape_right" x0="32" y0="26" width="32" height="32"/>
     </shapes>
     <animations>
-      <animation code="Hand_right" repeat="false">
+      <animation code="Hand_right">
         <frame image="00" duration="9"/>
         <frame image="01" duration="9"/>
         <frame image="02" duration="9"/>
@@ -88,7 +88,7 @@
         <frame image="01" duration="9"/>
         <frame image="00" duration="9"/>
       </animation>
-      <animation code="Hand_left" repeat="false">
+      <animation code="Hand_left">
         <frame image="05" duration="9"/>
         <frame image="06" duration="9"/>
         <frame image="07" duration="9"/>
@@ -98,7 +98,7 @@
         <frame image="06" duration="9"/>
         <frame image="05" duration="9"/>
       </animation>
-      <animation code="Sword_right" repeat="false">
+      <animation code="Sword_right">
         <frame image="19" duration="5"/>
         <frame image="20" duration="5"/>
         <frame image="21" duration="5"/>
@@ -108,7 +108,7 @@
         <frame image="20" duration="10"/>
         <frame image="19" duration="10"/>
       </animation>
-      <animation code="Sword_left" repeat="false">
+      <animation code="Sword_left">
         <frame image="26" duration="5"/>
         <frame image="27" duration="3"/>
         <frame image="28" duration="3"/>
@@ -142,11 +142,11 @@
         <frame image="14" duration="30"/>
       </animation>
     </animations>
-    <states default="Idle_Left">
-      <state code="Hand_Right" shape="shape_center" animation="Hand_right"/>
-      <state code="Hand_Left" shape="shape_center" animation="Hand_left"/>
-      <state code="Sword_Right" shape="shape_center" animation="Sword_right"/>
-      <state code="Sword_Left" shape="shape_center" animation="Sword_left"/>
+    <states default="Idle_Center">
+      <state code="Hand_Right" shape="shape_center" animation="Hand_right" goto="Idle_Right" repeatsBeforeGoto="0"/>
+      <state code="Hand_Left" shape="shape_center" animation="Hand_left" goto="Idle_Left" repeatsBeforeGoto="0"/>
+      <state code="Sword_Right" shape="shape_center" animation="Sword_right" goto="Idle_Right" repeatsBeforeGoto="0"/>
+      <state code="Sword_Left" shape="shape_center" animation="Sword_left" goto="Idle_Left" repeatsBeforeGoto="0"/>
       <state code="Idle_Left" shape="shape_center" animation="Left_stances"/>
       <state code="Idle_Center" shape="shape_center" animation="Center_stances"/>
       <state code="Idle_Right" shape="shape_center" animation="Right_stances"/>
@@ -208,7 +208,7 @@
       <rectangle code="right" x0="32" y0="14" width="60" height="50"/>
     </shapes>
     <animations>
-      <animation code="basic" repeat="false">
+      <animation code="basic">
         <frame image="00" duration="1"/>
       </animation>
     </animations>
